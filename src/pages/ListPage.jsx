@@ -1,7 +1,9 @@
+import Header from "../components/layouts/Header";
+
 const ListPage = () => {
   return (
     <div className="ListPage">
-      <section>ListPage</section>
+      <Header />
     </div>
   );
 };
