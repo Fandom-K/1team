@@ -1,9 +1,11 @@
+
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import ListPage from "./pages/ListPage";
 import MyPage from "./pages/Mypage";
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
     </>
   );
 }
