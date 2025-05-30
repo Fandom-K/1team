@@ -1,13 +1,22 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Hello from "./Hello";
+import LandingPage from "./pages/LandingPage";
+import NotFound from "./pages/NotFound";
+import ListPage from "./pages/ListPage";
+import MyPage from "./pages/Mypage";
+
 
 function App() {
   return (
     <>
-      <Hello />
+      <Routes>
+        <Route index path="/" element={<LandingPage />} />
+        <Route path="/list" element={<ListPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
     </>
   );
 }
