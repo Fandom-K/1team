@@ -1,0 +1,46 @@
+.Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+  background: #ccc;
+}
+
+.btn-round {
+  border-radius: 9999px;
+}
+
+.btn-angular {
+  border-radius: 3px;
+}
+
+.btn-positive {
+  background: linear-gradient(to right, #f96d69, #fe5493);
+}
+
+.btn-disabled {
+  background: #828282;
+}
+
+.btn-more {
+  border: 5px;
+  background: #181d26;
+  border-color: #ffffff;
+}
+.btn-img {
+  width: 20px;
+  height: 20px;
+}
+@media (min-width: 745px) {
+}
+
+@media (min-width: 376px) {
+}
