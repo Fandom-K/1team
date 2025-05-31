@@ -1,7 +1,10 @@
+import IdolProfile from "../components/common/IdolProfile";
+
 const MyPage = () => {
   return (
     <div className="MyPage">
-      <section>MyPage</section>
+      <IdolProfile />
+      mypage
     </div>
   );
 };
