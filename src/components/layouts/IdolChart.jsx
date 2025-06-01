@@ -1,3 +1,4 @@
+// components/layout/IdolChart.js
 import { useState } from "react";
 import "../../styles/layout/IdolChart.css";
 import Button from "../common/Button";
@@ -34,6 +35,7 @@ const IdolChart = () => {
             이달의 남자 아이돌
           </button>
         </div>
+
         <div>
           {activeTab === "이달의 여자 아이돌" && (
             <IdolChartTab gender="female" />

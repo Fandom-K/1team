@@ -1,29 +1,46 @@
 import "../../styles/layout/IdolChartTab.css";
 import Button from "../common/Button";
+import useAllIdolList from "../../hooks/useAllIdolList";
 
 // api 가져오면 프롭스로 받은 조건을 적용해서 렌더링
-const IdolChartItem = ({ gender = "female" }) => {
+const IdolChartItem = ({ idol, rank }) => {
   return (
     <div className="IdolChartItem">
       <div className="idolchart-item__info">
-        <img src="../../../public/IdolImage/fandomK-img-1.jpg" />
-        <p>1</p>
-        <h3>르세라핌 채원</h3>
+        <img
+          src={
+            idol.profilePicture ||
+            "https://cphoto.asiae.co.kr/listimglink/1/2011062210300334840_3.jpg"
+          }
+          alt={idol.name}
+        />
+        <p>{rank}</p>
+        <h3>
+          {idol.group} {idol.name}
+        </h3>
       </div>
-
-      <h4>104,000표</h4>
+      <h4>{idol.totalVotes?.toLocaleString() || "0"}표</h4>
     </div>
   );
 };
 
 const IdolChartTab = ({ gender = "female" }) => {
+  const { allIdols, loading, error } = useAllIdolList();
+
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>에러 발생: {error.message}</p>;
+
+  // 성별 필터링 + 상위 5명 정렬 (votes 기준 정렬이 있다고 가정)
+  const filtered = allIdols
+    .filter((idol) => idol.gender === gender)
+    .sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0))
+    .slice(0, 5); // 상위 5명만
+
   return (
     <div className="IdolChartTab">
-      <IdolChartItem gender={gender} />
-      <IdolChartItem gender={gender} />
-      <IdolChartItem gender={gender} />
-      <IdolChartItem gender={gender} />
-      <IdolChartItem gender={gender} />
+      {filtered.map((idol, index) => (
+        <IdolChartItem key={idol.id} idol={idol} rank={index + 1} />
+      ))}
       <Button
         text="더 보기"
         alt="차트 투표하기 버튼"
