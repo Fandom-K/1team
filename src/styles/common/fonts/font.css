@@ -1,0 +1,155 @@
+/* Pretendard Font 설정 */
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff")
+    format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+html {
+  font-family: "Pretendard";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* 텍스트 스타일 정의 */
+.font-bold-26 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.font-bold-20-line26 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.font-bold-20 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.font-semibold-18 {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.font-medium-18 {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.font-bold-16-line26 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.font-bold-16-line26-letter5 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 5%;
+}
+
+.font-medium-16 {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.font-regular-16 {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.font-regular-16-line18-letter-neg017 {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: -0.17px;
+}
+
+.font-bold-15-line26 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.font-bold-14-line26 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.font-regular-14 {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.font-medium-13-line26-letter2 {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  letter-spacing: 2%;
+}
+
+.font-bold-13-line26-letter2 {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 26px;
+  letter-spacing: 2%;
+}
+
+.font-medium-12 {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.font-medium-12-line18-letter-neg017 {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: -0.17px;
+}

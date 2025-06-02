@@ -1,0 +1,29 @@
+.CustomBox {
+  width: 295px;
+  height: 58px;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #ffffff;
+  padding: 16px;
+  background-color: #272f3d;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.CustomBox .custombox-input {
+  all: unset;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  width: 100%;
+}
+
+.CustomBox.error {
+  border-color: var(--error-100);
+}
+
+.CustomBox.custombox-responsive {
+  width: 60vw;
+}
