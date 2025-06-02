@@ -1,23 +1,23 @@
 import ProfileChunk from "./ProfileChunk";
-import "./InterestIdolList.css";
-import { useState } from "react";
+import "../styles/InterestIdolList.css";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
 const InterestIdolList = () => {
   const [profiles, setProfiles] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("/api/getProfiles") // 서버 API 주소로 변경
-      .then((response) => {
-        // 서버에서 받은 데이터가 배열이라고 가정
-        setProfiles(response.data);
-      })
-      .catch((error) => {
-        console.error("데이터 요청 실패:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/getProfiles") // 서버 API 주소로 변경
+  //     .then((response) => {
+  //       // 서버에서 받은 데이터가 배열이라고 가정
+  //       setProfiles(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("데이터 요청 실패:", error);
+  //     });
+  // }, []);
 
   return (
     <div className="InterestIdolList">

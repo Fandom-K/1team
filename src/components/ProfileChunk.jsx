@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import IdolProfile from "./common/IdolProfile";
 import { SizeProvider } from "../../src/contexts/SizeContext";
 import { getidols } from "./api";
-import "./ProfileChunk.css";
+import "../styles/ProfileChunk.css";
 
 const ProfileChunk = ({ size = 70 }) => {
   const [selected, setSelected] = useState(false); // 선택 상태 관리

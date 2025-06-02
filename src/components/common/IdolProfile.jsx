@@ -1,5 +1,5 @@
 import { useSize } from "../../contexts/SizeContext";
-import "./IdolProfile.css";
+import "../../styles/common/IdolProfile.css";
 
 const IdolProfile = ({
   borderColor = "#f96d69",
