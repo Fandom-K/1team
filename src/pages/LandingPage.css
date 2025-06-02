@@ -2,6 +2,7 @@
   width: 100%;
   font-family: "Pretendard";
   position: relative;
+  overflow: hidden;
 }
 
 /* ::가상 요소 왼쪽 상단 그라데이션 효과 */
@@ -12,18 +13,14 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../../src/assets/images/Img_top\ design.png");
+  background-image: url("/src/assets/images/Img_top\ design.png");
   background-repeat: no-repeat;
   /* 왼쪽 상단에 정확히 고정 */
   background-position: top left;
   /* 이미지 크기를 원본 그대로 유지해서 왜곡 없이 표시 */
   background-size: auto;
-  z-index: 3;
+  z-index: 6;
   pointer-events: none;
-}
-
-/* 중앙 그라데이션 효과 */
-.LandingPage .overlay {
 }
 
 /* ------------------ */
@@ -35,23 +32,42 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
   height: 100vh;
   background-color: var(--black-100);
   color: white;
   text-align: center;
   padding: 1.5rem;
-  background-image: url("../../src/assets/images/image\ 14.png");
+  background-image: url("/src/assets/images/bg-intro-mobile.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
-  z-index: 2;
-  max-width: 100%;
+  z-index: 5;
+}
+
+/* 중앙 그라데이션 효과 */
+.intro .overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(2, 0, 14, 0),
+    rgba(2, 0, 14, 0.358),
+    rgba(2, 0, 14, 0.913),
+    rgb(2, 0, 14)
+  );
+  pointer-events: none;
+  z-index: 4;
 }
 
 .intro h1 {
   font-size: 20px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.5;
   margin-bottom: 20px;
 }
 
@@ -69,9 +85,13 @@
   height: 48px;
 }
 
-.intro-top,
+.intro-top {
+  margin-bottom: 220px;
+  z-index: 5;
+}
 .intro-bottom {
-  margin: 220px 0;
+  margin-top: 220px;
+  z-index: 5;
 }
 
 /* ------------------ */
@@ -79,9 +99,10 @@
 /* ------------------ */
 .step-wrapper {
   position: relative;
+  width: 100%;
   background-color: var(--black-100);
-  /* z-index: 1;
-  overflow: hidden; */
+  z-index: 1;
+  overflow: hidden;
 }
 
 /* 세로 띠 */
@@ -92,39 +113,38 @@
   left: 50%;
   transform: translateX(-50%);
   width: 117px;
-  height: 100%;
-  background-image: linear-gradient(
-    #030615,
-    #051d31,
-    #051e32,
-    #051c30,
-    #030b1c
-  );
+  /* 핵심: 스크롤 높이 다 안 쓰고, 중간까지만 표시 */
+  height: calc(100% - 400px); /* 또는 적당히 조절 */
+  margin-top: 220px; /* 상단 잘라내기 */
+  margin-bottom: 180px; /* 하단 잘라내기 */
+
+  background-image: linear-gradient(#030615, #051e32, #051c30, #030b1c);
   z-index: 5;
 }
-
 .step {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
   height: 100vh;
   color: white;
   text-align: center;
   padding: 1.5rem;
-  background-image: url("../../src/assets/images/bg-Home-1.jpg");
+  background-image: url("/src/assets/images/bg-Home-1.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
 }
 
 .step2 {
-  background-image: url("../../src/assets/images/bg-Home-2.jpg");
+  background-image: url("/src/assets/images/bg-Home-2.jpg");
 }
 
 .step3 {
-  background-image: url("../../src/assets/images/bg-Home-3.jpg");
+  background-image: url("/src/assets/images/bg-Home-3.jpg");
 }
 
 .step .overlay {
@@ -133,14 +153,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 744px;
-  height: 744px;
-  border: 1px solid red;
+  height: 100vh;
+  overflow: hidden; /* width 값을 가려줌 */
   background: radial-gradient(
-    circle,
-    rgba(0, 1, 9, 0),
-    rgba(0, 1, 9, 0.926),
-    rgb(0, 1, 9),
-    rgba(2, 2, 133, 0.525)
+    rgba(2, 0, 14, 0.476),
+    rgba(2, 0, 14, 0.823),
+    rgb(2, 0, 14),
+    rgb(2, 0, 14),
+    rgb(2, 0, 14)
   );
   z-index: 2;
 }
@@ -148,6 +168,25 @@
 .step-top,
 .step-bottom {
   z-index: 8;
+}
+
+.step .step-img {
+  width: clamp(240px, 40vw, 400px);
+  aspect-ratio: 9 / 16;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 0 auto;
+}
+
+.img1 {
+  background-image: url("/src/assets/images/phone-Home1-mobile.png");
+}
+.img2 {
+  background-image: url("/src/assets/images/phone-Home2-mobile.png");
+}
+.img3 {
+  background-image: url("/src/assets/images/phone-Home3-mobile.png");
 }
 
 .step h2 {
@@ -164,13 +203,134 @@
   color: #ffffff;
   margin-bottom: 40px;
 }
-.step .step-img {
-  width: 100%;
+
+/* --------------PC----------------- */
+@media (min-width: 745px) {
+  .intro {
+    background-image: url("/src/assets/images/bg-intro-pc.png");
+    background-size: contain; /* ✅ 확대 없이 전부 보이게 */
+  }
+  .intro .overlay {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(2, 0, 14, 0),
+      rgba(2, 0, 14, 0.527),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14)
+    );
+  }
+
+  .intro-top {
+    margin-bottom: 260px;
+    z-index: 5;
+  }
+  .intro-bottom {
+    margin-top: 260px;
+    z-index: 5;
+  }
+  .intro h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  /* ------------------ */
+  /* ✅ Step Sections   */
+  /* ------------------ */
+  .step .overlay {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* width 값을 가려줌 */
+    background: radial-gradient(
+      rgba(2, 0, 14, 0),
+      rgba(2, 0, 14, 0.867),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14)
+    );
+    z-index: 2;
+  }
+
+  .step .step-img {
+    width: clamp(300px, 50vw, 340px);
+    aspect-ratio: 9 / 16;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 0 auto;
+  }
+  .img1 {
+    background-image: url("/src/assets/images/phone-Home1-pc.png");
+  }
+
+  .img2 {
+    background-image: url("/src/assets/images/phone-Home2-pc.png");
+  }
+
+  .img3 {
+    background-image: url("/src/assets/images/phone-Home3-pc.png");
+  }
+
+  .step p {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 26px;
+    color: #ffffff;
+    margin-bottom: 40px;
+  }
 }
 
-/* --------------Tablet----------------- */
-@media (min-width: 745px) {
-}
-/* ----------------Mobile--------------------- */
+/* ----------------tablet--------------------- */
 @media (min-width: 376px) {
+  /* ------------------ */
+  /* ✅ Intro Section   */
+  /* ------------------ */
+  .intro {
+    background-image: url("/src/assets/images/bg-intro-tablet.png");
+  }
+
+  .intro h1 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .intro .logo {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .intro .Button {
+    width: 477px;
+    height: 48px;
+    margin: 0 auto;
+  }
+
+  /* ------------------ */
+  /* ✅ Step Sections   */
+  /* ------------------ */
+  .step .overlay {
+    background: radial-gradient(
+      rgba(2, 0, 14, 0.603),
+      rgba(2, 0, 14, 0.81),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14)
+    );
+    z-index: 2;
+  }
+
+  .img1 {
+    background-image: url("/src/assets/images/phone-Home1-tablet.png");
+  }
+
+  .img2 {
+    background-image: url("/src/assets/images/phone-Home2-tablet.png");
+  }
+
+  .img3 {
+    background-image: url("/src/assets/images/phone-Home3-tablet.png");
+  }
 }
