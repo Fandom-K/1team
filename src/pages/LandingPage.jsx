@@ -4,9 +4,6 @@ import "../styles/common/fonts/font.css";
 import "../index.css";
 import "./LandingPage.css";
 import logo from "../../src/assets/images/logo.svg";
-import Home1 from "../assets/images/Home-1.png";
-import Home2 from "../assets/images/Home-2.png";
-import Home3 from "../assets/images/Home-3.png";
 
 const LandingPage = () => {
   return (
@@ -25,7 +22,6 @@ const LandingPage = () => {
         <div className="intro-bottom">
           <Link to="/list">
             <Button
-              // type="disabled -> type="positive"로 변경 (색상 클래스 덮어 쓰기 위함)
               type="positive"
               corner="angular"
               text="지금 시작하기"
@@ -36,6 +32,7 @@ const LandingPage = () => {
       </section>
 
       <div className="step-wrapper">
+        {/* ------------ step1 ------------- */}
         <section className="step step1">
           <div className="overlay"></div>
           <div className="step-top">
@@ -46,10 +43,15 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="step-bottom">
-            <img className="step-img" src={Home1} alt="후원하기 step1" />
+            <div
+              className="step-img img1"
+              role="img"
+              aria-label="후원하기 step1"
+            />
           </div>
         </section>
 
+        {/* ------------ step2 ------------- */}
         <section className="step step2">
           <div className="overlay"></div>
           <div className="step-top">
@@ -61,10 +63,15 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="step-bottom">
-            <img className="step-img" src={Home2} alt="이달의 아티스트 step2" />
+            <div
+              className="step-img img1"
+              role="img"
+              aria-label="이달의 아티스트 step2"
+            />
           </div>
         </section>
 
+        {/* ------------ step3 ------------- */}
         <section className="step step3">
           <div className="overlay"></div>
           <div className="step-top">
@@ -76,7 +83,11 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="step-bottom">
-            <img className="step-img" src={Home3} alt="나만의 아티스트" />
+            <div
+              className="step-img img1"
+              role="img"
+              aria-label="나만의 아티스트 step3"
+            />
           </div>
         </section>
       </div>
