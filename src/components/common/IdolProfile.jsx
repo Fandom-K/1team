@@ -12,7 +12,7 @@ import "../../styles/common/IdolProfile.css";
 const IdolProfile = ({
   size = 70, // 기본 사이즈 70px
   borderColor = "#f96d69",
-  item, // api "profilePicture" prop
+  idol: idol, // api "profilePicture" prop
   isSelected, // 선택 토글용 prop
   onSelect, // 선택 토글용 prop
 }) => {
@@ -34,7 +34,7 @@ const IdolProfile = ({
       style={{ ...style, cursor: onSelect ? "pointer" : "default" }}
       onClick={onSelect ? handleClick : undefined} // 함수가 있으면 클릭 가능
     >
-      <img className="inner-image" src={item.profilePicture} alt={item.name} />
+      <img className="inner-image" src={idol.profilePicture} alt={idol.name} />
       {/* 오버레이 독립 div */}
       {isSelected && <div className="overlay" />}
     </div>

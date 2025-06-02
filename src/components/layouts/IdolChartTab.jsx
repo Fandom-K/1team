@@ -2,18 +2,13 @@ import { useEffect, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
 import Button from "../common/Button";
 import useAllIdolList from "../../hooks/useAllIdolList";
+import IdolProfile from "../common/IdolProfile";
 
 const IdolChartItem = ({ idol, rank }) => {
   return (
     <div className="IdolChartItem">
       <div className="idolchart-item__info">
-        <img
-          src={
-            idol.profilePicture ||
-            "https://cphoto.asiae.co.kr/listimglink/1/2011062210300334840_3.jpg"
-          }
-          alt={idol.name}
-        />
+        <IdolProfile idol={idol} size={80} />
         <p>{rank}</p>
         <h3>
           {idol.group} {idol.name}
