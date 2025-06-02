@@ -1,11 +1,10 @@
-
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import ListPage from "./pages/ListPage";
 import MyPage from "./pages/Mypage";
-
+import ExamplePage from "./pages/ExamplePage";
 
 function App() {
   return (
@@ -15,8 +14,9 @@ function App() {
         <Route path="/list" element={<ListPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="*" element={<NotFound />} />
+        {/* 예시를 위한 페이지. 추후 삭제. */}
+        <Route path="/example" element={<ExamplePage />} />
       </Routes>
-
     </>
   );
 }

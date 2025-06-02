@@ -1,0 +1,45 @@
+.radio-button {
+  position: relative;
+  display: inline-block;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  /* visibility: hidden; -> 이것만 써서 hide 하면 빈 공간을 차지함 */
+}
+
+.radio-custom {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--white-100);
+  transition: all 0.2s ease;
+}
+
+.radio-custom::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 3px solid white;
+  background-color: var(--white-100);
+  transition: opacity 0.2s ease;
+}
+
+.radio-input:checked + .radio-custom::after {
+  background-color: var(--brand-100);
+}
+
+.radio-input:checked + .radio-custom {
+  background-color: var(--brand-100);
+}

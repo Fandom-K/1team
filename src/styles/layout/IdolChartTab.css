@@ -1,0 +1,55 @@
+.IdolChartTab {
+  width: 100%;
+}
+
+.IdolChartTab Button {
+  width: 100%;
+  height: 42px;
+  margin: 51px 0;
+}
+
+.IdolChartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff1a;
+  padding: 8px 0;
+}
+
+.idolchart-item__info {
+  display: flex;
+  gap: 12px;
+}
+
+.IdolChartItem img {
+  width: 70px;
+  height: 70px;
+}
+
+.IdolChartItem p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #f96d69;
+}
+
+.IdolChartItem h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffffde;
+}
+
+.IdolChartItem h4 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff99;
+}
+
+@media (min-width: 376px) {
+  .IdolChartTab Button {
+    max-width: 326px;
+    margin: 51px auto;
+  }
+}
+
+@media (min-width: 745px) {
+}

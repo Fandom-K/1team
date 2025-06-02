@@ -1,7 +1,7 @@
 .Header {
-  background-color: black;
+  background-color: #02000e;
   width: 100%;
-  max-width: 1200px;
+  max-width: 374px;
   height: 80px;
   margin: 0 auto;
   display: flex;
@@ -22,12 +22,12 @@
 
 @media (min-width: 745px) {
   .Header {
-    margin: 0 25px;
+    max-width: 744px;
   }
 }
 
 @media (min-width: 376px) {
   .Header {
-    margin: 0 23px;
+    max-width: 1200px;
   }
 }
