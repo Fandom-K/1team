@@ -1,0 +1,29 @@
+.IdolProfile {
+  width: 70px;
+  height: 70px;
+  padding: 4px;
+  border-radius: 50%;
+  border: 1px solid #f96d69;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.inner-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right,
+    rgba(249, 109, 105, 0.5),
+    rgba(254, 84, 147, 0.5)
+  );
+  pointer-events: none; /* 클릭 이벤트 방지 (오버레이가 클릭을 가로채지 않게) */
+}
