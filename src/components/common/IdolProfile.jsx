@@ -7,7 +7,6 @@ import "../../styles/common/IdolProfile.css";
  * @param {Object} props.item - 아이돌 데이터 객체 (프로필 사진 등 포함)
  * @param {boolean} props.isSelected - 선택 상태
  * @param {function} props.onSelect - 선택 시 호출되는 콜백 함수
- * @returns {JSX.Element}
  */
 const IdolProfile = ({
   size = 70, // 기본 사이즈 70px
