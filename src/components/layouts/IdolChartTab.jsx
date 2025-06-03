@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
 import Button from "../common/Button";
-import useAllIdolList from "../../hooks/useAllIdolList";
+
 import IdolProfile from "../common/IdolProfile";
+import getIdol from "../../services/getIdol";
 
 const IdolChartItem = ({ idol, rank }) => {
   return (
@@ -20,9 +21,28 @@ const IdolChartItem = ({ idol, rank }) => {
 };
 
 const IdolChartTab = ({ gender = "female" }) => {
-  const { allIdols, loading, error } = useAllIdolList();
+  const [allIdols, setAllIdols] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   // 화면 사이즈 감지하는 스테이트: window객체의 innerWidth에 접근하면 현재 브라우저의 넓이에 접근할 수 있음
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 745);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const data = await getIdol({ gender });
+        setAllIdols(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [gender]);
 
   useEffect(() => {
     // handleResize로 isWideScreen의 값 변경: 불린값/동적인 느낌
