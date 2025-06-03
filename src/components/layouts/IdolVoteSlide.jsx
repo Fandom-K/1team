@@ -1,57 +1,51 @@
-// IdolSlider.jsx
-import {
-  Swiper,
-  SwiperSlide,
-  Pagination,
-  Navigation,
-  Scrollbar,
-} from "swiper/react";
-// import Chawon from "../../../public";
-// import Roze from "/1team/public/IdolImage/fandomK-img-2.jpg";
-// import Jennie from "/1team/public/IdolImage/fandomK-img-1.jpg";
-// import Kazuha from "/1team/public/IdolImage/fandomK-img-1.jpg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "./IdolVoteSlide.css";
 
-const IdolSlider = () => {
-  const images = [
-    {
-      name: "채원",
-      url: "/1team/public/IdolImage/fandomK-img-1.jpg",
-    },
-    {
-      name: "로제",
-      url: "/1team/public/IdolImage/fandomK-img-2.jpg",
-    },
-    {
-      name: "제니",
-      url: "/1team/public/IdolImage/fandomK-img-3.jpg",
-    },
-    {
-      name: "카즈하",
-      url: "/1team/public/IdolImage/fandomK-img-4.jpg",
-    },
-  ];
-
+const IdolVoteSlide = () => {
   return (
-    <div className="">
-      <Swiper
-        pagination={{ clickable: true }}
-        modules={[Pagination]}
-        spaceBetween={30}
-        slidesPerView={4}
-        loop={true}
-      >
-        {images.map((idol, index) => (
-          <SwiperSlide key={index}>
-            <div className="checkbox">
-              <img src={idol.url} alt={idol.name} className="rounded" />
-              <p className=" lg font-semibold">{idol.name}</p>
-            </div>
-            {/* <idolCard id="id" group="group name"/> */}
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <Swiper
+      modules={[Pagination, Navigation]}
+      spaceBetween={50}
+      slidesPerView={10}
+      navigation
+      onSlideChange={() => console.log("slide change")}
+      onSwiper={(swiper) => console.log(swiper)} //알아오기
+      speed={500}
+      pagination={{
+        clickable: true,
+      }}
+      breakpoints={{
+        320: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 4,
+        },
+      }}
+    >
+      <SwiperSlide>Slide 1</SwiperSlide>
+      <SwiperSlide>Slide 2</SwiperSlide>
+      <SwiperSlide>Slide 3</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+    </Swiper>
   );
 };
-
-export default IdolSlider;
+export default IdolVoteSlide;

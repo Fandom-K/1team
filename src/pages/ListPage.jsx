@@ -6,7 +6,7 @@ const ListPage = () => {
   return (
     <div className="ListPage">
       <Header />
-      <IdolVoteSlide />
+      <IdolVoteSlide></IdolVoteSlide>
       <IdolChart />
     </div>
   );
