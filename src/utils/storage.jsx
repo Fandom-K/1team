@@ -10,15 +10,26 @@ export function loadData() {
 
   // 저장된 데이터가 있으면 JSON으로 변환해서 반환
   // 없으면 초기값을 반환
-  return raw
-    ? JSON.parse(raw)
-    : {
-        selectedIdols: [], // 선택한 아이돌 없음
-        credit: {
-          balance: 5000, // 잔액을 나타내는 부분, 기본 크레딧 5000 줌
-          history: [], // 거래 내역 없음
-        },
-      };
+  try {
+    return raw
+      ? JSON.parse(raw)
+      : {
+          selectedIdols: [],
+          credit: {
+            balance: 5000,
+            history: [],
+          },
+        };
+  } catch (e) {
+    console.warn("로컬스토리지 데이터 파싱 실패:", e);
+    return {
+      selectedIdols: [],
+      credit: {
+        balance: 5000,
+        history: [],
+      },
+    };
+  }
 }
 
 /**
