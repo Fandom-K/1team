@@ -1,0 +1,131 @@
+{
+  "list": [
+    {
+      "id": 1001,
+      "name": "민지",
+      "gender": "female",
+      "group": "뉴진스",
+      "profilePicture": "https://image.newdaily.co.kr/site/data/img/2024/05/31/2024053100051_0.jpg",
+      "totalVotes": 0,
+      "teamId": 1
+    },
+    {
+      "id": 1002,
+      "name": "하니",
+      "gender": "female",
+      "group": "뉴진스",
+      "profilePicture": "https://i.ytimg.com/vi/60RaggLgggE/maxresdefault.jpg",
+      "totalVotes": 0,
+      "teamId": 1
+    },
+    {
+      "id": 1003,
+      "name": "다니엘",
+      "gender": "female",
+      "group": "뉴진스",
+      "profilePicture": "https://i.ytimg.com/vi/SiDYYqj9Knk/maxresdefault.jpg",
+      "totalVotes": 0,
+      "teamId": 1
+    },
+    {
+      "id": 1004,
+      "name": "해린",
+      "gender": "female",
+      "group": "뉴진스",
+      "profilePicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpJPstcGt3A_mHS3F_k7ceCPGhc18kb3OqjA&s",
+      "totalVotes": 0,
+      "teamId": 1
+    },
+    {
+      "id": 1005,
+      "name": "혜인",
+      "gender": "female",
+      "group": "뉴진스",
+      "profilePicture": "https://image.xportsnews.com/contents/images/upload/article/2023/1115/mb_1700038184683700.jpg",
+      "totalVotes": 0,
+      "teamId": 1
+    },
+    {
+      "id": 2001,
+      "name": "지수",
+      "gender": "female",
+      "group": "블랙핑크",
+      "profilePicture": "https://image.fnnews.com/resource/media/image/2022/03/18/202203181900378333_l.jpg",
+      "totalVotes": 0,
+      "teamId": 2
+    },
+    {
+      "id": 2002,
+      "name": "제니",
+      "gender": "female",
+      "group": "블랙핑크",
+      "profilePicture": "https://i.ytimg.com/vi/STTEIUrP9y8/maxresdefault.jpg",
+      "totalVotes": 0,
+      "teamId": 2
+    },
+    {
+      "id": 2003,
+      "name": "로제",
+      "gender": "female",
+      "group": "블랙핑크",
+      "profilePicture": "https://i.namu.wiki/i/vsv3oo0CJJ_gBEJeE8zEGVNGEC7U_loCSDBdjj90dYrLrmfqtTuQr62gEaFlaIpTPjfFj5OodTcKkBxE-kIcCkZDzLNcmvm_7gFQPts9wAK4EkxYRYLD-va7FVMZJ670L4cDEYN-R1QkTSZ2v2zaLQ.webp",
+      "totalVotes": 0,
+      "teamId": 2
+    },
+    {
+      "id": 2004,
+      "name": "리사",
+      "gender": "female",
+      "group": "블랙핑크",
+      "profilePicture": "https://img.sbs.co.kr/newsnet/etv/upload/2024/06/28/30000934707_500.jpg",
+      "totalVotes": 0,
+      "teamId": 2
+    },
+    {
+      "id": 3001,
+      "name": "아이린",
+      "gender": "female",
+      "group": "레드벨벳",
+      "profilePicture": "https://i.namu.wiki/i/jsiqSR1T8qV3rjP5eHgqCKi1EvIA5ioxz_F1ppbIejNBV61reJuQsdERi7KRN9LpAzYLqnyst4SFE6Iyp0SFsg.webp",
+      "totalVotes": 0,
+      "teamId": 3
+    },
+    {
+      "id": 3002,
+      "name": "슬기",
+      "gender": "female",
+      "group": "레드벨벳",
+      "profilePicture": "https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/ts/2025/05/18/15670396_1577305_5448.jpg",
+      "totalVotes": 0,
+      "teamId": 3
+    },
+    {
+      "id": 3003,
+      "name": "웬디",
+      "gender": "female",
+      "group": "레드벨벳",
+      "profilePicture": "https://i.ytimg.com/vi/Iv-oeSdsnEc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAlDzIz7GC4pjbcuMZeVFfDlhEwRw",
+      "totalVotes": 0,
+      "teamId": 3
+    },
+    {
+      "id": 3004,
+      "name": "조이",
+      "gender": "female",
+      "group": "레드벨벳",
+      "profilePicture": "https://mblogthumb-phinf.pstatic.net/MjAyMTA4MThfOTAg/MDAxNjI5MjUyODY1NjA3.qnXefHjOT1WzPFJZccRhcYVzmyRS8JDyhCNHKFfb058g.J8wOjs6Coptl0Tq51qIcAnLBdcVb8jiwmGgrutOkfgUg.JPEG.miyampuzzy/4179c8bc92e5877ed271dff7bf5e8819.jpg?type=w800",
+      "totalVotes": 0,
+      "teamId": 3
+    },
+    {
+      "id": 3005,
+      "name": "예리",
+      "gender": "female",
+      "group": "레드벨벳",
+      "profilePicture": "https://i.namu.wiki/i/NBDUvlmCTxdWRw-tMqOdSRQMup3CllLNkZ",
+      "totalVotes": 0,
+      "teamId": 3
+    }
+  ],
+  "nextCursor": null
+}
