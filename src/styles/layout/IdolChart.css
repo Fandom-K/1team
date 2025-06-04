@@ -1,5 +1,5 @@
 .IdolChart {
-  background-color: #02000e;
+  background-color: var(--black-100);
   color: #ffffff;
   width: 100%;
   display: flex;
@@ -12,11 +12,6 @@
   align-items: center;
   justify-content: space-between;
   margin: 40px 0 16px;
-}
-
-.IdolChart .idolchart-header h1 {
-  font-size: 16px;
-  font-weight: 700;
 }
 
 .idolchart-tap {
@@ -33,20 +28,17 @@
   all: unset;
   text-align: center;
   width: 48%;
-  color: #828282;
-  background-color: #02000e;
-
+  color: var(--gray-200);
+  background-color: var(--black-100);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 400;
   padding: 12px;
 }
 
 .idolchart-buttons button.active {
   font-weight: 700;
   border-bottom: 1px solid #ffffff;
-  color: #f7f7f8;
-  background-color: #181d26;
+  color: var(--white-200);
+  background-color: var(--black-200);
 }
 
 @media (min-width: 376px) {
