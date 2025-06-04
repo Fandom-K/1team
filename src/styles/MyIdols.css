@@ -1,3 +1,17 @@
 .MyIdols {
-  color: white;
+  color: #f6f6f8;
+}
+
+/* 768이상~ */
+@media (min-width: 768px) {
+  .MyIdols .font-bold-16-line26 {
+    font-size: 20px;
+  }
+}
+
+/*1200부터~*/
+@media (min-width: 1200px) {
+  .MyIdols .font-bold-16-line26 {
+    font-size: 24px;
+  }
 }

@@ -1,4 +1,5 @@
 import "../../styles/common/IdolProfile.css";
+
 /**
  * 아이돌 프로필 컴포넌트
  * @param {Object} props - 컴포넌트에 전달되는 속성들
@@ -9,33 +10,38 @@ import "../../styles/common/IdolProfile.css";
  * @param {function} props.onSelect - 선택 시 호출되는 콜백 함수
  */
 const IdolProfile = ({
-  size = 70, // 기본 사이즈 70px
-  borderColor = "#f96d69",
-  item, // api "profilePicture" prop
-  isSelected, // 선택 토글용 prop
-  onSelect, // 선택 토글용 prop
+  size,
+  borderColor = "var(--brand-100)",
+  idol, // api "profilePicture" prop
+  isSelected,
+  onClick,
 }) => {
-  const handleClick = () => {
-    if (onSelect) {
-      onSelect(); // 함수가 넘어온 경우에만 호출
-    }
-  };
-
   const style = {
-    width: size,
-    height: size,
+    width: size + "px",
+    height: size + "px",
     borderColor,
   };
 
   return (
-    <div
-      className="IdolProfile"
-      style={{ ...style, cursor: onSelect ? "pointer" : "default" }}
-      onClick={onSelect ? handleClick : undefined} // 함수가 있으면 클릭 가능
-    >
-      <img className="inner-image" src={item.profilePicture} alt={item.name} />
-      {/* 오버레이 독립 div */}
-      {isSelected && <div className="overlay" />}
+    <div className="IdolProfile" style={{ ...style }}>
+      {idol && idol.profilePicture ? (
+        <img
+          className="inner-image"
+          src={idol.profilePicture}
+          alt={idol.name}
+          onClick={onClick}
+        />
+      ) : (
+        <div>로딩 중...</div>
+      )}
+
+      {isSelected && (
+        <img
+          className="selected"
+          src={"../assets/icons/ic_check.png"} // 체크 표시에 사용할 이미지 경로
+          alt="선택됨"
+        />
+      )}
     </div>
   );
 };

@@ -1,9 +1,16 @@
-.for-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  row-gap: 24px; /* 태블릿 공통, 브라우저 31px */
+.InterestIdolList {
+  color: white;
 }
 
-@media screen {
+@media (min-width: 768px) {
+  /* 768이상~ */
+  .InterestIdolList .font-bold-16-line26 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .InterestIdolList .font-bold-16-line26 {
+    font-size: 24px;
+  }
 }

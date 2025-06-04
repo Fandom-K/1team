@@ -1,19 +1,14 @@
 import "../../styles/layout/IdolChartTab.css";
 import Button from "../common/Button";
 import useAllIdolList from "../../hooks/useAllIdolList";
+import IdolProfile from "../common/IdolProfile";
 
 // api 가져오면 프롭스로 받은 조건을 적용해서 렌더링
 const IdolChartItem = ({ idol, rank }) => {
   return (
     <div className="IdolChartItem">
       <div className="idolchart-item__info">
-        <img
-          src={
-            idol.profilePicture ||
-            "https://cphoto.asiae.co.kr/listimglink/1/2011062210300334840_3.jpg"
-          }
-          alt={idol.name}
-        />
+        <IdolProfile />
         <p>{rank}</p>
         <h3>
           {idol.group} {idol.name}

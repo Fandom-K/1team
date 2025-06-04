@@ -21,11 +21,6 @@
   gap: 12px;
 }
 
-.IdolChartItem img {
-  width: 70px;
-  height: 70px;
-}
-
 .IdolChartItem p {
   font-size: 14px;
   font-weight: 400;

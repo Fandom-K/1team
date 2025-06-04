@@ -3,7 +3,7 @@
   height: 70px;
   padding: 4px;
   border-radius: 50%;
-  border: 1px solid #f96d69;
+  border: 1px solid var(--brand-100);
   box-sizing: border-box;
   cursor: pointer;
 }

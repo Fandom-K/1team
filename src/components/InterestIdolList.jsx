@@ -1,28 +1,14 @@
 import ProfileChunk from "./ProfileChunk";
-import "../styles/InterestIdolList.css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "../styles/InterestIdolList.css";
+import "../styles/common/fonts/font.css";
 // import { Navigation, Pagination } from "swiper/modules";
 
-const InterestIdolList = () => {
+const InterestIdolList = ({ size }) => {
   return (
     <div className="InterestIdolList">
-      <h3>관심 있는 아이돌을 추가해보세요.</h3>
-      {/* <Swiper
-        spaceBetween={20}
-        loop={true}
-        breakpoints={{
-          320: {
-            slidesPerView: 3,
-          },
-          768: {
-            slidesPerView: 4,
-          },
-          1024: {
-            slidesPerView: 8,
-          },
-        }}
-      > */}
-      <ProfileChunk size={98} />
+      <h3 className="font-bold-16-line26">관심 있는 아이돌을 추가해보세요.</h3>
+      <ProfileChunk className="ProfileChunk" size={size} />
     </div>
   );
 };
