@@ -1,55 +1,67 @@
 .IdolChartTab {
-  width: 100%;
-}
-
-.IdolChartTab Button {
-  width: 100%;
-  height: 42px;
-  margin: 51px 0;
+    width: 100%;
 }
 
 .IdolChartItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #ffffff1a;
-  padding: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ffffff1a;
+    padding: 8px 0;
 }
 
 .idolchart-item__info {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
 .IdolChartItem img {
-  width: 70px;
-  height: 70px;
+    width: 70px;
+    height: 70px;
 }
 
 .IdolChartItem p {
-  font-size: 14px;
-  font-weight: 400;
-  color: #f96d69;
+    font-size: 14px;
+    font-weight: 400;
+    color: #f96d69;
 }
 
 .IdolChartItem h3 {
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffffde;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffffde;
 }
 
 .IdolChartItem h4 {
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff99;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff99;
+}
+
+.IdolChartTab__button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 51px 0;
+}
+
+.IdolChartTab__button-wrapper Button {
+    max-width: 326px;
+    width: 100%;
+    height: 42px;
 }
 
 @media (min-width: 376px) {
-  .IdolChartTab Button {
-    max-width: 326px;
-    margin: 51px auto;
-  }
+    .IdolChartTab Button {
+        max-width: 326px;
+        margin: 51px auto;
+    }
 }
 
 @media (min-width: 745px) {
+    .IdolChartTab {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 16px;
+    }
 }
