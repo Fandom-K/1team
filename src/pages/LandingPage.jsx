@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import Button from "../components/common/Button";
 import "../styles/common/fonts/font.css";
 import "../index.css";
-import "./LandingPage.css";
+import "../styles/layout/LandingPage.css";
 import logo from "../../src/assets/images/logo.svg";
+import Home1 from "../../src/assets/images/phone-Home1-pc.png";
+import Home2 from "../../src/assets/images/phone-Home3-pc.png";
+import Home3 from "../../src/assets/images/phone-Home3-pc.png";
 
 const LandingPage = () => {
   return (
@@ -11,7 +14,7 @@ const LandingPage = () => {
       <section className="intro">
         <div className="overlay"></div>
         <div className="intro-top">
-          <h1>
+          <h1 className="">
             내가 좋아하는 아이돌을 <br />
             가장 <span>쉽게 덕질</span> 하는 방법
           </h1>
@@ -43,11 +46,7 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="step-bottom">
-            <div
-              className="step-img img1"
-              role="img"
-              aria-label="후원하기 step1"
-            />
+            <img className="step-img" src={Home1} alt="후원하기img" />
           </div>
         </section>
 
@@ -63,11 +62,7 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="step-bottom">
-            <div
-              className="step-img img1"
-              role="img"
-              aria-label="이달의 아티스트 step2"
-            />
+            <img className="step-img" src={Home2} alt="이달의 아티스트img" />
           </div>
         </section>
 
@@ -83,11 +78,7 @@ const LandingPage = () => {
             </p>
           </div>
           <div className="step-bottom">
-            <div
-              className="step-img img1"
-              role="img"
-              aria-label="나만의 아티스트 step3"
-            />
+            <img className="step-img " src={Home3} alt="나만의 아티스트" />
           </div>
         </section>
       </div>
