@@ -1,4 +1,5 @@
 .IdolProfile {
+  position: relative;
   width: 70px;
   height: 70px;
   padding: 4px;
@@ -8,15 +9,25 @@
   cursor: pointer;
 }
 
-.inner-image {
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.image-wrapper .inner-image {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.IdolProfile .overlay {
+.image-wrapper .overlay {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -25,5 +36,16 @@
     rgba(249, 109, 105, 0.5),
     rgba(254, 84, 147, 0.5)
   );
-  pointer-events: none; /* 클릭 이벤트 방지 (오버레이가 클릭을 가로채지 않게) */
+  pointer-events: none;
+}
+
+.image-wrapper .selected {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px; /* 아이콘 사이즈 조정 */
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
 }

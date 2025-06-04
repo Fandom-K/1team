@@ -1,4 +1,5 @@
 import "../../styles/common/IdolProfile.css";
+import icCheck from "../../assets/icons/ic_check.png";
 
 /**
  * 아이돌 프로필 컴포넌트
@@ -23,24 +24,23 @@ const IdolProfile = ({
   };
 
   return (
-    <div className="IdolProfile" style={{ ...style }}>
+    <div className="IdolProfile" style={{ ...style }} onClick={onClick}>
       {idol && idol.profilePicture ? (
-        <img
-          className="inner-image"
-          src={idol.profilePicture}
-          alt={idol.name}
-          onClick={onClick}
-        />
+        <div className="image-wrapper">
+          <img
+            className="inner-image"
+            src={idol.profilePicture}
+            alt={idol.name}
+          />
+          {isSelected && (
+            <>
+              <div className="overlay" />
+              <img className="selected" src={icCheck} alt="선택됨" />
+            </>
+          )}
+        </div>
       ) : (
         <div>로딩 중...</div>
-      )}
-
-      {isSelected && (
-        <img
-          className="selected"
-          src={"../assets/icons/ic_check.png"} // 체크 표시에 사용할 이미지 경로
-          alt="선택됨"
-        />
       )}
     </div>
   );
