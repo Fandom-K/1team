@@ -1,6 +1,5 @@
 .IdolProfile {
   position: relative;
-  position: relative;
   width: 70px;
   height: 70px;
   padding: 4px;
@@ -23,8 +22,6 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  position: relative;
-  z-index: 1;
 }
 
 .image-wrapper .overlay {
@@ -32,13 +29,13 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   border-radius: 50%;
   background: linear-gradient(
     to right,
     rgba(249, 109, 105, 0.5),
     rgba(254, 84, 147, 0.5)
   );
-  pointer-events: none;
 }
 
 .image-wrapper .selected {

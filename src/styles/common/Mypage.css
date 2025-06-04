@@ -20,14 +20,14 @@
   opacity: 0.4;
 }
 
-.MyPage .interest-idols-list {
+.MyPage .Favor-idols-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 좌우, 열 */
   grid-template-rows: repeat(2, auto); /* 아래위, 행*/
   gap: 24px 16px;
 }
 
-.MyPage .interest-idols-list .ProfileChunk {
+.MyPage .my-idols-list .ProfileChunk {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,13 +44,35 @@
   align-items: center;
 }
 
+.no-fav {
+  color: #ffffff99;
+}
+
+.my-idols-list {
+  display: flex;
+}
+
+.mother {
+  position: relative;
+}
+
+.idol-delete-Btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background: none;
+}
+
 @media (min-width: 768px) {
-  .MyPage .interest-idols-list .ProfileChunk .IdolProfile {
+  .MyPage .my-idols-list .ProfileChunk .IdolProfile {
     width: 128px;
     height: 128px;
     padding: 6.47px;
   }
-  .MyPage .interest-idols-list {
+  .MyPage .Favor-idols-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
@@ -60,10 +82,10 @@
 }
 
 @media (min-width: 1200px) {
-  .MyPage .interest-idols-list .ProfileChunk .IdolProfile {
+  .MyPage .my-idols-list .ProfileChunk .IdolProfile {
     padding: 6.53px;
   }
-  .MyPage .interest-idols-list {
+  .MyPage .Favor-idols-list {
     grid-template-columns: repeat(8, 1fr);
   }
 }

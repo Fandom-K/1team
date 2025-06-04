@@ -1,27 +1,14 @@
 import IdolProfile from "./common/IdolProfile";
-import { useState } from "react";
 
-const ProfileChunk = ({ idol, size }) => {
-  const [selectedIds, setSelectedIds] = useState([]);
-
-  // 선택 토글 함수
-  const handleSelect = (idolId) => {
-    setSelectedIds((prev) =>
-      prev.includes(idolId)
-        ? prev.filter((id) => id !== idolId)
-        : [...prev, idolId]
-    );
-  };
-
+const ProfileChunk = ({ idol, size, isSelected, onClick }) => {
   return (
-    <div className="ProfileChunk">
+    <div className="ProfileChunk" onClick={onClick}>
       <IdolProfile
         className="idol-profile"
         key={idol.id}
         size={size}
         idol={idol}
-        isSelected={selectedIds.includes(idol.id)}
-        onClick={() => handleSelect(idol.id)}
+        isSelected={isSelected}
       />
       {/* 이름과 그룹도 보여주기 */}
       <div className="chunk-name">{idol.name}</div>

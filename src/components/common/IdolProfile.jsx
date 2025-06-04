@@ -42,17 +42,6 @@ const IdolProfile = ({
       ) : (
         <div>로딩 중...</div>
       )}
-
-      {isSelected && (
-        <>
-          <div className="overlay-color" />
-          <img
-            className="selected"
-            src={icCheck} // 체크 표시에 사용할 이미지 경로
-            alt="선택됨"
-          />
-        </>
-      )}
     </div>
   );
 };
