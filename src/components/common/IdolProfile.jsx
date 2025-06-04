@@ -1,5 +1,5 @@
 import "../../styles/common/IdolProfile.css";
-
+import icCheck from "../../assets/icons/ic_check.png";
 /**
  * 아이돌 프로필 컴포넌트
  * @param {Object} props - 컴포넌트에 전달되는 속성들
@@ -36,11 +36,14 @@ const IdolProfile = ({
       )}
 
       {isSelected && (
-        <img
-          className="selected"
-          src={"../assets/icons/ic_check.png"} // 체크 표시에 사용할 이미지 경로
-          alt="선택됨"
-        />
+        <>
+          <div className="selected-color" />
+          <img
+            className="selected"
+            src={icCheck} // 체크 표시에 사용할 이미지 경로
+            alt="선택됨"
+          />
+        </>
       )}
     </div>
   );

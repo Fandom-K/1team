@@ -1,4 +1,5 @@
 .IdolProfile {
+  position: relative;
   width: 70px;
   height: 70px;
   padding: 4px;
@@ -13,17 +14,31 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  position: relative;
+  z-index: 1;
 }
 
-.IdolProfile .overlay {
+.IdolProfile .overlay-color {
   position: absolute;
+  width: 30px;
+  height: 30px;
   width: 100%;
-  height: 100%;
   border-radius: 50%;
   background: linear-gradient(
     to right,
     rgba(249, 109, 105, 0.5),
     rgba(254, 84, 147, 0.5)
   );
-  pointer-events: none; /* 클릭 이벤트 방지 (오버레이가 클릭을 가로채지 않게) */
+  z-index: 5;
+}
+
+.IdolProfile .selected {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  width: 34px;
+  height: 36px;
+  z-index: 10;
+  pointer-events: none;
+  background-color: red;
 }
