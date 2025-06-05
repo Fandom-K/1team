@@ -1,13 +1,12 @@
 .card {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
 }
 .card-image-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 80%;
+  background-image: linear-gradient(tobottom, rgba(0, 0, 0, 1), 90%);
 }
 
 .card-image {
@@ -18,14 +17,33 @@
 
 .button-wrapper {
   position: absolute;
-  bottom: 10px;
-  z-index: 2;
-  /* transform: translateX(90%); */
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
 }
 .button-wrapper .Button {
-  width: 100px;
+  width: 234px;
+  height: 40px;
 }
 
 .card-votes {
   font-weight: bold;
+}
+
+.card-feature h3 {
+  color: #ffffff;
+  opacity: 40%;
+  margin-bottom: 8px;
+}
+
+.img-blur-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+  z-index: 2;
+  pointer-events: none;
 }

@@ -2,7 +2,7 @@
   color: white;
 }
 
-.VoteSlide {
+.voteSlide {
   width: 100%;
   max-width: 374px;
   display: flex;
@@ -10,14 +10,38 @@
   margin: 0 auto;
 }
 
+.swiper-button-next {
+  position: absolute;
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+  padding: 30px 10px;
+}
+.swiper-button-prev {
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+  padding: 30px 10px;
+  position: absolute;
+  left: -100px;
+  top: 0;
+  overflow: visible;
+  border: 8px solid red;
+  z-index: 99;
+}
+
+/* .swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+} */
+
 @media (min-width: 745px) {
-  .VoteSlide {
+  .voteSlide {
     max-width: 744px;
   }
 }
 
 @media (min-width: 376px) {
-  .VoteSlide {
+  .voteSlide {
     max-width: 1200px;
   }
 }

@@ -37,7 +37,7 @@ const IdolVoteSlide = () => {
   }
 
   return (
-    <div className="VoteSlide">
+    <div className="voteSlide">
       <Swiper
         modules={[Pagination, Navigation]}
         spaceBetween={50}
@@ -66,9 +66,6 @@ const IdolVoteSlide = () => {
           },
         }}
       >
-        {/* <SwiperSlide>
-          <Idolcard />
-        </SwiperSlide> */}
         {Idols.map((idol) => (
           <SwiperSlide>
             <IdolCard idol={idol} />
