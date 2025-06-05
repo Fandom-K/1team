@@ -10,16 +10,11 @@ const IdolCard = ({ idol }) => {
           className="card-image"
           src={idol.profilePicture}
           alt="카드이미지"
-        ></img>
+        />
         <div className="button-wrapper">
-          <Link to="">
-            <Button
-              className="a"
-              text="후원하기"
-              cornner="angular"
-              alt="후원하기 버튼"
-            />
-          </Link>
+          {/* <Link to=""> */}
+          <Button text="후원하기" corner="angular" type="positive" />
+          {/* </Link> */}
         </div>
       </div>
 

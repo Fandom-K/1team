@@ -1,31 +1,29 @@
 .card {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 .card-image-wrapper {
   position: relative;
-}
-.button-wrapper {
-  position: relative;
-}
-.card > .Button {
-  position: absolute;
-  z-index: 1;
-}
-
-.a {
-  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .card-image {
   object-fit: cover;
   width: 100%;
-  height: 80%;
-  position: relative;
+  height: 100%;
 }
 
-.card .Button {
-  padding: 2px 16px 3px;
+.button-wrapper {
+  position: absolute;
+  bottom: 10px;
+  z-index: 2;
+  /* transform: translateX(90%); */
+}
+.button-wrapper .Button {
+  width: 100px;
 }
 
 .card-votes {
