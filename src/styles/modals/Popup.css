@@ -1,0 +1,48 @@
+.Modal.Popup .modal-container {
+  gap: 8px;
+}
+
+.Modal.Popup .modal-container .modal-close {
+  width: 15.5px;
+  height: 15.5px;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 31px;
+}
+
+.popup-image {
+  position: relative;
+}
+/* box-shadow: 0px 0px 52.15px 0px #FFAAAA; */
+
+.popup-image .blur {
+  z-index: 10;
+  width: 100px;
+  height: 100px;
+  background-color: #ffaaaa;
+  filter: blur(30px);
+  opacity: 0.2;
+  border-radius: 52.15px;
+  position: absolute;
+}
+
+.Modal.Popup .popup-message {
+  color: #ffffff;
+}
+
+.Modal.Popup .popup-message > span {
+  color: #f96d69;
+}
+
+.Modal.Popup .modal-body-and-footer {
+  gap: 31px;
+}
+
+.Popup .modalFooter Button {
+  width: 100%;
+  height: 42px;
+}

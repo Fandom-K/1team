@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
 
+import Button from "../common/Button";
+import useAllIdolList from "../../hooks/useAllIdolList";
+import IdolProfile from "../common/IdolProfile";
+
 import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
 import MoreButton from "./MoreButton";
+import useIsWideScreen from "../../hooks/useIsWideScreen";
 
 const IdolChartItem = ({ idol, rank }) => {
   return (
@@ -31,35 +36,21 @@ const IdolChartTab = ({ gender = "female" }) => {
     window.innerWidth >= 745 ? 10 : 5
   );
 
-  // 화면 사이즈 감지하는 스테이트: window객체의 innerWidth에 접근하면 현재 브라우저의 넓이에 접근할 수 있음
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 745);
+  const isWideScreen = useIsWideScreen(745);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const data = await getIdol({ gender });
-        setAllIdols(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
+    setLoading(true);
 
-    fetchData();
+    getIdol({ gender })
+      .then((data) => setAllIdols(data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
   }, [gender]);
 
   useEffect(() => {
-    // handleResize로 isWideScreen의 값 변경: 불린값/동적인 느낌
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth >= 745);
-    };
-
-    window.addEventListener("resize", handleResize); // useEffect안에서 addEventListener를 사용하는 형태
-    // 반드시 언마운트되는 시점에 removeEventListener로 정리해줘야함 : 메모리누수 방지 : 클린업 함수
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    // 화면 넓이 바뀌면 visibleCount 초기값 재조정
+    setVisibleCount(isWideScreen ? 10 : 5);
+  }, [isWideScreen]);
 
   if (loading) return <p>로딩 중...</p>;
   if (error) return <p>에러 발생: {error.message}</p>;
@@ -68,19 +59,7 @@ const IdolChartTab = ({ gender = "female" }) => {
     .filter((idol) => idol.gender === gender)
     .sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0));
 
-  // 보여줄 아이돌 목록 자르기
   const visibleIdols = filtered.slice(0, visibleCount);
-
-  const leftColumn = [];
-  const rightColumn = [];
-
-  visibleIdols.forEach((idol, index) => {
-    if (index < visibleIdols.length / 2) {
-      leftColumn.push({ ...idol, rank: index + 1 });
-    } else {
-      rightColumn.push({ ...idol, rank: index + 1 });
-    }
-  });
 
   const handleMoreClick = () => {
     const increment = isWideScreen ? 10 : 5;
@@ -92,19 +71,9 @@ const IdolChartTab = ({ gender = "female" }) => {
   return (
     <>
       <div className="IdolChartTab grid-column">
-        {/* 좌측 열 */}
-        <div className="column">
-          {leftColumn.map((idol) => (
-            <IdolChartItem key={idol.id} idol={idol} rank={idol.rank} />
-          ))}
-        </div>
-
-        {/* 우측 열 */}
-        <div className="column">
-          {rightColumn.map((idol) => (
-            <IdolChartItem key={idol.id} idol={idol} rank={idol.rank} />
-          ))}
-        </div>
+        {visibleIdols.map((idol, index) => (
+          <IdolChartItem key={idol.id} idol={idol} rank={index + 1} />
+        ))}
       </div>
 
       {showMoreButton && (

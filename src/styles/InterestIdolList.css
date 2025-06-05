@@ -1,9 +1,0 @@
-.for-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  row-gap: 24px; /* 태블릿 공통, 브라우저 31px */
-}
-
-@media screen {
-}

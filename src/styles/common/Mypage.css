@@ -1,0 +1,135 @@
+.MyPage {
+  color: #f6f6f8;
+}
+
+.MyPage > div:first-type-of {
+  display: flex;
+  flex-direction: column;
+}
+
+.MyPage .ProfileChunk {
+  height: 151px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.MyPage .chunk-name {
+  color: #f4efef;
+}
+
+.MyPage .chunk-group {
+  color: #ffffff99;
+  opacity: 0.4;
+}
+
+.MyPage .interest-idols-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 좌우, 열 */
+  grid-template-rows: repeat(2, auto); /* 아래위, 행*/
+  gap: 24px 16px;
+}
+
+.MyPage .btn-positive {
+  width: 255px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+.MyPage .button-wrapper {
+  align-items: center;
+}
+
+.MyPage .my-idols-list p {
+  color: #ffffff99;
+}
+
+.MyPage .my-idols-list {
+  display: flex;
+  gap: 30px;
+}
+
+.MyPage .chunk-wrapper {
+  position: relative;
+  color: #f6f6f8;
+  text-align: center;
+}
+
+.MyPage .chunk-wrapper p {
+  color: #ffffff99;
+  opacity: 0.4;
+}
+
+.MyPage .idol-delete-Btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.MyPage .chunk-wrapper .IdolProfile {
+  width: 70px;
+  height: 70px;
+}
+
+.MyPage .list-change-btn {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .MyPage .font-bold-16-line26 {
+    font-size: 20px;
+  }
+  .MyPage .my-idols-list .ProfileChunk .IdolProfile {
+    width: 128px;
+    height: 128px;
+    padding: 6.47px;
+  }
+  .MyPage .interest-idols-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .MyPage .ProfileChunk {
+    height: 183px;
+  }
+  .my-idols-list {
+    gap: 24px;
+  }
+  .MyPage .interest-idols-list {
+    gap: 24px 24px;
+  }
+  .MyPage .chunk-wrapper .IdolProfile {
+    width: 98px;
+    height: 98px;
+  }
+  .idol-delete-Btn img {
+    width: 2.3575em;
+  }
+  .MyPage .list-change-btn {
+    display: block;
+    width: 29px;
+    height: 135px;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(27, 27, 27, 0.8);
+    border-radius: 4px;
+  }
+  .MyPage .interest-idols > div:first-of-type {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .MyPage .font-bold-16-line26 {
+    font-size: 24px;
+  }
+  .MyPage .my-idols-list .ProfileChunk .IdolProfile {
+    padding: 6.53px;
+  }
+  .MyPage .interest-idols-list {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
