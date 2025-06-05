@@ -10,7 +10,7 @@ const ProfileChunk = ({ idol, size, isSelected, onClick }) => {
         idol={idol}
         isSelected={isSelected}
       />
-      {/* 이름과 그룹도 보여주기 */}
+
       <div className="chunk-name">{idol.name}</div>
       <div className="chunk-group">{idol.group}</div>
     </div>

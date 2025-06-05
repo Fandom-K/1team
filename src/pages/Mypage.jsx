@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
-import "../styles/common/Mypage.css";
 import ProfileChunk from "../components/ProfileChunk";
 import useAllIdolList from "../hooks/useAllIdolList";
 import IdolProfile from "../components/common/IdolProfile";
 import idolDeleteBtn from "../assets/icons/btn_delete.svg";
+import prevButton from "../assets/images/prev_btn.png";
+import nextButton from "../assets/images/next_btn.png";
+
+import "../styles/common/Mypage.css";
 
 const MyPage = () => {
-  const { allIdols, loading, error } = useAllIdolList(20);
+  const { allIdols, loading, error } = useAllIdolList(16);
   const [selectedIdols, setSelectedIdols] = useState([]);
   const [myFavorIdols, setMyFavorIdols] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); //페이지네이션 상태저장
 
   useEffect(() => {
-    console.log("선택된 아이돌 ID들이 바뀌었어요:", selectedIdols);
-  }, [selectedIdols]);
+    console.log("현재 페이지 변경됨:", currentPage);
+  }, [currentPage]);
 
   if (loading) return <div>Loading...</div>; // 로딩중일 때 보여줄 화면
   if (error) return <div>Error: {error.message}</div>; // 오류 발생 시
@@ -52,6 +56,31 @@ const MyPage = () => {
     console.log("삭제:", idolId);
   };
 
+  //------아래는 페이지네이션 함수'3')/-------//
+
+  const itemsPerPage = 16;
+
+  const totalPages = Math.ceil(allIdols.length / itemsPerPage);
+
+  // const currenIdols = allIdols.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage
+  // );//현재 페이지 아이돌 목록
+
+  const handlePrevPage = () => {
+    if (currentPage > 1)
+      setCurrentPage((prev) => {
+        console.log("prev page before update:", prev);
+        return prev - 1;
+      }); //test
+    console.log("prev");
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+    console.log("next");
+  };
+
   return (
     <div className="MyPage">
       <Header />
@@ -59,9 +88,7 @@ const MyPage = () => {
         <div className="my-idols">
           <h3 className="font-bold-16-line26">내가 관심있는 아이돌</h3>
           <div className="my-idols-list">
-            {myFavorIdols.length === 0 && (
-              <p className="no-fav">관심 아이돌이 없습니다.</p>
-            )}
+            {myFavorIdols.length === 0 && <p>관심 아이돌이 없습니다.</p>}
             {myFavorIdols.map((idol) => (
               <div className="chunk-wrapper" key={idol.id}>
                 <IdolProfile idol={idol} />
@@ -80,21 +107,38 @@ const MyPage = () => {
           </div>
         </div>
 
-        <div className="Favor-idols">
+        <div className="interest-idols">
           <h3 className="font-bold-16-line26">
             관심 있는 아이돌을 추가해보세요.
           </h3>
-          <div className="Favor-idols-list">
-            {allIdols.map((idol, index) => (
-              <ProfileChunk
-                key={idol.id}
-                className="ProfileChunk"
-                index={index}
-                idol={idol}
-                isSelected={selectedIdols.includes(idol.id)} // 선택여부 props 전달
-                onClick={() => toggleSelect(idol.id)} // 클릭 시 선택 토글
-              />
-            ))}
+          <div>
+            <div>
+              <button className="list-change-btn" onClick={handlePrevPage}>
+                <img src={prevButton} />
+              </button>
+            </div>
+            <div className="interest-idols-list">
+              {allIdols
+                .slice(
+                  (currentPage - 1) * itemsPerPage,
+                  currentPage * itemsPerPage
+                )
+                .map((idol, index) => (
+                  <ProfileChunk
+                    key={idol.id}
+                    className="ProfileChunk"
+                    index={index}
+                    idol={idol}
+                    isSelected={selectedIdols.includes(idol.id)} //클릭시 오버레이
+                    onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
+                  />
+                ))}
+            </div>
+            <div>
+              <button className="list-change-btn" onClick={handleNextPage}>
+                <img src={nextButton} />
+              </button>
+            </div>
           </div>
         </div>
 
