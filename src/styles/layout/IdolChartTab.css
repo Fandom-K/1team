@@ -16,11 +16,6 @@
   align-items: center;
 }
 
-.IdolChartItem img {
-  width: 70px;
-  height: 70px;
-}
-
 .IdolChartItem p {
   color: var(--brand-100);
 }

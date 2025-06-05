@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
 
+import Button from "../common/Button";
+import useAllIdolList from "../../hooks/useAllIdolList";
+import IdolProfile from "../common/IdolProfile";
+
 import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
 import MoreButton from "./MoreButton";

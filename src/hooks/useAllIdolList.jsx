@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const knownGroups = ["아이브", "뉴진스", "르세라핌", "블랙핑크", "라이즈"]; // 추정 그룹 목록
+const knownGroups = ["16-1"]; // 추정 그룹 목록
 
 function useAllIdolList(limit = 100) {
   const [allIdols, setAllIdols] = useState([]);
