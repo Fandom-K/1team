@@ -14,7 +14,7 @@ const LandingPage = () => {
       <section className="intro">
         <div className="overlay"></div>
         <div className="intro-top">
-          <h1 className="">
+          <h1 className="font-bold-26">
             내가 좋아하는 아이돌을 <br />
             가장 <span>쉽게 덕질</span> 하는 방법
           </h1>

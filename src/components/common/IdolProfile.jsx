@@ -1,4 +1,4 @@
-import '../../styles/common/IdolProfile.css';
+import "../../styles/common/IdolProfile.css";
 /**
  * 아이돌 프로필 컴포넌트
  * @param {Object} props - 컴포넌트에 전달되는 속성들
@@ -9,34 +9,34 @@ import '../../styles/common/IdolProfile.css';
  * @param {function} props.onSelect - 선택 시 호출되는 콜백 함수
  */
 const IdolProfile = ({
-    size = 70, // 기본 사이즈 70px
-    borderColor = '#f96d69',
-    idol: idol, // api "profilePicture" prop
-    isSelected, // 선택 토글용 prop
-    onSelect, // 선택 토글용 prop
+  size = 70, // 기본 사이즈 70px
+  borderColor = "#f96d69",
+  idol: idol, // api "profilePicture" prop
+  isSelected, // 선택 토글용 prop
+  onSelect, // 선택 토글용 prop
 }) => {
-    const handleClick = () => {
-        if (onSelect) {
-            onSelect(); // 함수가 넘어온 경우에만 호출
-        }
-    };
+  const handleClick = () => {
+    if (onSelect) {
+      onSelect(); // 함수가 넘어온 경우에만 호출
+    }
+  };
 
-    const style = {
-        width: size,
-        height: size,
-        borderColor,
-    };
+  const style = {
+    width: size,
+    height: size,
+    borderColor,
+  };
 
-    return (
-        <div
-            className="IdolProfile"
-            style={{ ...style, cursor: onSelect ? 'pointer' : 'default' }}
-            onClick={onSelect ? handleClick : undefined} // 함수가 있으면 클릭 가능
-        >
-            <img className="inner-image" src={idol.profilePicture} alt={idol.name} />
-            {/* 오버레이 독립 div */}
-            {isSelected && <div className="overlay" />}
-        </div>
-    );
+  return (
+    <div
+      className="IdolProfile"
+      style={{ ...style, cursor: onSelect ? "pointer" : "default" }}
+      onClick={onSelect ? handleClick : undefined} // 함수가 있으면 클릭 가능
+    >
+      <img className="inner-image" src={idol.profilePicture} alt={idol.name} />
+      {/* 오버레이 독립 div */}
+      {isSelected && <div className="overlay" />}
+    </div>
+  );
 };
 export default IdolProfile;
