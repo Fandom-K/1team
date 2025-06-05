@@ -4,6 +4,7 @@ import "../../styles/layout/IdolChartTab.css";
 import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
 import MoreButton from "./MoreButton";
+import useIsWideScreen from "../../hooks/useIsWideScreen";
 
 const IdolChartItem = ({ idol, rank }) => {
   return (
@@ -31,32 +32,21 @@ const IdolChartTab = ({ gender = "female" }) => {
     window.innerWidth >= 745 ? 10 : 5
   );
 
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 745);
+  const isWideScreen = useIsWideScreen(745);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const data = await getIdol({ gender });
-        setAllIdols(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
+    setLoading(true);
 
-    fetchData();
+    getIdol({ gender })
+      .then((data) => setAllIdols(data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
   }, [gender]);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth >= 745);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    // 화면 넓이 바뀌면 visibleCount 초기값 재조정
+    setVisibleCount(isWideScreen ? 10 : 5);
+  }, [isWideScreen]);
 
   if (loading) return <p>로딩 중...</p>;
   if (error) return <p>에러 발생: {error.message}</p>;
