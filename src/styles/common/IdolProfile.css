@@ -1,7 +1,7 @@
 .IdolProfile {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 98px;
+  height: 98px;
   padding: 4px;
   border-radius: 50%;
   border: 1px solid var(--brand-100);
@@ -47,4 +47,15 @@
   height: auto;
   pointer-events: none;
   z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .IdolProfile {
+    width: 128px;
+    height: 128px;
+    padding: 5px;
+  }
+}
+
+@media (min-width: 1200px) {
 }

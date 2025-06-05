@@ -24,7 +24,11 @@ const IdolProfile = ({
   };
 
   return (
-    <div className="IdolProfile" style={{ ...style }} onClick={onClick}>
+    <div
+      className="IdolProfile IdolProfile-2"
+      style={{ ...style }}
+      onClick={onClick}
+    >
       {idol && idol.profilePicture ? (
         <div className="image-wrapper">
           <img

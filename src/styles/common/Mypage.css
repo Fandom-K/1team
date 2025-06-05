@@ -2,13 +2,12 @@
   color: #f6f6f8;
 }
 
-.MyPage .IdolProfile {
-  width: 98px;
-  height: 98px;
-}
-
 .MyPage .ProfileChunk {
   height: 151px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .MyPage .chunk-name {
@@ -25,13 +24,8 @@
   grid-template-columns: repeat(3, 1fr); /* 좌우, 열 */
   grid-template-rows: repeat(2, auto); /* 아래위, 행*/
   gap: 24px 16px;
-}
-
-.MyPage .my-idols-list .ProfileChunk {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  width: 328px;
+  height: 326px;
 }
 
 .MyPage .btn-positive {
@@ -50,20 +44,30 @@
 
 .my-idols-list {
   display: flex;
+  gap: 30px;
 }
 
-.mother {
+.chunk-wrapper {
   position: relative;
+  color: #f6f6f8;
+  text-align: center;
+}
+
+.chunk-wrapper p {
+  color: #ffffff99;
+  opacity: 0.4;
 }
 
 .idol-delete-Btn {
   position: absolute;
   top: 0;
   right: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   background: none;
+}
+
+.MyPage .chunk-wrapper .IdolProfile {
+  width: 70px;
+  height: 70px;
 }
 
 @media (min-width: 768px) {
@@ -78,6 +82,18 @@
   }
   .MyPage .ProfileChunk {
     height: 183px;
+  }
+  .my-idols-list {
+    gap: 24px;
+  }
+  .MyPage .Favor-idols-list {
+    gap: 24px 24px;
+    width: 584px;
+    height: 390px;
+  }
+  .MyPage .chunk-wrapper .IdolProfile {
+    width: 98px;
+    height: 98px;
   }
 }
 

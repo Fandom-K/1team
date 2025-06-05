@@ -63,7 +63,7 @@ const MyPage = () => {
               <p className="no-fav">관심 아이돌이 없습니다.</p>
             )}
             {myFavorIdols.map((idol) => (
-              <div className="mother" key={idol.id}>
+              <div className="chunk-wrapper" key={idol.id}>
                 <IdolProfile idol={idol} />
                 <button
                   className="idol-delete-Btn"
