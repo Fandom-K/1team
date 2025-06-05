@@ -1,0 +1,48 @@
+.ModalVote .vote-chart-list {
+  height: 514px;
+  overflow-y: auto;
+}
+
+.vote-chart-list::-webkit-scrollbar {
+  display: none;
+}
+
+.InModalVote.IdolChartItem .group-and-vote {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.InModalVote.IdolChartItem .group-and-vote .name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.ModalVote .RadioGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff1a;
+}
+
+.InModalVote.IdolChartItem {
+  border-bottom: none;
+}
+
+.ModalVote .credit-charge-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalVote .vote-cost-message {
+  position: relative;
+  top: 12px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.ModalVote .vote-cost-message > span {
+  color: #f96d69;
+}

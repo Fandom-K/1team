@@ -19,6 +19,6 @@
 }
 
 .Input input::placeholder {
-  color: #67666e;
+  color: var(--gray-100);
   vertical-align: middle;
 }
