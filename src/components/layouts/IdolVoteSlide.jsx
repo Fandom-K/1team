@@ -12,6 +12,7 @@ const IdolVoteSlide = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [Idols, setIdols] = useState(null);
+  const [swiper, setSwiper] = useState(null);
 
   //데이터 요청
   useEffect(() => {
@@ -38,14 +39,21 @@ const IdolVoteSlide = () => {
 
   return (
     <div className="voteSlide">
+      <div class="move-button">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
       <Swiper
         modules={[Pagination, Navigation]}
         spaceBetween={50}
         slidesPerView={10}
-        navigation
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
+        onBeforeInit={(swipper) => setSwiper(swipper)}
         slideToClickedSlide="true"
         onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)} //알아오기
         speed={500}
         pagination={{
           clickable: true,

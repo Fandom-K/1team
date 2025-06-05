@@ -2,31 +2,45 @@
   color: white;
 }
 
+.move-button .swiper-button-next button {
+  position: absolute; /* 위치 지정 */
+  display: flex;
+  justify-content: space-between;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+}
+
+.voteSlide .move-button > div {
+  position: relative;
+}
+
 .voteSlide {
-  width: 100%;
   max-width: 374px;
   display: flex;
   align-content: center;
   margin: 0 auto;
 }
 
-.swiper-button-next {
+.swiper-wrapper {
+  margin: 0 auto;
+}
+
+/* .voteSlide .swiper-button-next {
   position: absolute;
   background-color: rgba(27, 27, 27, 0.8);
   color: #ffffff;
   padding: 30px 10px;
 }
-.swiper-button-prev {
+
+.voteSlide .swiper-button-prev {
   background-color: rgba(27, 27, 27, 0.8);
   color: #ffffff;
   padding: 30px 10px;
   position: absolute;
-  left: -100px;
-  top: 0;
-  overflow: visible;
-  border: 8px solid red;
-  z-index: 99;
-}
+ 
 
 /* .swiper-button-prev:after,
 .swiper-button-next:after {
