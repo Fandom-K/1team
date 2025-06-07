@@ -1,0 +1,33 @@
+.Header {
+  background-color: #02000e;
+  width: 100%;
+  max-width: 374px;
+  height: 80px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header .profile-img {
+  border: none;
+  border-radius: 50%;
+}
+
+.Header .header-logo {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 745px) {
+  .Header {
+    max-width: 744px;
+  }
+}
+
+@media (min-width: 376px) {
+  .Header {
+    max-width: 1200px;
+  }
+}

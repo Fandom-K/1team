@@ -1,0 +1,292 @@
+.LandingPage {
+  width: 100%;
+  font-family: "Pretendard";
+  position: relative;
+  overflow: hidden;
+}
+/* 수정 */
+/* ::가상 요소 왼쪽 상단 그라데이션 효과 */
+.LandingPage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/assets/images/Img_top-design.png");
+  background-repeat: no-repeat;
+  /* 왼쪽 상단에 정확히 고정 */
+  background-position: top left;
+  /* 이미지 크기를 원본 그대로 유지해서 왜곡 없이 표시 */
+  background-size: auto;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ------------------ */
+/* ✅ Intro Section   */
+/* ------------------ */
+.intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+  max-width: 1200px;
+
+  min-height: 100vh; /* ✅ vh 대신 min-height로 교체 */
+
+  background-color: var(--black-100);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+
+  background-image: url("/src/assets/images/bg-intro-mobile.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* ✅ 확대 없이 전부 보이게 */
+  z-index: 2;
+}
+
+.intro-top {
+  margin-bottom: 14rem;
+  z-index: 2;
+}
+
+.intro-bottom {
+  margin-top: 14rem;
+  z-index: 2;
+}
+
+/* 중앙 그라데이션 효과 */
+.intro .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(2, 0, 14, 0.196),
+    rgba(2, 0, 14, 0.412),
+    rgba(2, 0, 14, 0.913),
+    rgb(2, 0, 14)
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.intro h1 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.intro h1 > span {
+  color: var(--brand-100);
+}
+
+.intro .logo {
+  width: 80%;
+  padding: 0 10px;
+}
+
+.intro .Button {
+  /* 최소값 / 기준값(선호값) / 최대값: 360px */
+  width: clamp(100px, 80vw, 230px);
+  height: 3rem;
+}
+
+/* ------------------ */
+/* ✅ Step Sections   */
+/* ------------------ */
+.step-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: var(--black-100);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* 세로 띠 */
+.step-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 117px;
+  /* 핵심: 스크롤 높이 다 안 쓰고, 중간까지만 표시 */
+  height: calc(100% - 400px); /* 또는 적당히 조절 */
+  margin-top: 220px; /* 상단 잘라내기 */
+  margin-bottom: 180px; /* 하단 잘라내기 */
+
+  background-image: linear-gradient(#030615, #051e32, #051c30, #030b1c);
+  z-index: 3;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+  max-width: 1200px;
+
+  min-height: 100vh; /* ✅ vh 대신 min-height로 교체 */
+
+  text-align: center;
+  padding: 50px 24px 50px; /* top / side / bottom padding */
+
+  background-image: linear-gradient(#02000e, #02000eb9, #02000e),
+    url("/src/assets/images/bg-Home-1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.step2 {
+  background-image: linear-gradient(#02000e, #02000eb9, #02000e),
+    url("/src/assets/images/bg-Home-2.jpg");
+}
+
+.step3 {
+  background-image: linear-gradient(#02000e, #02000eb9, #02000e),
+    url("/src/assets/images/bg-Home-3.jpg");
+}
+
+.step .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+
+  background: radial-gradient(
+    rgba(2, 0, 14, 0),
+    rgba(2, 0, 14, 0.063),
+    rgba(2, 0, 14, 0.119),
+    rgb(2, 0, 14),
+    rgb(2, 0, 14)
+  );
+  z-index: 2;
+}
+
+.step-top,
+.step-bottom {
+  z-index: 4;
+}
+
+.step .step-img {
+  /* 최소값 / 기준값(선호값) / 최대값 */
+  width: clamp(240px, 50vw, 340px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.step h2 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #d2c030;
+}
+
+.step p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+/* ----------------tablet--------------------- */
+@media (min-width: 376px) {
+  /* ------------------ */
+  /* ✅ Intro Section   */
+  /* ------------------ */
+  .intro {
+    background-image: url("/src/assets/images/bg-intro-tablet.png");
+  }
+
+  .intro-top {
+    margin-bottom: 15rem;
+  }
+
+  .intro-bottom {
+    margin-top: 15rem;
+  }
+
+  .intro h1 {
+    font-weight: 700;
+  }
+
+  .intro .logo {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .intro .Button {
+    /* 최소값 / 기준값(선호값) / 최대값 */
+    width: clamp(240px, 80vw, 477px);
+    height: 3rem;
+  }
+
+  /* ------------------ */
+  /* ✅ Step Sections   */
+  /* ------------------ */
+  .step {
+    padding: 100px 32px 100px;
+  }
+}
+
+/* --------------PC----------------- */
+@media (min-width: 745px) {
+  .intro {
+    background-image: url("/src/assets/images/bg-intro-pc.png");
+  }
+
+  .intro h1 {
+    font-size: 1.625rem;
+    font-weight: 700;
+  }
+
+  .intro .overlay {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(2, 0, 14, 0.197),
+      rgba(2, 0, 14, 0.464),
+      rgba(2, 0, 14, 0.669),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14)
+    );
+  }
+
+  /* ------------------ */
+  /* ✅ Step Sections   */
+  /* ------------------ */
+  .step {
+    padding: 140px 48px 140px;
+  }
+
+  .step .overlay {
+    background: radial-gradient(
+      rgba(2, 0, 14, 0),
+      rgba(2, 0, 14, 0.245),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14),
+      rgb(2, 0, 14)
+    );
+  }
+
+  .step p {
+    font-size: 24px;
+  }
+}

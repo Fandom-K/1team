@@ -1,0 +1,24 @@
+.Input {
+  width: 295px;
+  height: 58px;
+}
+
+.Input input {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #ffffff;
+  padding: 16px;
+  background-color: #272f3d;
+  color: #ffffff;
+}
+
+.Input.Error > input {
+  border-color: var(--error-100);
+}
+
+.Input input::placeholder {
+  color: var(--gray-100);
+  vertical-align: middle;
+}
