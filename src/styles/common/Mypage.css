@@ -1,5 +1,9 @@
 .MyPage {
   color: #f6f6f8;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 24px;
 }
 
 .MyPage > div:first-type-of {
@@ -28,7 +32,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 좌우, 열 */
   grid-template-rows: repeat(2, auto); /* 아래위, 행*/
-  gap: 24px 16px;
+  margin-top: 16px;
+  gap: 24px 17px;
 }
 
 .MyPage .btn-positive {
@@ -48,6 +53,12 @@
 .MyPage .my-idols-list {
   display: flex;
   gap: 30px;
+  height: 100%;
+  align-items: center;
+  padding-top: 32px;
+  padding-bottom: 42px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 40px;
 }
 
 .MyPage .chunk-wrapper {
@@ -78,6 +89,11 @@
   display: none;
 }
 
+.MyPage .my-idols-wrapper {
+  border: 1px solid red;
+  padding: 24px;
+}
+
 @media (min-width: 768px) {
   .MyPage .font-bold-16-line26 {
     font-size: 20px;
@@ -90,15 +106,14 @@
   .MyPage .interest-idols-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 57px;
   }
   .MyPage .ProfileChunk {
     height: 183px;
   }
   .my-idols-list {
     gap: 24px;
-  }
-  .MyPage .interest-idols-list {
-    gap: 24px 24px;
   }
   .MyPage .chunk-wrapper .IdolProfile {
     width: 98px;
@@ -119,6 +134,7 @@
   .MyPage .interest-idols > div:first-of-type {
     display: flex;
     align-items: center;
+    gap: 27px;
   }
 }
 
@@ -131,5 +147,13 @@
   }
   .MyPage .interest-idols-list {
     grid-template-columns: repeat(8, 1fr);
+    gap: 32px 22px;
+    margin-top: 32px;
+  }
+  .MyPage .interest-idols > div:first-of-type {
+    max-width: 1300px;
+    display: flex;
+    justify-content: center;
+    gap: 34px;
   }
 }

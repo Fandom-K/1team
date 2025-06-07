@@ -1,9 +1,0 @@
-.ProfileChunk {
-  display: flex;
-  gap: 8px;
-  text-align: center;
-}
-
-.chunk-group {
-  opacity: 0.4;
-}
