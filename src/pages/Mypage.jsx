@@ -2,83 +2,132 @@ import { useState, useEffect } from "react";
 import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
 import ProfileChunk from "../components/ProfileChunk";
-import useAllIdolList from "../hooks/useAllIdolList";
 import IdolProfile from "../components/common/IdolProfile";
 import idolDeleteBtn from "../assets/icons/btn_delete.svg";
 import prevButton from "../assets/images/prev_btn.png";
 import nextButton from "../assets/images/next_btn.png";
-
+import axios from "axios";
 import "../styles/common/Mypage.css";
 
-const MyPage = () => {
-  const { allIdols, loading, error } = useAllIdolList(16);
+const ITEMS_PER_PAGE = 16;
+
+const MypageTest = () => {
+  const [list, setList] = useState([]); // 현재 페이지 데이터
+  const [nextCursor, setNextCursor] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [prevCursors, setPrevCursors] = useState([]); // 이전 커서 스택
+
+  // 관심 아이돌, 선택 아이돌 상태
   const [selectedIdols, setSelectedIdols] = useState([]);
   const [myFavorIdols, setMyFavorIdols] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1); //페이지네이션 상태저장
 
+  // 서버 호출, 커서 요청
+  const fetchNextPage = async () => {
+    if (loading || (!nextCursor && prevCursors.length > 0)) return; // 처음엔 null 가능
+    setLoading(true);
+
+    // 이전 커서 저장: 현재 커서가 있으면 스택에 저장
+    if (nextCursor !== null) {
+      setPrevCursors((prev) => [...prev, nextCursor]);
+    }
+
+    try {
+      const res = await axios.get(
+        "https://fandom-k-api.vercel.app/16-1/idols",
+        {
+          params: {
+            cursor: nextCursor,
+            pageSize: ITEMS_PER_PAGE,
+          },
+        }
+      );
+
+      setList(res.data.list);
+
+      // nextCursor 업데이트
+      if (res.data.nextCursor && res.data.nextCursor !== "0") {
+        setNextCursor(res.data.nextCursor);
+      } else {
+        setNextCursor(null);
+        setHasMore(false);
+      }
+    } catch (err) {
+      console.error("다음 페이지 요청 실패", err);
+    }
+    setLoading(false);
+  };
+
+  // 이전 페이지 요청 함수
+  const handlePrevPage = async () => {
+    if (loading || prevCursors.length === 0) return; // 더 이상 이전 없음
+
+    // 이전 커서 꺼내기
+    const newPrevCursors = [...prevCursors]; // 복사
+    const prevCursor = newPrevCursors.pop(); // 배열 마지막 커서 꺼내기
+
+    console.log("이전 커서:", prevCursor);
+
+    setPrevCursors(newPrevCursors);
+    setLoading(true);
+
+    try {
+      const res = await axios.get(
+        "https://fandom-k-api.vercel.app/16-1/idols",
+        {
+          params: {
+            cursor: prevCursor,
+            pageSize: ITEMS_PER_PAGE,
+          },
+        }
+      );
+      setList(res.data.list);
+      // nextCursor 업데이트
+      if (res.data.nextCursor && res.data.nextCursor !== "0") {
+        setNextCursor(res.data.nextCursor);
+      } else {
+        setNextCursor(null);
+        setHasMore(false);
+      }
+    } catch (err) {
+      console.error("이전 페이지 요청 실패", err);
+    }
+    setLoading(false);
+  };
+
+  // 최초 요청 또는 페이지 변경
   useEffect(() => {
-    console.log("현재 페이지 변경됨:", currentPage);
-  }, [currentPage]);
+    // 최초 로드시, 처음에는 null로 요청 (첫 페이지)
+    fetchNextPage();
+  }, []);
 
-  if (loading) return <div>Loading...</div>; // 로딩중일 때 보여줄 화면
-  if (error) return <div>Error: {error.message}</div>; // 오류 발생 시
+  // 관심등록
+  const handleAddFavorIdols = () => {
+    const newIdols = list.filter(
+      (idol) =>
+        selectedIdols.includes(idol.id) &&
+        !myFavorIdols.some((fav) => fav.id === idol.id)
+    );
+    setMyFavorIdols((prev) => [...prev, ...newIdols]);
+    setSelectedIdols([]);
+  };
 
+  // 관심삭제
+  const handleRemoveFavorite = (idolId) => {
+    setMyFavorIdols((prev) => prev.filter((idol) => idol.id !== idolId));
+  };
+
+  // 선택 토글
   const toggleSelect = (idolId) => {
     setSelectedIdols((prev) =>
       prev.includes(idolId)
         ? prev.filter((id) => id !== idolId)
         : [...prev, idolId]
     );
-    console.log("현재 선택된 아이돌 ID들:", selectedIdols);
-  }; // 선택 토글 함수
-
-  const handleAddFavorIdols = () => {
-    const newSelectedIdols = allIdols.filter((idol) =>
-      selectedIdols.includes(idol.id)
-    );
-    const newIdols = newSelectedIdols.filter(
-      (idol) => !myFavorIdols.some((existing) => existing.id === idol.id)
-    ); //이미 있는 목록 제외 new 선언
-
-    console.log(newIdols);
-
-    setMyFavorIdols((prev) => {
-      const updated = [...prev, ...newIdols];
-      console.log("업데이트된 관심 아이돌:", updated); // 중간값 디버깅
-      return updated;
-    }); // 관심목록에 set 된 좋아하는 아이돌 병합?
-
-    setSelectedIdols([]);
-  };
-
-  const handleRemoveFavorite = (idolId) => {
-    setMyFavorIdols((prev) => prev.filter((idol) => idol.id !== idolId));
-    console.log("삭제:", idolId);
-  };
-
-  //------아래는 페이지네이션 함수'3')/-------//
-
-  const itemsPerPage = 16;
-
-  const totalPages = Math.ceil(allIdols.length / itemsPerPage);
-
-  // const currenIdols = allIdols.slice(
-  //   (currentPage - 1) * itemsPerPage,
-  //   currentPage * itemsPerPage
-  // );//현재 페이지 아이돌 목록
-
-  const handlePrevPage = () => {
-    if (currentPage > 1)
-      setCurrentPage((prev) => {
-        console.log("prev page before update:", prev);
-        return prev - 1;
-      }); //test
-    console.log("prev");
   };
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-    console.log("next");
+    fetchNextPage();
   };
 
   return (
@@ -113,29 +162,32 @@ const MyPage = () => {
           </h3>
           <div>
             <div>
-              <button className="list-change-btn" onClick={handlePrevPage}>
+              <button
+                className="list-change-btn"
+                onClick={handlePrevPage}
+                disabled={loading || prevCursors.length === 0}
+              >
                 <img src={prevButton} />
               </button>
             </div>
             <div className="interest-idols-list">
-              {allIdols
-                .slice(
-                  (currentPage - 1) * itemsPerPage,
-                  currentPage * itemsPerPage
-                )
-                .map((idol, index) => (
-                  <ProfileChunk
-                    key={idol.id}
-                    className="ProfileChunk"
-                    index={index}
-                    idol={idol}
-                    isSelected={selectedIdols.includes(idol.id)} //클릭시 오버레이
-                    onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
-                  />
-                ))}
+              {list.map((idol, index) => (
+                <ProfileChunk
+                  key={idol.id}
+                  className="ProfileChunk"
+                  index={index}
+                  idol={idol}
+                  isSelected={selectedIdols.includes(idol.id)} //클릭시 오버레이
+                  onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
+                />
+              ))}
             </div>
             <div>
-              <button className="list-change-btn" onClick={handleNextPage}>
+              <button
+                className="list-change-btn"
+                onClick={handleNextPage}
+                disabled={!hasMore}
+              >
                 <img src={nextButton} />
               </button>
             </div>
@@ -155,4 +207,4 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default MypageTest;
