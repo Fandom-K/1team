@@ -51,7 +51,7 @@ const ModalDonation = ({ isOpen, onClose }) => {
         <div className="advertisement" key="modalBody">
           <div className="card">
             <div className="idol-image">
-              <img src={idolImage} />
+              <img src="/public/idolImage/fandomK-img6.jpg" />
             </div>
             <div className="ad-about">
               <div className="ad-place">강남역 광고</div>
