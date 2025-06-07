@@ -11,94 +11,57 @@ import "../styles/common/Mypage.css";
 
 const ITEMS_PER_PAGE = 16;
 
-const MypageTest = () => {
+const Mypage = () => {
   const [list, setList] = useState([]); // 현재 페이지 데이터
   const [nextCursor, setNextCursor] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [currentCursor, setCurrentCursor] = useState(null);
   const [prevCursors, setPrevCursors] = useState([]); // 이전 커서 스택
 
   // 관심 아이돌, 선택 아이돌 상태
   const [selectedIdols, setSelectedIdols] = useState([]);
   const [myFavorIdols, setMyFavorIdols] = useState([]);
 
-  // 서버 호출, 커서 요청
-  const fetchNextPage = async () => {
-    if (loading || (!nextCursor && prevCursors.length > 0)) return; // 처음엔 null 가능
-    setLoading(true);
-
-    // 이전 커서 저장: 현재 커서가 있으면 스택에 저장
-    if (nextCursor !== null) {
-      setPrevCursors((prev) => [...prev, nextCursor]);
-    }
-
-    try {
-      const res = await axios.get(
-        "https://fandom-k-api.vercel.app/16-1/idols",
-        {
-          params: {
-            cursor: nextCursor,
-            pageSize: ITEMS_PER_PAGE,
-          },
-        }
-      );
-
-      setList(res.data.list);
-
-      // nextCursor 업데이트
-      if (res.data.nextCursor && res.data.nextCursor !== "0") {
-        setNextCursor(res.data.nextCursor);
-      } else {
-        setNextCursor(null);
-        setHasMore(false);
+  const fetchPage = async (cursor) => {
+    // 요청
+    const response = await axios.get(
+      "https://fandom-k-api.vercel.app/16-1/idols",
+      {
+        params: { cursor, pageSize: 16 },
       }
-    } catch (err) {
-      console.error("다음 페이지 요청 실패", err);
+    );
+    const data = response.data;
+
+    // 이전 커서 저장
+    if (cursor !== null) {
+      setPrevCursors((prev) => [...prev, cursor]);
     }
-    setLoading(false);
+
+    // 현재 위치를 다음 요청에 활용하기 위해 저장
+    setCurrentCursor(cursor); // 현재 위치
+    setList(data.list);
+    // 만약 응답에 nextCursor 있으면, 다음 요청에 사용
+    setNextCursor(data.nextCursor);
   };
 
-  // 이전 페이지 요청 함수
-  const handlePrevPage = async () => {
-    if (loading || prevCursors.length === 0) return; // 더 이상 이전 없음
-
-    // 이전 커서 꺼내기
-    const newPrevCursors = [...prevCursors]; // 복사
-    const prevCursor = newPrevCursors.pop(); // 배열 마지막 커서 꺼내기
-
-    console.log("이전 커서:", prevCursor);
-
-    setPrevCursors(newPrevCursors);
-    setLoading(true);
-
-    try {
-      const res = await axios.get(
-        "https://fandom-k-api.vercel.app/16-1/idols",
-        {
-          params: {
-            cursor: prevCursor,
-            pageSize: ITEMS_PER_PAGE,
-          },
-        }
-      );
-      setList(res.data.list);
-      // nextCursor 업데이트
-      if (res.data.nextCursor && res.data.nextCursor !== "0") {
-        setNextCursor(res.data.nextCursor);
-      } else {
-        setNextCursor(null);
-        setHasMore(false);
-      }
-    } catch (err) {
-      console.error("이전 페이지 요청 실패", err);
-    }
-    setLoading(false);
+  // 다음 페이지 호출
+  const handleNextPage = () => {
+    fetchPage(nextCursor);
   };
 
-  // 최초 요청 또는 페이지 변경
+  // 이전 페이지 호출
+  const handlePrevPage = () => {
+    // 이전 커서 중 가장 마지막 것 꺼내기
+    const prevStack = [...prevCursors];
+    prevStack.pop(); // 마지막 커서 제거 (현재 위치)
+    const prevCursor = prevStack[prevStack.length - 1]; // 바로 이전 커서
+
+    // 이전 커서로 요청
+    fetchPage(prevCursor);
+    setPrevCursors(prevStack); // 저장된 이전 커서 업데이트
+  };
+
   useEffect(() => {
-    // 최초 로드시, 처음에는 null로 요청 (첫 페이지)
-    fetchNextPage();
+    fetchPage();
   }, []);
 
   // 관심등록
@@ -124,10 +87,6 @@ const MypageTest = () => {
         ? prev.filter((id) => id !== idolId)
         : [...prev, idolId]
     );
-  };
-
-  const handleNextPage = () => {
-    fetchNextPage();
   };
 
   return (
@@ -162,11 +121,7 @@ const MypageTest = () => {
           </h3>
           <div>
             <div>
-              <button
-                className="list-change-btn"
-                onClick={handlePrevPage}
-                disabled={loading || prevCursors.length === 0}
-              >
+              <button className="list-change-btn" onClick={handlePrevPage}>
                 <img src={prevButton} />
               </button>
             </div>
@@ -183,11 +138,7 @@ const MypageTest = () => {
               ))}
             </div>
             <div>
-              <button
-                className="list-change-btn"
-                onClick={handleNextPage}
-                disabled={!hasMore}
-              >
+              <button className="list-change-btn" onClick={handleNextPage}>
                 <img src={nextButton} />
               </button>
             </div>
@@ -207,4 +158,4 @@ const MypageTest = () => {
   );
 };
 
-export default MypageTest;
+export default Mypage;
