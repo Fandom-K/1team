@@ -6,7 +6,7 @@
   padding: 24px;
 }
 
-.MyPage > div:first-type-of {
+.MyPage > :nth-child(2) {
   display: flex;
   flex-direction: column;
 }
@@ -43,7 +43,10 @@
 }
 
 .MyPage .button-wrapper {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  margin: 24px;
 }
 
 .MyPage .my-idols-list p {
@@ -59,6 +62,10 @@
   padding-bottom: 42px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 40px;
+  overflow: auto;
+}
+.MyPage .my-idols-list::-webkit-scrollbar {
+  display: none;
 }
 
 .MyPage .chunk-wrapper {
@@ -89,9 +96,11 @@
   display: none;
 }
 
-.MyPage .my-idols-wrapper {
-  border: 1px solid red;
-  padding: 24px;
+.MyPage .idol-info {
+  margin: 8px;
+}
+.MyPage .idol-info > h4 {
+  margin-bottom: 2px;
 }
 
 @media (min-width: 768px) {
@@ -136,6 +145,9 @@
     align-items: center;
     gap: 27px;
   }
+  .MyPage .button-wrapper {
+    margin: 40px;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -155,5 +167,8 @@
     display: flex;
     justify-content: center;
     gap: 34px;
+  }
+  .MyPage .button-wrapper {
+    margin: 48px;
   }
 }
