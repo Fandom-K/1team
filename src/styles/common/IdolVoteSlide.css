@@ -13,18 +13,19 @@
   color: #ffffff;
 }
 
-.voteSlide .move-button > div {
-  position: relative;
+.vote-slide .prev-button-wrapper > div {
+  position: absolute;
+  right: 200px;
 }
 
-.voteSlide {
-  max-width: 374px;
+.vote-slide .next-button-wrapper > div {
+  position: relative;
+  left: 2rem;
+}
+
+.vote-slide {
   display: flex;
   align-content: center;
-  margin: 0 auto;
-}
-
-.swiper-wrapper {
   margin: 0 auto;
 }
 
@@ -49,13 +50,13 @@
 } */
 
 @media (min-width: 745px) {
-  .voteSlide {
+  .vote-slide {
     max-width: 744px;
   }
 }
 
 @media (min-width: 376px) {
-  .voteSlide {
+  .vote-slide {
     max-width: 1200px;
   }
 }
