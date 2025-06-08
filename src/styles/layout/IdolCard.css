@@ -15,14 +15,14 @@
   height: 100%;
 }
 
-.button-wrapper {
+.IdolCard .button-wrapper {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
 }
-.button-wrapper .Button {
+.IdolCard .button-wrapper .Button {
   width: 234px;
   height: 40px;
 }

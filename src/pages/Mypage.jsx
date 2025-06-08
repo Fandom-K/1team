@@ -34,9 +34,7 @@ const Mypage = () => {
     // 이전 커서 저장
     if (cursor !== null) {
       setPrevCursors((prev) => [...prev, cursor]);
-    }
-
-    // 현재 위치를 다음 요청에 활용하기 위해 저장
+    } // 현재 위치를 다음 요청에 활용하기 위해 저장
     setCurrentCursor(cursor); // 현재 위치
     setList(data.list);
     // 만약 응답에 nextCursor 있으면, 다음 요청에 사용
@@ -106,7 +104,7 @@ const Mypage = () => {
                 >
                   <img src={idolDeleteBtn} />
                 </button>
-                <div>
+                <div className="idol-info">
                   <h4>{idol.name}</h4>
                   <p>{idol.group}</p>
                 </div>
