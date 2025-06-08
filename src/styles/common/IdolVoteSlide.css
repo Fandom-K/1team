@@ -14,13 +14,19 @@
 }
 
 .vote-slide .prev-button-wrapper > div {
-  position: absolute;
-  right: 200px;
+  position: relative;
+  left: -2rem;
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+  padding: 30px 10px;
 }
 
 .vote-slide .next-button-wrapper > div {
   position: relative;
   left: 2rem;
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+  padding: 30px 10px;
 }
 
 .vote-slide {
@@ -28,26 +34,6 @@
   align-content: center;
   margin: 0 auto;
 }
-
-/* .voteSlide .swiper-button-next {
-  position: absolute;
-  background-color: rgba(27, 27, 27, 0.8);
-  color: #ffffff;
-  padding: 30px 10px;
-}
-
-.voteSlide .swiper-button-prev {
-  background-color: rgba(27, 27, 27, 0.8);
-  color: #ffffff;
-  padding: 30px 10px;
-  position: absolute;
- 
-
-/* .swiper-button-prev:after,
-.swiper-button-next:after {
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
-} */
 
 @media (min-width: 745px) {
   .vote-slide {
