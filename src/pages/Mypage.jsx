@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import usePageSize from "../hooks/usePageSize";
 import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
 import ProfileChunk from "../components/ProfileChunk";
@@ -9,9 +10,11 @@ import nextButton from "../assets/images/next_btn.png";
 import axios from "axios";
 import "../styles/common/Mypage.css";
 
-const ITEMS_PER_PAGE = 16;
+const INITIAL_ITEMS = 16;
 
 const Mypage = () => {
+  const ITEMS_PER_PAGE = usePageSize(16, 8, 6);
+  const pageSize = usePageSize(16, 8, 6);
   const [list, setList] = useState([]); // 현재 페이지 데이터
   const [nextCursor, setNextCursor] = useState(null);
   const [currentCursor, setCurrentCursor] = useState(null);
@@ -21,7 +24,9 @@ const Mypage = () => {
   const [selectedIdols, setSelectedIdols] = useState([]);
   const [myFavorIdols, setMyFavorIdols] = useState([]);
 
-  const fetchPage = async (cursor) => {
+  const fetchPage = async (cursor, isInitial = false) => {
+    const pageSizeToUse = isInitial ? INITIAL_ITEMS : ITEMS_PER_PAGE;
+
     // 이전 커서 저장
     if (cursor !== null) {
       setPrevCursors((prev) => [...prev, cursor]);
@@ -30,7 +35,7 @@ const Mypage = () => {
     const response = await axios.get(
       "https://fandom-k-api.vercel.app/16-1/idols",
       {
-        params: { cursor, pageSize: ITEMS_PER_PAGE },
+        params: { cursor, pageSize: pageSizeToUse },
       }
     );
     const data = response.data;
@@ -61,6 +66,10 @@ const Mypage = () => {
   useEffect(() => {
     fetchPage();
   }, []);
+
+  useEffect(() => {
+    fetchPage(null);
+  }, [pageSize]);
 
   // 관심등록
   const handleAddFavorIdols = () => {
