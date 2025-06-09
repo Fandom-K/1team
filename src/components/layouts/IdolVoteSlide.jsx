@@ -38,10 +38,9 @@ const IdolVoteSlide = () => {
   }
 
   return (
-    <div className="voteSlide">
-      <div class="move-button">
+    <div className="vote-slide">
+      <div class="prev-button-wrapper">
         <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
       </div>
       <Swiper
         modules={[Pagination, Navigation]}
@@ -80,6 +79,9 @@ const IdolVoteSlide = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div class="next-button-wrapper">
+        <div class="swiper-button-next"></div>
+      </div>
     </div>
   );
 };
