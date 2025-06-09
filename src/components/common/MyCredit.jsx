@@ -1,5 +1,13 @@
 import "../../styles/layout/MyCredit.css";
+import { getMyCredit } from "../../utils/getStorage";
+import ModalCharge from "../modals/ModalCharge";
+import useModal from "../../hooks/useModal";
+import { useState } from "react";
+
 const MyCredit = () => {
+  const data = getMyCredit();
+  const { isOpen, openModal, closeModal } = useModal();
+
   return (
     <div className="mycredit">
       <div className="credit-status">
@@ -15,12 +23,15 @@ const MyCredit = () => {
               />
               <div className="blur"></div>
             </div>
-            <p>36,000</p>
+            <p>{data}</p>
           </div>
         </div>
       </div>
       <div>
-        <button className="charge-button">충전하기</button>
+        <button className="charge-button" onClick={openModal}>
+          충전하기
+        </button>
+        {isOpen && <ModalCharge onClose={closeModal} />}
       </div>
     </div>
   );
