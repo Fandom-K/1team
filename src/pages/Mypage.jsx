@@ -22,19 +22,19 @@ const Mypage = () => {
   const [myFavorIdols, setMyFavorIdols] = useState([]);
 
   const fetchPage = async (cursor) => {
-    // 요청
-    const response = await axios.get(
-      "https://fandom-k-api.vercel.app/16-1/idols",
-      {
-        params: { cursor, pageSize: 16 },
-      }
-    );
-    const data = response.data;
-
     // 이전 커서 저장
     if (cursor !== null) {
       setPrevCursors((prev) => [...prev, cursor]);
     } // 현재 위치를 다음 요청에 활용하기 위해 저장
+
+    const response = await axios.get(
+      "https://fandom-k-api.vercel.app/16-1/idols",
+      {
+        params: { cursor, pageSize: ITEMS_PER_PAGE },
+      }
+    );
+    const data = response.data;
+
     setCurrentCursor(cursor); // 현재 위치
     setList(data.list);
     // 만약 응답에 nextCursor 있으면, 다음 요청에 사용
@@ -119,7 +119,10 @@ const Mypage = () => {
           </h3>
           <div>
             <div>
-              <button className="list-change-btn" onClick={handlePrevPage}>
+              <button
+                className="list-change-btn"
+                onClick={() => handlePrevPage()}
+              >
                 <img src={prevButton} />
               </button>
             </div>
@@ -136,7 +139,10 @@ const Mypage = () => {
               ))}
             </div>
             <div>
-              <button className="list-change-btn" onClick={handleNextPage}>
+              <button
+                className="list-change-btn"
+                onClick={() => handleNextPage()}
+              >
                 <img src={nextButton} />
               </button>
             </div>
