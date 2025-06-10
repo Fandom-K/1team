@@ -12,6 +12,15 @@ const IdolCard = ({ idol, donation }) => {
     setToDonateIdol(idol);
   };
 
+  const now = new Date();
+  const deadlineDate = donation?.deadline ? new Date(donation.deadline) : null;
+
+  let diffDays = 0;
+  if (deadlineDate) {
+    const diffMs = deadlineDate - now; // 밀리초 차이
+    diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24)); // 남은 일수 (올림처리)
+  }
+
   return (
     <div className="card">
       <div className="card-image-wrapper">
@@ -47,10 +56,10 @@ const IdolCard = ({ idol, donation }) => {
               />
               <div className="blur"></div>
             </div>
-            <p>6000</p>
+            <p>{donation?.receivedDonations || "후원된 금액이 없습니다"}</p>
             {/* {idol.totalVote?.toLacaleString() || "0"} 나중에 바꿔주기 */}
           </div>
-          <p className="card-deadline">5일 남음</p>
+          <p className="card-deadline">{diffDays}일 남음</p>
         </div>
         <div className="vote-progress-containter">
           <div className="progress-bar"></div>

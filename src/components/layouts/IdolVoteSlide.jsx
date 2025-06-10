@@ -17,22 +17,22 @@ const IdolVoteSlide = () => {
   const [swiper, setSwiper] = useState(null);
 
   //데이터 요청
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const data = await getIdol();
-        const votedata = await getDonationIdol();
-        setIdols(data);
-        setDonations(votedata);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       setLoading(true);
+  //       const data = await getIdol();
+  //       const votedata = await getDonationIdol();
+  //       setIdols(data);
+  //       setDonations(votedata);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     async function fetchData() {
