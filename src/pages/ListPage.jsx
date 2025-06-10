@@ -1,5 +1,5 @@
 import Header from "../components/layouts/Header";
-import IdolChart from "../components/layouts/idolChart";
+import IdolChart from "../components/layouts/IdolChart";
 import IdolVoteSlide from "../components/layouts/IdolVoteSlide";
 import MyCredit from "../components/common/MyCredit";
 import "../styles/layout/ListPage.css";

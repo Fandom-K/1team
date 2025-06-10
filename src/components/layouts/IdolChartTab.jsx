@@ -9,7 +9,7 @@ const IdolChartItem = ({ idol, rank }) => {
   return (
     <div className="IdolChartItem">
       <div className="idolchart-item__info">
-        <IdolProfile idol={idol} size={80} />
+        <IdolProfile idol={idol} size={70} />
         <p className="font-regular-16">{rank}</p>
         <h3 className="font-medium-16">
           {idol.group} {idol.name}
