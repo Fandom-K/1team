@@ -49,10 +49,20 @@ const IdolChart = () => {
         </div>
 
         <div>
-          {activeTab === "이달의 여자 아이돌" && (
+          <div
+            style={{
+              display: activeTab === "이달의 여자 아이돌" ? "block" : "none",
+            }}
+          >
             <IdolChartTab gender="female" />
-          )}
-          {activeTab === "이달의 남자 아이돌" && <IdolChartTab gender="male" />}
+          </div>
+          <div
+            style={{
+              display: activeTab === "이달의 남자 아이돌" ? "block" : "none",
+            }}
+          >
+            <IdolChartTab gender="male" />
+          </div>
         </div>
       </div>
     </div>
