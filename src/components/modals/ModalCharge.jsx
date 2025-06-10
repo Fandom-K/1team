@@ -6,7 +6,7 @@ import CustomBox from "../common/CustomBox";
 import RadioButton from "../common/RadioButton";
 import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
-import { loadData, saveData } from "../../utils/storage";
+import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalCharge.css";
 import { getCreditData } from "../../utils/getStorage";
 
@@ -27,7 +27,7 @@ const ModalCharge = ({ onClose }) => {
     const data = getCreditData();
 
     const newHistory = {
-      type: "purchase",
+      type: "charge",
       amount: selectedCredit,
       date: new Date().toISOString(),
     };

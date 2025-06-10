@@ -1,8 +1,29 @@
 .MyPage {
   color: #f6f6f8;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 24px;
 }
 
-.MyPage > div:first-type-of {
+.MyPage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/assets/images/Img_top-design.png");
+  background-repeat: no-repeat;
+  /* 왼쪽 상단에 정확히 고정 */
+  background-position: top left;
+  /* 이미지 크기를 원본 그대로 유지해서 왜곡 없이 표시 */
+  background-size: auto;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.MyPage > :nth-child(2) {
   display: flex;
   flex-direction: column;
 }
@@ -28,7 +49,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 좌우, 열 */
   grid-template-rows: repeat(2, auto); /* 아래위, 행*/
-  gap: 24px 16px;
+  margin-top: 16px;
+  gap: 24px 0;
 }
 
 .MyPage .btn-positive {
@@ -38,7 +60,10 @@
 }
 
 .MyPage .button-wrapper {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  margin: 24px;
 }
 
 .MyPage .my-idols-list p {
@@ -48,6 +73,16 @@
 .MyPage .my-idols-list {
   display: flex;
   gap: 30px;
+  height: 100%;
+  align-items: center;
+  padding-top: 32px;
+  padding-bottom: 42px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 40px;
+  overflow: auto;
+}
+.MyPage .my-idols-list::-webkit-scrollbar {
+  display: none;
 }
 
 .MyPage .chunk-wrapper {
@@ -72,11 +107,28 @@
 .MyPage .chunk-wrapper .IdolProfile {
   width: 70px;
   height: 70px;
+  cursor: pointer;
 }
 
 .MyPage .list-change-btn {
   display: none;
 }
+
+.MyPage .idol-info {
+  margin: 8px;
+  white-space: nowrap;
+}
+.MyPage .idol-info > h4 {
+  margin-bottom: 2px;
+}
+
+/* .Mypage .interest-idols-list {
+  overflow: auto;
+}
+
+ .Mypage .interest-idols-list::-webkit-scrollbar {
+  display: none;
+} */
 
 @media (min-width: 768px) {
   .MyPage .font-bold-16-line26 {
@@ -90,15 +142,14 @@
   .MyPage .interest-idols-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 57px;
   }
   .MyPage .ProfileChunk {
     height: 183px;
   }
   .my-idols-list {
     gap: 24px;
-  }
-  .MyPage .interest-idols-list {
-    gap: 24px 24px;
   }
   .MyPage .chunk-wrapper .IdolProfile {
     width: 98px;
@@ -119,6 +170,11 @@
   .MyPage .interest-idols > div:first-of-type {
     display: flex;
     align-items: center;
+    gap: 27px;
+    justify-content: space-between;
+  }
+  .MyPage .button-wrapper {
+    margin: 40px;
   }
 }
 
@@ -131,5 +187,16 @@
   }
   .MyPage .interest-idols-list {
     grid-template-columns: repeat(8, 1fr);
+    gap: 32px 22px;
+    margin-top: 32px;
+  }
+  .MyPage .interest-idols > div:first-of-type {
+    max-width: 1300px;
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+  }
+  .MyPage .button-wrapper {
+    margin: 48px;
   }
 }

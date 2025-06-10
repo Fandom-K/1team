@@ -1,85 +1,142 @@
 import { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+import { Swiper, SwiperSlide } from "swiper/react";
+import getIdol from "../services/getIdol";
+import usePageSize from "../hooks/usePageSize";
 import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
 import ProfileChunk from "../components/ProfileChunk";
-import useAllIdolList from "../hooks/useAllIdolList";
 import IdolProfile from "../components/common/IdolProfile";
 import idolDeleteBtn from "../assets/icons/btn_delete.svg";
 import prevButton from "../assets/images/prev_btn.png";
 import nextButton from "../assets/images/next_btn.png";
-
+import axios from "axios";
 import "../styles/common/Mypage.css";
 
-const MyPage = () => {
-  const { allIdols, loading, error } = useAllIdolList(16);
+const INITIAL_ITEMS = 16;
+
+const Mypage = () => {
+  const ITEMS_PER_PAGE = usePageSize(16, 8, 6);
+  const pageSize = usePageSize(16, 8, 6);
+  const [list, setList] = useState([]); // 현재 페이지 데이터
+  const [nextCursor, setNextCursor] = useState(null);
+  const [currentCursor, setCurrentCursor] = useState(null);
+  const [prevCursors, setPrevCursors] = useState([]); // 이전 커서 스택
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [idols, setIdols] = useState(null);
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  const chunkArray = (arr, size) => {
+    if (!arr || arr.length === 0) return [];
+    const result = [];
+    for (let i = 0; i < arr.length; i += size) {
+      result.push(arr.slice(i, i + size));
+    }
+    return result;
+  };
+  const groupedIdols = isMobile ? chunkArray(idols, 9) : [];
+
+  // 관심 아이돌, 선택 아이돌 상태
   const [selectedIdols, setSelectedIdols] = useState([]);
   const [myFavorIdols, setMyFavorIdols] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1); //페이지네이션 상태저장
+
+  const fetchPage = async (cursor, isInitial = false) => {
+    const pageSizeToUse = isInitial ? INITIAL_ITEMS : ITEMS_PER_PAGE;
+
+    // 이전 커서 저장
+    if (cursor !== null) {
+      setPrevCursors((prev) => [...prev, cursor]);
+    } // 현재 위치를 다음 요청에 활용하기 위해 저장
+
+    const response = await axios.get(
+      "https://fandom-k-api.vercel.app/16-1/idols",
+      {
+        params: { cursor, pageSize: pageSizeToUse },
+      }
+    );
+    const data = response.data;
+
+    setCurrentCursor(cursor); // 현재 위치
+    setList(data.list);
+    // 만약 응답에 nextCursor 있으면, 다음 요청에 사용
+    setNextCursor(data.nextCursor);
+  };
+
+  // 다음 페이지 호출
+  const handleNextPage = () => {
+    fetchPage(nextCursor);
+  };
+
+  // 이전 페이지 호출
+  const handlePrevPage = () => {
+    // 이전 커서 중 가장 마지막 것 꺼내기
+    const prevStack = [...prevCursors];
+    prevStack.pop(); // 마지막 커서 제거 (현재 위치)
+    const prevCursor = prevStack[prevStack.length - 1]; // 바로 이전 커서
+
+    // 이전 커서로 요청
+    fetchPage(prevCursor);
+    setPrevCursors(prevStack); // 저장된 이전 커서 업데이트
+  };
 
   useEffect(() => {
-    console.log("현재 페이지 변경됨:", currentPage);
-  }, [currentPage]);
+    fetchPage();
+  }, []);
 
-  if (loading) return <div>Loading...</div>; // 로딩중일 때 보여줄 화면
-  if (error) return <div>Error: {error.message}</div>; // 오류 발생 시
+  useEffect(() => {
+    fetchPage(null);
+  }, [pageSize]);
 
+  // 관심등록
+  const handleAddFavorIdols = () => {
+    const newIdols = list.filter(
+      (idol) =>
+        selectedIdols.includes(idol.id) &&
+        !myFavorIdols.some((fav) => fav.id === idol.id)
+    );
+    setMyFavorIdols((prev) => [...prev, ...newIdols]);
+    setSelectedIdols([]);
+  };
+
+  // 관심삭제
+  const handleRemoveFavorite = (idolId) => {
+    setMyFavorIdols((prev) => prev.filter((idol) => idol.id !== idolId));
+  };
+
+  // 선택 토글
   const toggleSelect = (idolId) => {
     setSelectedIdols((prev) =>
       prev.includes(idolId)
         ? prev.filter((id) => id !== idolId)
         : [...prev, idolId]
     );
-    console.log("현재 선택된 아이돌 ID들:", selectedIdols);
-  }; // 선택 토글 함수
-
-  const handleAddFavorIdols = () => {
-    const newSelectedIdols = allIdols.filter((idol) =>
-      selectedIdols.includes(idol.id)
-    );
-    const newIdols = newSelectedIdols.filter(
-      (idol) => !myFavorIdols.some((existing) => existing.id === idol.id)
-    ); //이미 있는 목록 제외 new 선언
-
-    console.log(newIdols);
-
-    setMyFavorIdols((prev) => {
-      const updated = [...prev, ...newIdols];
-      console.log("업데이트된 관심 아이돌:", updated); // 중간값 디버깅
-      return updated;
-    }); // 관심목록에 set 된 좋아하는 아이돌 병합?
-
-    setSelectedIdols([]);
   };
 
-  const handleRemoveFavorite = (idolId) => {
-    setMyFavorIdols((prev) => prev.filter((idol) => idol.id !== idolId));
-    console.log("삭제:", idolId);
-  };
+  //데이터 요청
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const data = await getIdol();
+        setIdols(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
-  //------아래는 페이지네이션 함수'3')/-------//
-
-  const itemsPerPage = 16;
-
-  const totalPages = Math.ceil(allIdols.length / itemsPerPage);
-
-  // const currenIdols = allIdols.slice(
-  //   (currentPage - 1) * itemsPerPage,
-  //   currentPage * itemsPerPage
-  // );//현재 페이지 아이돌 목록
-
-  const handlePrevPage = () => {
-    if (currentPage > 1)
-      setCurrentPage((prev) => {
-        console.log("prev page before update:", prev);
-        return prev - 1;
-      }); //test
-    console.log("prev");
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-    console.log("next");
-  };
+  if (loading) {
+    return <p>로딩 중...</p>;
+  }
+  if (error) {
+    return <p>에러 발생: {error.message}</p>;
+  }
 
   return (
     <div className="MyPage">
@@ -98,7 +155,7 @@ const MyPage = () => {
                 >
                   <img src={idolDeleteBtn} />
                 </button>
-                <div>
+                <div className="idol-info">
                   <h4>{idol.name}</h4>
                   <p>{idol.group}</p>
                 </div>
@@ -111,19 +168,47 @@ const MyPage = () => {
           <h3 className="font-bold-16-line26">
             관심 있는 아이돌을 추가해보세요.
           </h3>
-          <div>
+          {isMobile ? (
+            // 모바일이면 Swiper 적용
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={20}
+              // 필요에 따라 navigation, pagination 추가 가능
+            >
+              {groupedIdols.map((group, index) => (
+                <SwiperSlide key={index}>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3, 2fr)",
+                      gap: "10px",
+                    }}
+                  >
+                    {group.map((idol) => (
+                      <ProfileChunk
+                        key={idol.id}
+                        className="ProfileChunk"
+                        idol={idol}
+                        isSelected={selectedIdols.includes(idol.id)}
+                        onClick={() => toggleSelect(idol.id)}
+                      />
+                    ))}
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
             <div>
-              <button className="list-change-btn" onClick={handlePrevPage}>
-                <img src={prevButton} />
-              </button>
-            </div>
-            <div className="interest-idols-list">
-              {allIdols
-                .slice(
-                  (currentPage - 1) * itemsPerPage,
-                  currentPage * itemsPerPage
-                )
-                .map((idol, index) => (
+              <div>
+                <button
+                  className="list-change-btn"
+                  onClick={() => handlePrevPage()}
+                >
+                  <img src={prevButton} />
+                </button>
+              </div>
+              <div className="interest-idols-list">
+                {list.map((idol, index) => (
                   <ProfileChunk
                     key={idol.id}
                     className="ProfileChunk"
@@ -133,13 +218,17 @@ const MyPage = () => {
                     onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
                   />
                 ))}
+              </div>
+              <div>
+                <button
+                  className="list-change-btn"
+                  onClick={() => handleNextPage()}
+                >
+                  <img src={nextButton} />
+                </button>
+              </div>
             </div>
-            <div>
-              <button className="list-change-btn" onClick={handleNextPage}>
-                <img src={nextButton} />
-              </button>
-            </div>
-          </div>
+          )}
         </div>
 
         <div className="button-wrapper">
@@ -155,4 +244,4 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default Mypage;

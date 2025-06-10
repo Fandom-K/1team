@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   width: 100%;
   height: 100%;
 }
@@ -15,17 +16,18 @@
   height: 100%;
 }
 
-.button-wrapper {
+.card .button-wrapper {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
+  width: 90%;
 }
-.button-wrapper .Button {
-  width: 234px;
+.card .button-wrapper .Button {
+  width: 100%;
   height: 40px;
-}
+} /* 모바일 사이즈 일 때 37vw로 */
 
 .card-votes {
   font-weight: bold;
@@ -46,4 +48,32 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
   z-index: 2;
   pointer-events: none;
+}
+
+.img-credit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.img-blur {
+  position: relative;
+  width: 11px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.vote-amount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-vote {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .card .button-wrapper {
+    width: 90%;
+  }
 }

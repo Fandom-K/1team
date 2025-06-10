@@ -4,7 +4,7 @@
   position: relative;
   overflow: hidden;
 }
-
+/* 수정 */
 /* ::가상 요소 왼쪽 상단 그라데이션 효과 */
 .LandingPage::before {
   content: "";

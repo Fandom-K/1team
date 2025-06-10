@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "../../styles/layout/IdolChart.css";
 import Button from "../common/Button";
 import IdolChartTab from "./IdolChartTab";
+import VoteContext from "../../contexts/VoteContext";
 
 const IdolChart = () => {
   const [activeTab, setActiveTab] = useState("이달의 여자 아이돌");
+  const { setVoteGender, voteModal } = useContext(VoteContext);
+
+  const handleButtonClick = () => {
+    if (activeTab.includes("여자")) {
+      setVoteGender("female");
+    } else {
+      setVoteGender("male");
+    }
+    voteModal.openModal();
+  };
 
   return (
     <div className="IdolChart">
@@ -17,6 +28,7 @@ const IdolChart = () => {
           type="positive"
           corner="angular"
           className="font-bold-13-line26-letter2"
+          onClick={handleButtonClick}
         />
       </div>
 
