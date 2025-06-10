@@ -1,4 +1,3 @@
-// components/layout/IdolChart.js
 import { useState } from "react";
 import "../../styles/layout/IdolChart.css";
 import Button from "../common/Button";
