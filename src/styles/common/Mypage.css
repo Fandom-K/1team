@@ -107,6 +107,7 @@
 .MyPage .chunk-wrapper .IdolProfile {
   width: 70px;
   height: 70px;
+  cursor: pointer;
 }
 
 .MyPage .list-change-btn {
