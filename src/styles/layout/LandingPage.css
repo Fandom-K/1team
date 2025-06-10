@@ -1,10 +1,8 @@
 .LandingPage {
   width: 100%;
-  font-family: "Pretendard";
   position: relative;
-  overflow: hidden;
 }
-/* 수정 */
+
 /* ::가상 요소 왼쪽 상단 그라데이션 효과 */
 .LandingPage::before {
   content: "";
@@ -34,7 +32,7 @@
   justify-content: center;
 
   margin: 0 auto;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 
   min-height: 100vh; /* ✅ vh 대신 min-height로 교체 */
 
@@ -61,7 +59,7 @@
 }
 
 /* 중앙 그라데이션 효과 */
-.intro .overlay {
+.intro-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -80,9 +78,6 @@
 }
 
 .intro h1 {
-  font-size: 1.25rem;
-  font-weight: 400;
-  line-height: 1.5;
   margin-bottom: 20px;
 }
 
@@ -101,6 +96,12 @@
   height: 3rem;
 }
 
+.intro .Button span {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.857;
+}
+
 /* ------------------ */
 /* ✅ Step Sections   */
 /* ------------------ */
@@ -109,7 +110,6 @@
   width: 100%;
   background-color: var(--black-100);
   z-index: 1;
-  overflow: hidden;
 }
 
 /* 세로 띠 */
@@ -144,13 +144,15 @@
   text-align: center;
   padding: 50px 24px 50px; /* top / side / bottom padding */
 
-  background-image: linear-gradient(#02000e, #02000eb9, #02000e),
-    url("/src/assets/images/bg-Home-1.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
+.step1 {
+  background-image: linear-gradient(#02000e, #02000eb9, #02000e),
+    url("/src/assets/images/bg-Home-1.jpg");
+}
 .step2 {
   background-image: linear-gradient(#02000e, #02000eb9, #02000e),
     url("/src/assets/images/bg-Home-2.jpg");
@@ -161,7 +163,7 @@
     url("/src/assets/images/bg-Home-3.jpg");
 }
 
-.step .overlay {
+.step-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -184,7 +186,7 @@
   z-index: 4;
 }
 
-.step .step-img {
+.step-phone-mockup {
   /* 최소값 / 기준값(선호값) / 최대값 */
   width: clamp(240px, 50vw, 340px);
   background-repeat: no-repeat;
@@ -193,16 +195,11 @@
 }
 
 .step h2 {
-  font-size: 16px;
-  font-weight: 500;
   margin-bottom: 1rem;
   color: #d2c030;
 }
 
 .step p {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.5;
   color: #ffffff;
   margin-bottom: 40px;
 }
@@ -230,13 +227,16 @@
 
   .intro .logo {
     width: 100%;
-    padding: 0 10px;
   }
 
   .intro .Button {
     /* 최소값 / 기준값(선호값) / 최대값 */
     width: clamp(240px, 80vw, 477px);
     height: 3rem;
+  }
+
+  .intro .Button span {
+    font-weight: 700;
   }
 
   /* ------------------ */
@@ -248,17 +248,16 @@
 }
 
 /* --------------PC----------------- */
-@media (min-width: 745px) {
+@media (min-width: 768px) {
   .intro {
     background-image: url("/src/assets/images/bg-intro-pc.png");
   }
 
   .intro h1 {
     font-size: 1.625rem;
-    font-weight: 700;
   }
 
-  .intro .overlay {
+  .intro-overlay {
     background: radial-gradient(
       ellipse at center,
       rgba(2, 0, 14, 0.197),
@@ -276,7 +275,7 @@
     padding: 140px 48px 140px;
   }
 
-  .step .overlay {
+  .step-overlay {
     background: radial-gradient(
       rgba(2, 0, 14, 0),
       rgba(2, 0, 14, 0.245),
@@ -287,6 +286,6 @@
   }
 
   .step p {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 }
