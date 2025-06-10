@@ -2,7 +2,6 @@ import "../../styles/layout/MyCredit.css";
 import { getMyCredit } from "../../utils/getStorage";
 import ModalCharge from "../modals/ModalCharge";
 import useModal from "../../hooks/useModal";
-import { useState } from "react";
 
 const MyCredit = () => {
   const data = getMyCredit();
