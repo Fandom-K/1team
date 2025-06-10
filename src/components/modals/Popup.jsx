@@ -1,7 +1,7 @@
 import "../../styles/modals/Popup.css";
 import Modal from "./Modal";
 import creditIcon from "../../assets/icons/credit_113px.svg";
-import { useEffect } from "react";
+import { Fragment } from "react";
 import Button from "../common/Button";
 
 const Popup = ({
@@ -26,8 +26,21 @@ const Popup = ({
             <img src={creditIcon} />
           </div>
           <span className="popup-message font-medium-16">
-            앗! 투표하기 위한 <span>크레딧</span>이 부족해요
+            {highlightKeyword
+              ? message.split(highlightKeyword).map((part, index) => (
+                  <React.Fragment key={index}>
+                    {part}
+                    {/* 마지막 part가 아니면 하이라이트키워드 span으로 추가 */}
+                    {index !== message.split(highlightKeyword).length - 1 && (
+                      <span>{highlightKeyword}</span>
+                    )}
+                  </React.Fragment>
+                ))
+              : message}
           </span>
+          {/* <span className="popup-message font-medium-16">
+            앗! 투표하기 위한 <span>크레딧</span>이 부족해요
+          </span> */}
         </div>
         <div className="modalFooter" key="modalFooter">
           <Button text="확인" alt="확인" type="positive" onClick={onClose} />

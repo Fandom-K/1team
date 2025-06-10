@@ -1,19 +1,16 @@
 import "../common/Button";
 import Modal from "./Modal";
 import { useState, useEffect } from "react";
-import CustomBox from "../common/CustomBox";
 import RadioButton from "../common/RadioButton";
 import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
-import { loadData, saveData } from "../../utils/storage";
+import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalVote.css";
 import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
 import Spinner from "../common/Spinner";
-import Popup from "./Popup";
-import { getCreditData, getMyCredit } from "../../utils/getStorage";
-import useModal from "../../hooks/useModal";
-import { updateIdol } from "../../services/saveIdol";
+import { getCreditData } from "../../utils/getStorage";
+import { addVote } from "../../services/saveIdolData";
 
 const IdolChartItem = ({ idol, rank }) => {
   return (
@@ -40,25 +37,25 @@ const ModalVote = ({ gender, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filteredData, setFilteredData] = useState([]);
-  const [selectedIdol, setSelectedIdol] = useState("");
-  const [hasvoteToday, setHasVoteToday] = useState(true);
+  const [selectedIdolId, setSelectedIdolId] = useState("");
+  const [hasvoteToday, setHasVoteToday] = useState(null);
 
   useEffect(() => {
     const data = getCreditData();
     const voted = data.history.some(
       (el) =>
         el.date.split("T")[0] === new Date().toISOString().split("T")[0] &&
-        el.type === "vote"
+        el.type === "vote-" + gender
     );
     setHasVoteToday(voted);
-  }, []);
+  }, [hasvoteToday]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-        const data = await getIdol({ gender });
-        setAllIdols(data);
+        const data = await getIdol();
+        setAllIdols(data.filter((idol) => idol.gender === gender));
       } catch (err) {
         setError(err);
       } finally {
@@ -71,16 +68,14 @@ const ModalVote = ({ gender, onClose }) => {
   useEffect(() => {
     if (allIdols.length > 0) {
       setFilteredData(
-        allIdols
-          .sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0))
-          .slice(6)
+        allIdols.sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0))
       );
     }
   }, [allIdols]);
 
   useEffect(() => {
     if (!filteredData || filteredData.length === 0) return;
-    setSelectedIdol(filteredData[0].id);
+    setSelectedIdolId(filteredData[0].id);
   }, [filteredData]);
 
   // if (loading) return <p>로딩 중...</p>;
@@ -88,7 +83,7 @@ const ModalVote = ({ gender, onClose }) => {
   if (error) return <p>에러 발생: {error.message}</p>;
 
   const handleChange = (id) => {
-    setSelectedIdol(id);
+    setSelectedIdolId(id);
     // const selected = allIdols.find((idol) => idol.id === id);
     // console.log(`선택된 아이돌: ${selected.name}`);
   };
@@ -97,33 +92,32 @@ const ModalVote = ({ gender, onClose }) => {
     const backupData = JSON.parse(JSON.stringify(data));
 
     const newHistory = {
-      type: "vote",
+      type: "vote-" + gender,
       amount: 1000,
       date: new Date().toISOString(),
     };
 
-    data.history.push(newHistory);
-    data.balance = Number(data.balance) - Number(newHistory.amount);
+    const updatedData = { ...data };
+    updatedData.history.push(newHistory);
+    updatedData.balance =
+      Number(updatedData.balance) - Number(newHistory.amount);
 
-    return { success: true, data, backupData };
+    return { success: true, updatedData, backupData };
   };
 
   const saveVote = async () => {
-    const voteCnt = allIdols.find((idol) => idol.id === selectedIdol)[
-      "totalVotes"
-    ];
-
     try {
-      await updateIdol(selectedIdol, { totalVotes: Number(voteCnt) + 1 });
-      return true;
+      await addVote(selectedIdolId);
+      return { success: true };
     } catch (e) {
       if (e.response) {
         console.log(e.response.status);
         console.log(e.response.data);
+        return { success: false, error: e.response.data };
       } else {
         console.log("리퀘스트가 실패했습니다.");
+        return { success: false, error: "Request failed." };
       }
-      return false;
     }
   };
 
@@ -132,42 +126,30 @@ const ModalVote = ({ gender, onClose }) => {
     const myCredit = data.balance;
 
     if (myCredit < 1000) {
-      onClose({ error: "credit not enough" });
+      onClose({ success: false, message: "credit not enough" });
       return false;
     }
 
     try {
       const creditResult = await saveCredit(data);
-
-      if (!creditResult.success) {
-        return false;
-      }
-
       const voteSuccess = await saveVote();
 
-      if (!voteSuccess) {
-        console.log("Vote submission failed. Reverting credit changes.");
-        await saveData({ credit: creditResult.backupData }); // 저장된 데이터 롤백
+      if (!creditResult.success || !voteSuccess.success) {
+        console.log("작업 실패로 인해 변경을 적용하지 않습니다.");
         return false;
       }
 
-      await saveData({ credit: creditResult.data }); // 최종 데이터 저장
-      return true;
+      saveData({ credit: creditResult.updatedData });
+      // window.alert(
+      //   `성공적으로 투표 되었습니다./n 현재 잔액: ${creditResult.updatedData.balance}`
+      // );
+      // setHasVoteToday(true);
+      onClose({ success: true, message: "vote-" + gender });
     } catch (error) {
       console.error("Error in handleSubmit:", error);
       return false;
     }
   };
-
-  // const handleSubmit = () => {
-  //   if (result) {
-  //     window.alert(`성공적으로 투표 되었습니다./n 현재 잔액: ${data.balance}`);
-  //   } else {
-  //     window.alert({ error });
-  //   }
-
-  //   onClose();
-  // };
 
   return (
     <Modal
@@ -184,8 +166,8 @@ const ModalVote = ({ gender, onClose }) => {
                 <IdolChartItem idol={idol} rank={index + 1} />
                 <RadioButton
                   value={idol.id}
-                  checked={selectedIdol === idol.id}
-                  onChange={setSelectedIdol}
+                  checked={selectedIdolId === idol.id}
+                  onChange={setSelectedIdolId}
                   onClick={(e) => e.stopPropagation()}
                 />
               </RadioGroup>
