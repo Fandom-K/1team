@@ -34,8 +34,8 @@ const IdolCard = ({ idol }) => {
               />
               <div className="blur"></div>
             </div>
-            <p>6000</p> //나중에 바꿔주기
-            {/* {idol.totalVote?.toLacaleString() || "0"} */}
+            <p>6000</p>
+            {/* {idol.totalVote?.toLacaleString() || "0"} 나중에 바꿔주기 */}
           </div>
           <p className="card-deadline">5일 남음</p>
         </div>
