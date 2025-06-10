@@ -34,7 +34,6 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin-right: 17px;
 }
 
 .MyPage .chunk-name {
@@ -116,6 +115,7 @@
 
 .MyPage .idol-info {
   margin: 8px;
+  white-space: nowrap;
 }
 .MyPage .idol-info > h4 {
   margin-bottom: 2px;
@@ -170,7 +170,7 @@
     display: flex;
     align-items: center;
     gap: 27px;
-    justify-content: center;
+    justify-content: space-between;
   }
   .MyPage .button-wrapper {
     margin: 40px;

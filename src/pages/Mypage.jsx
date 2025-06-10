@@ -25,18 +25,19 @@ const Mypage = () => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [Idols, setIdols] = useState(null);
+  const [idols, setIdols] = useState(null);
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const chunkArray = (arr, size) => {
+    if (!arr || arr.length === 0) return [];
     const result = [];
     for (let i = 0; i < arr.length; i += size) {
       result.push(arr.slice(i, i + size));
     }
     return result;
   };
-  const groupedIdols = isMobile ? chunkArray(Idols, 9) : [];
+  const groupedIdols = isMobile ? chunkArray(idols, 9) : [];
 
   // 관심 아이돌, 선택 아이돌 상태
   const [selectedIdols, setSelectedIdols] = useState([]);
