@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+import { Swiper, SwiperSlide } from "swiper/react";
+import getIdol from "../services/getIdol";
 import usePageSize from "../hooks/usePageSize";
 import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
@@ -19,6 +22,22 @@ const Mypage = () => {
   const [nextCursor, setNextCursor] = useState(null);
   const [currentCursor, setCurrentCursor] = useState(null);
   const [prevCursors, setPrevCursors] = useState([]); // 이전 커서 스택
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [idols, setIdols] = useState(null);
+
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  const chunkArray = (arr, size) => {
+    if (!arr || arr.length === 0) return [];
+    const result = [];
+    for (let i = 0; i < arr.length; i += size) {
+      result.push(arr.slice(i, i + size));
+    }
+    return result;
+  };
+  const groupedIdols = isMobile ? chunkArray(idols, 9) : [];
 
   // 관심 아이돌, 선택 아이돌 상태
   const [selectedIdols, setSelectedIdols] = useState([]);
@@ -96,6 +115,29 @@ const Mypage = () => {
     );
   };
 
+  //데이터 요청
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const data = await getIdol();
+        setIdols(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <p>로딩 중...</p>;
+  }
+  if (error) {
+    return <p>에러 발생: {error.message}</p>;
+  }
+
   return (
     <div className="MyPage">
       <Header />
@@ -126,36 +168,67 @@ const Mypage = () => {
           <h3 className="font-bold-16-line26">
             관심 있는 아이돌을 추가해보세요.
           </h3>
-          <div>
-            <div>
-              <button
-                className="list-change-btn"
-                onClick={() => handlePrevPage()}
-              >
-                <img src={prevButton} />
-              </button>
-            </div>
-            <div className="interest-idols-list">
-              {list.map((idol, index) => (
-                <ProfileChunk
-                  key={idol.id}
-                  className="ProfileChunk"
-                  index={index}
-                  idol={idol}
-                  isSelected={selectedIdols.includes(idol.id)} //클릭시 오버레이
-                  onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
-                />
+          {isMobile ? (
+            // 모바일이면 Swiper 적용
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={20}
+              // 필요에 따라 navigation, pagination 추가 가능
+            >
+              {groupedIdols.map((group, index) => (
+                <SwiperSlide key={index}>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3, 2fr)",
+                      gap: "10px",
+                    }}
+                  >
+                    {group.map((idol) => (
+                      <ProfileChunk
+                        key={idol.id}
+                        className="ProfileChunk"
+                        idol={idol}
+                        isSelected={selectedIdols.includes(idol.id)}
+                        onClick={() => toggleSelect(idol.id)}
+                      />
+                    ))}
+                  </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
+          ) : (
             <div>
-              <button
-                className="list-change-btn"
-                onClick={() => handleNextPage()}
-              >
-                <img src={nextButton} />
-              </button>
+              <div>
+                <button
+                  className="list-change-btn"
+                  onClick={() => handlePrevPage()}
+                >
+                  <img src={prevButton} />
+                </button>
+              </div>
+              <div className="interest-idols-list">
+                {list.map((idol, index) => (
+                  <ProfileChunk
+                    key={idol.id}
+                    className="ProfileChunk"
+                    index={index}
+                    idol={idol}
+                    isSelected={selectedIdols.includes(idol.id)} //클릭시 오버레이
+                    onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
+                  />
+                ))}
+              </div>
+              <div>
+                <button
+                  className="list-change-btn"
+                  onClick={() => handleNextPage()}
+                >
+                  <img src={nextButton} />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="button-wrapper">

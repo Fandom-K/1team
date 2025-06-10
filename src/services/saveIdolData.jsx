@@ -9,3 +9,8 @@ export async function updateIdol(id, idolData) {
   const response = await instance.put(`/idols/${id}`, idolData);
   return response.data;
 }
+
+export async function addVote(idolId) {
+  const response = await instance.post("/votes", { idolId: idolId });
+  return response.data;
+}

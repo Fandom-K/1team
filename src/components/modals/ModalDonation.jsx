@@ -2,14 +2,15 @@ import "../../styles/modals/ModalDonation.css";
 import "../common/Button";
 import Modal from "./Modal";
 import CreditInput from "../CreditInput";
-import { useEffect, useState } from "react";
-import idolImage from "/public/idolImage/fandomK-img6.jpg";
+import { useState, useContext } from "react";
 import { loadData, saveData } from "../../utils/storage";
 import Button from "../common/Button";
-import Popup from "./Popup";
-import useModal from "../../hooks/useModal";
+import { getCreditData } from "../../utils/getStorage";
+import DonateContext from "../../contexts/DonateContext";
 
-const ModalDonation = ({ isOpen, onClose }) => {
+const ModalDonation = ({ onClose }) => {
+  const { toDonateIdol } = useContext(DonateContext);
+
   const [creditValue, setCreditValue] = useState("");
   const [error, setError] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -36,13 +37,29 @@ const ModalDonation = ({ isOpen, onClose }) => {
       }
     }
   };
-  const result = false;
-
-  // const popupModal = useModal();
 
   const handleSubmit = () => {
+    if (buttonType === "disabled") return;
+
+    const data = getCreditData();
+
+    const newHistory = {
+      type: "donate",
+      amount: creditValue,
+      date: new Date().toISOString(),
+    };
+
+    data.history.push(newHistory);
+    data.balance = Number(data.balance) - Number(newHistory.amount);
+
+    // const result = saveData({ credit: data });
+    // if (result) {
+    //   window.alert(`성공적으로 후원 되었습니다./n 현재 잔액: ${data.balance}`);
+    // } else {
+    //   window.alert("실패");
+    // }
+
     onClose();
-    return result;
   };
 
   return (
@@ -51,7 +68,8 @@ const ModalDonation = ({ isOpen, onClose }) => {
         <div className="advertisement" key="modalBody">
           <div className="card">
             <div className="idol-image">
-              <img src="/public/idolImage/fandomK-img6.jpg" />
+              {/* <img src="/public/idolImage/fandomK-img6.jpg" /> */}
+              <img src={toDonateIdol.profilePicture} />
             </div>
             <div className="ad-about">
               <div className="ad-place">강남역 광고</div>
@@ -65,9 +83,6 @@ const ModalDonation = ({ isOpen, onClose }) => {
             error={error}
             errorMessage={errorMessage}
           />
-          {/* {popupModal.isOpen && (
-            <Popup isOpen={popupModal.isOpen} onClose={popupModal.closeModal} />
-          )} */}
         </div>
         <div className="donation" key="modalFooter">
           <Button
