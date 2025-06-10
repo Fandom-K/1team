@@ -2,14 +2,15 @@
   border: 1px solid rgba(241, 238, 249, 0.8);
   border-radius: 8px;
   margin: 0 auto;
-  width: 1200px;
+  width: 100%;
+  max-width: 327px;
   margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
   height: 131px;
-  padding: 30px 80px;
+  padding: 30px 20px;
 }
 
 .credit-status {
@@ -62,4 +63,17 @@
   opacity: 0.4;
   border-radius: 16px;
   position: absolute;
+}
+
+@media (min-width: 376px) {
+  .mycredit {
+    max-width: 696px;
+  }
+}
+
+@media (min-width: 745px) {
+  .mycredit {
+    max-width: 1200px;
+    padding: 30px 80px;
+  }
 }

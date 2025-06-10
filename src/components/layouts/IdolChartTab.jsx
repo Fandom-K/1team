@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
-
-import Button from "../common/Button";
 import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
 import MoreButton from "./MoreButton";
