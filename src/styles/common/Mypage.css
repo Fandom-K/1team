@@ -34,6 +34,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  margin-right: 17px;
 }
 
 .MyPage .chunk-name {
@@ -50,7 +51,7 @@
   grid-template-columns: repeat(3, 1fr); /* 좌우, 열 */
   grid-template-rows: repeat(2, auto); /* 아래위, 행*/
   margin-top: 16px;
-  gap: 24px 17px;
+  gap: 24px 0;
 }
 
 .MyPage .btn-positive {
@@ -120,6 +121,14 @@
   margin-bottom: 2px;
 }
 
+/* .Mypage .interest-idols-list {
+  overflow: auto;
+}
+
+ .Mypage .interest-idols-list::-webkit-scrollbar {
+  display: none;
+} */
+
 @media (min-width: 768px) {
   .MyPage .font-bold-16-line26 {
     font-size: 20px;
@@ -161,6 +170,7 @@
     display: flex;
     align-items: center;
     gap: 27px;
+    justify-content: center;
   }
   .MyPage .button-wrapper {
     margin: 40px;
