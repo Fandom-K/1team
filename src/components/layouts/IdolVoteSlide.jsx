@@ -79,8 +79,8 @@ const IdolVoteSlide = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div class="next-button-wrapper">
-        <div class="swiper-button-next"></div>
+      <div className="next-button-wrapper">
+        <div className="swiper-button-next"></div>
       </div>
     </div>
   );

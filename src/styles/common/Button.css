@@ -28,6 +28,7 @@
 
 .btn-disabled {
   background: #828282;
+  pointer-events: none;
 }
 
 .btn-more {
