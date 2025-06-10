@@ -2,8 +2,16 @@ import Button from "./Button";
 import "../../styles/layout/IdolCard.css";
 import { Link } from "react-router-dom";
 import "../../styles/common/fonts/font.css";
+import { useContext } from "react";
+import DonateContext from "../../contexts/DonateContext";
 
 const IdolCard = ({ idol }) => {
+  const { setToDonateIdol } = useContext(DonateContext);
+
+  const handleButtonClick = () => {
+    setToDonateIdol(idol);
+  };
+
   return (
     <div className="card">
       <div className="card-image-wrapper">
@@ -15,7 +23,12 @@ const IdolCard = ({ idol }) => {
         <div className="img-blur-overlay"></div>
         <div className="button-wrapper">
           {/* <Link to=""> */}
-          <Button text="후원하기" corner="angular" type="positive" />
+          <Button
+            text="후원하기"
+            corner="angular"
+            type="positive"
+            onClick={handleButtonClick}
+          />
           {/* </Link> */}
         </div>
       </div>
