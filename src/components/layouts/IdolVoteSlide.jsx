@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import { useState, useEffect } from "react";
 import getIdol from "../../services/getIdol";
+import getDonationIdol from "../../services/getDonationIdol";
 import IdolCard from "../../components/common/IdolCard";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,7 +12,8 @@ import "../../styles/common/idolVoteSlide.css";
 const IdolVoteSlide = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [Idols, setIdols] = useState(null);
+  const [idols, setIdols] = useState(null);
+  const [donations, setDonations] = useState(null);
   const [swiper, setSwiper] = useState(null);
 
   //데이터 요청
@@ -20,7 +22,33 @@ const IdolVoteSlide = () => {
       try {
         setLoading(true);
         const data = await getIdol();
+        const votedata = await getDonationIdol();
         setIdols(data);
+        setDonations(votedata);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const data = await getIdol();
+        const votedata = await getDonationIdol();
+
+        // 💡 donation을 idolId 기준으로 객체로 변환
+        const donationMap = votedata.reduce((acc, item) => {
+          acc[item.idolId] = item;
+          return acc;
+        }, {});
+
+        setIdols(data);
+        setDonations(donationMap); // 기존 배열이 아니라 Map 형태로 저장
       } catch (error) {
         setError(error);
       } finally {
@@ -73,9 +101,17 @@ const IdolVoteSlide = () => {
           },
         }}
       >
-        {Idols.map((idol) => (
+        {/* {idols.map((idol) => {
+          const matchedDonation = donations.find(
+            (donation) => donation.idolId === idol.id
+          ); // id로 매칭
           <SwiperSlide>
-            <IdolCard idol={idol} />
+            <IdolCard idol={idol} donation={matchedDonation} />
+          </SwiperSlide>;
+        })} */}
+        {idols.map((idol) => (
+          <SwiperSlide key={idol.id}>
+            <IdolCard idol={idol} donation={donations[idol.id]} />
           </SwiperSlide>
         ))}
       </Swiper>

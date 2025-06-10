@@ -1,11 +1,11 @@
 import Button from "./Button";
-import "../../styles/layout/IdolCard.css";
-import { Link } from "react-router-dom";
-import "../../styles/common/fonts/font.css";
-import { useContext } from "react";
 import DonateContext from "../../contexts/DonateContext";
+import { useContext, useState } from "react";
 
-const IdolCard = ({ idol }) => {
+import "../../styles/layout/IdolCard.css";
+import "../../styles/common/fonts/font.css";
+
+const IdolCard = ({ idol, donation }) => {
   const { setToDonateIdol } = useContext(DonateContext);
 
   const handleButtonClick = () => {
@@ -36,7 +36,7 @@ const IdolCard = ({ idol }) => {
       <div className="card-feature">
         <h3 className="font-regular-16-line18-letter-neg017">강남역 광고</h3>
         <h2 className="font-medium-18">
-          {idol.group} {idol.name} 지하철 광고
+          {donation?.subtitle || "후원 정보 없음"}
         </h2>
         <div className="vote-amount">
           <div className="card-vote">
@@ -51,6 +51,9 @@ const IdolCard = ({ idol }) => {
             {/* {idol.totalVote?.toLacaleString() || "0"} 나중에 바꿔주기 */}
           </div>
           <p className="card-deadline">5일 남음</p>
+        </div>
+        <div className="vote-progress-containter">
+          <div className="progress-bar"></div>
         </div>
       </div>
     </div>
