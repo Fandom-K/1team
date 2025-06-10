@@ -79,6 +79,11 @@ table {
   /* Brand colors */
   --brand-100: #f96d69;
   --brand-200: #fe5493;
+  --brand-gradients: linear-gradient(
+    to right,
+    var(--brand-100),
+    var(--brand-200)
+  );
 
   /* Error color */
   --error-100: #ff3b3b;
