@@ -44,7 +44,7 @@ const ModalDonation = ({ onClose }) => {
     const data = getCreditData();
 
     const newHistory = {
-      type: "purchase",
+      type: "donate",
       amount: creditValue,
       date: new Date().toISOString(),
     };
@@ -52,12 +52,12 @@ const ModalDonation = ({ onClose }) => {
     data.history.push(newHistory);
     data.balance = Number(data.balance) - Number(newHistory.amount);
 
-    const result = saveData({ credit: data });
-    if (result) {
-      window.alert(`성공적으로 충전 되었습니다./n 현재 잔액: ${data.balance}`);
-    } else {
-      window.alert("실패");
-    }
+    // const result = saveData({ credit: data });
+    // if (result) {
+    //   window.alert(`성공적으로 후원 되었습니다./n 현재 잔액: ${data.balance}`);
+    // } else {
+    //   window.alert("실패");
+    // }
 
     onClose();
   };
