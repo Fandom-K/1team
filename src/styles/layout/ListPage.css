@@ -3,6 +3,7 @@
   font-family: "Pretendard";
   position: relative;
   overflow: hidden;
+  padding: 24px;
 }
 
 /* ::가상 요소 왼쪽 상단 그라데이션 효과 */
