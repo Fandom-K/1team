@@ -39,10 +39,18 @@ const IdolCard = ({ idol }) => {
           {idol.group} {idol.name} 지하철 광고
         </h2>
         <div className="vote-amount">
-          <span className="card-vote">
-            {/* {idol.totalVote?.toLacaleString() || "0"} */}
-          </span>
-          <span className="card-deadline">5일 남음</span>
+          <div className="card-vote">
+            <div className="img-blur">
+              <img
+                className="img-credit"
+                src="../../../src/assets/icons/credit_113px.svg"
+              />
+              <div className="blur"></div>
+            </div>
+            <p>6000</p>
+            {/* {idol.totalVote?.toLacaleString() || "0"} 나중에 바꿔주기 */}
+          </div>
+          <p className="card-deadline">5일 남음</p>
         </div>
       </div>
     </div>
