@@ -198,36 +198,38 @@ const Mypage = () => {
               ))}
             </Swiper>
           ) : (
-            <div>
-              <div>
-                <button
-                  className="list-change-btn"
-                  onClick={() => handlePrevPage()}
-                >
-                  <img src={prevButton} />
-                </button>
+            <>
+              <div className="interest-idols-list-md-to-large">
+                <div>
+                  <button
+                    className="list-change-btn"
+                    onClick={() => handlePrevPage()}
+                  >
+                    <img src={prevButton} />
+                  </button>
+                </div>
+                <div className="interest-idols-list">
+                  {list.map((idol, index) => (
+                    <ProfileChunk
+                      key={idol.id}
+                      className="ProfileChunk"
+                      index={index}
+                      idol={idol}
+                      isSelected={selectedIdols.includes(idol.id)} //클릭시 오버레이
+                      onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
+                    />
+                  ))}
+                </div>
+                <div>
+                  <button
+                    className="list-change-btn"
+                    onClick={() => handleNextPage()}
+                  >
+                    <img src={nextButton} />
+                  </button>
+                </div>
               </div>
-              <div className="interest-idols-list">
-                {list.map((idol, index) => (
-                  <ProfileChunk
-                    key={idol.id}
-                    className="ProfileChunk"
-                    index={index}
-                    idol={idol}
-                    isSelected={selectedIdols.includes(idol.id)} //클릭시 오버레이
-                    onClick={() => toggleSelect(idol.id)} // 클릭시 선택 토글
-                  />
-                ))}
-              </div>
-              <div>
-                <button
-                  className="list-change-btn"
-                  onClick={() => handleNextPage()}
-                >
-                  <img src={nextButton} />
-                </button>
-              </div>
-            </div>
+            </>
           )}
         </div>
 

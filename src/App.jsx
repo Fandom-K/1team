@@ -5,6 +5,8 @@ import NotFound from "./pages/NotFound";
 import ListPage from "./pages/ListPage";
 import MyPage from "./pages/Mypage";
 import ExamplePage from "./pages/ExamplePage";
+import MypageTest from "./pages/MypageTest";
+import GradientVote from "./pages/GradientVote";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
         {/* 예시를 위한 페이지. 추후 삭제. */}
         <Route path="/example" element={<ExamplePage />} />
+        <Route path="/test" element={<MypageTest />} />
+        <Route path="/gra" element={<GradientVote />} />
       </Routes>
     </>
   );
