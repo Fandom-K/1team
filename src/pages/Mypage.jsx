@@ -37,7 +37,7 @@ const Mypage = () => {
     }
     return result;
   };
-  const groupedIdols = isMobile ? chunkArray(idols, 9) : [];
+  const groupedIdols = isMobile ? chunkArray(idols, 6) : [];
 
   // 관심 아이돌, 선택 아이돌 상태
   const [selectedIdols, setSelectedIdols] = useState([]);
