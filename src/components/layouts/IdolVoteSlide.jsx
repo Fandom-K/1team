@@ -7,7 +7,7 @@ import IdolCard from "../../components/common/IdolCard";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "../../styles/common/idolVoteSlide.css";
+import "../../styles/common/IdolVoteSlide.css";
 
 const IdolVoteSlide = () => {
   const [loading, setLoading] = useState(true);
