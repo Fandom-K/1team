@@ -10,7 +10,7 @@ const IdolCard = ({ idol, donation }) => {
   const { setToDonateIdol } = useContext(DonateContext);
 
   const handleButtonClick = () => {
-    setToDonateIdol(idol);
+    setToDonateIdol({ ...idol, donation });
   };
   const currentDonation = donation?.receivedDonations || 0;
   const targetDonation = donation?.targetDonation || 0;
