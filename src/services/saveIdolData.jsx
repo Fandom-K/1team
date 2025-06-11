@@ -15,8 +15,8 @@ export async function addVote(idolId) {
   return response.data;
 }
 
-export async function donateToIdol(idolId, amount) {
-  const response = await instance.put(`/donations/${idolId}/contribute`, {
+export async function donateToIdol(supportId, amount) {
+  const response = await instance.put(`/donations/${supportId}/contribute`, {
     amount: amount,
   });
   return response.data;
