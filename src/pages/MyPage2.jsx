@@ -46,7 +46,7 @@ const MyPage = () => {
           <h3>내 관심 아이돌</h3>
           <div>
             <FavoriteIdols
-              selectedIdols={selectedIdols}
+              selectedIdolIds={selectedIdols.map((idol) => idol.id)}
               myFavorIdols={myFavorIdols}
               onRemoveFavorite={handleRemoveFavorite}
             />
@@ -56,15 +56,13 @@ const MyPage = () => {
           <h3>관심있는 아이돌을 추가해보세요</h3>
           {isMobile ? (
             <MyPageMobile
-              selectedIdols={selectedIdols}
+              selectedIdolIds={selectedIdols.map((idol) => idol.id)}
               onToggle={toggleSelect}
-              onAddFavor={handleAddFavorIdolsFromChild}
             />
           ) : (
             <MyPageDesk
-              selectedIdols={selectedIdols}
+              selectedIdolIds={selectedIdols.map((idol) => idol.id)}
               onToggle={toggleSelect}
-              onAddFavor={handleAddFavorIdolsFromChild}
             />
           )}
         </div>

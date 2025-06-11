@@ -4,7 +4,7 @@ import ProfileChunk from "../ProfileChunk";
 import prevButton from "../../assets/images/prev_btn.png";
 import nextButton from "../../assets/images/next_btn.png";
 
-const MyPageDesk = ({ selectedIdols, onToggle }) => {
+const MyPageDesk = ({ selectedIdolIds, onToggle }) => {
   const [list, setList] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
   const [currentCursor, setCurrentCursor] = useState(null);
@@ -61,14 +61,17 @@ const MyPageDesk = ({ selectedIdols, onToggle }) => {
       <button onClick={handlePrevPage} className="list-change-btn">
         <img src={prevButton} alt="이전 페이지" />
       </button>
-      <div className="interest-idols-list">
+      <div
+        className="interest-idols-list"
+        style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
+      >
         {list.map((idol) => (
           <ProfileChunk
             key={idol.id}
             className="ProfileChunk"
             idol={idol}
-            isSelected={selectedIdols.includes(idol.id)}
-            onClick={() => onToggle(idol.id)}
+            isSelected={selectedIdolIds.includes(idol.id)}
+            onClick={() => onToggle(idol)}
           />
         ))}
       </div>

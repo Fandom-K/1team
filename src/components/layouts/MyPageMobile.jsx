@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import getIdol from "../../services/getIdol";
 import ProfileChunk from "../ProfileChunk";
 
-const MyPageMobile = ({ selectedIdols, onToggle }) => {
+const MyPageMobile = ({ selectedIdolIds, onToggle }) => {
   const [groupedIdols, setGroupedIdols] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -51,8 +51,8 @@ const MyPageMobile = ({ selectedIdols, onToggle }) => {
                 key={idol.id}
                 className="ProfileChunk"
                 idol={idol}
-                isSelected={selectedIdols.includes(idol.id)}
-                onClick={() => onToggle(idol.id)}
+                isSelected={selectedIdolIds.includes(idol.id)}
+                onClick={() => onToggle(idol)}
               />
             ))}
           </div>
