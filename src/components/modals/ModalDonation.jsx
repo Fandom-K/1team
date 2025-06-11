@@ -62,7 +62,9 @@ const ModalDonation = ({ onClose }) => {
     updatedData.balance =
       Number(updatedData.balance) - Number(newHistory.amount);
 
-    return { success: true, updatedData, backupData };
+    const storageSuccess = saveData({ credit: updatedData });
+
+    return { success: storageSuccess, updatedData, backupData };
   };
 
   const saveDonate = async () => {
@@ -97,10 +99,10 @@ const ModalDonation = ({ onClose }) => {
 
     if (!donateSuccess.success) {
       console.log("작업 실패로 인해 변경을 적용하지 않습니다.");
+      saveData({ credit: creditResult.backupData });
       onClose({ success: false, message: "api error" });
       return false;
     } else {
-      saveData({ credit: creditResult.updatedData });
       onClose({ success: true, message: "donate" });
     }
   };

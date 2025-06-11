@@ -15,7 +15,7 @@ const IdolChart = () => {
     } else {
       setVoteGender("male");
     }
-    if (window.innerWidth <= 745) {
+    if (window.innerWidth < 745) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
