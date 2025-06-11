@@ -1,38 +1,10 @@
 import GradientProfile from "../components/common/GradientProfile";
-import getIdol from "../services/getIdol";
-import { useEffect, useState } from "react";
 import icCheck from "../assets/icons/ic_check.png";
 
-const GradientVote = ({ isSelected }) => {
-  const [idols, setIdols] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const data = await getIdol();
-        setIdols(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return <p>로딩 중...</p>;
-  }
-  if (error) {
-    return <p>에러 발생: {error.message}</p>;
-  }
-
+const GradientVote = ({ idol, isSelected }) => {
   return (
-    <>
-      {Array.isArray(idols) && idols.length > 0 && (
+    <div>
+      {idol && (
         <div style={{ position: "relative", width: "70px", height: "70px" }}>
           <GradientProfile
             style={{
@@ -43,8 +15,8 @@ const GradientVote = ({ isSelected }) => {
           />
           <img
             className="inner-image"
-            src={idols[0].profilePicture}
-            alt={idols[0].name}
+            src={idol.profilePicture}
+            alt={idol.name}
             style={{
               borderRadius: "50%",
               width: "60px",
@@ -58,15 +30,15 @@ const GradientVote = ({ isSelected }) => {
             }}
           />
           {isSelected && (
-            <>
+            <div>
               <div
                 className="overlay"
                 style={{
                   position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
+                  top: "7px",
+                  left: "7px",
+                  width: "80%",
+                  height: "80%",
                   borderRadius: "50%",
                   background:
                     "linear-gradient(to right, rgba(249, 109, 105, 0.5), rgba(254, 84, 147, 0.5))",
@@ -86,11 +58,11 @@ const GradientVote = ({ isSelected }) => {
                   zIndex: "2",
                 }}
               />
-            </>
+            </div>
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

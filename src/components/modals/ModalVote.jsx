@@ -6,18 +6,18 @@ import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
 import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalVote.css";
-import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
 import Spinner from "../common/Spinner";
 import { getCreditData } from "../../utils/getStorage";
 import { addVote } from "../../services/saveIdolData";
 import ModalMobile from "./ModalMobile";
+import GradientVote from "../../pages/GradientVote";
 
 const IdolChartItem = ({ idol, rank, selected }) => {
   return (
     <div className="InModalVote IdolChartItem">
       <div className="idolchart-item__info">
-        <IdolProfile idol={idol} size={70} isSelected={selected} />
+        <GradientVote idol={idol} isSelected={selected} />
         <p>{rank}</p>
         <div className="group-and-vote">
           <h3 className="name">
