@@ -7,9 +7,12 @@ import { loadData, saveData } from "../../utils/storage";
 import Button from "../common/Button";
 import { getCreditData } from "../../utils/getStorage";
 import DonateContext from "../../contexts/DonateContext";
+import { donateToIdol } from "../../services/saveIdolData";
 
 const ModalDonation = ({ onClose }) => {
   const { toDonateIdol } = useContext(DonateContext);
+
+  const donation = toDonateIdol?.donation || {};
 
   const [creditValue, setCreditValue] = useState("");
   const [error, setError] = useState("");
@@ -38,10 +41,8 @@ const ModalDonation = ({ onClose }) => {
     }
   };
 
-  const handleSubmit = () => {
-    if (buttonType === "disabled") return;
-
-    const data = getCreditData();
+  const saveCredit = async (data) => {
+    const backupData = JSON.parse(JSON.stringify(data));
 
     const newHistory = {
       type: "donate",
@@ -49,17 +50,55 @@ const ModalDonation = ({ onClose }) => {
       date: new Date().toISOString(),
     };
 
-    data.history.push(newHistory);
-    data.balance = Number(data.balance) - Number(newHistory.amount);
+    const updatedData = { ...data };
+    updatedData.history.push(newHistory);
+    updatedData.balance =
+      Number(updatedData.balance) - Number(newHistory.amount);
 
-    // const result = saveData({ credit: data });
-    // if (result) {
-    //   window.alert(`성공적으로 후원 되었습니다./n 현재 잔액: ${data.balance}`);
-    // } else {
-    //   window.alert("실패");
-    // }
+    return { success: true, updatedData, backupData };
+  };
 
-    onClose();
+  const saveDonate = async () => {
+    try {
+      await donateToIdol(donation.id, Number(creditValue));
+      return { success: true };
+    } catch (e) {
+      if (e.response) {
+        console.log(e.response.status);
+        console.log(e.response.data);
+        return { success: false, error: e.response.data };
+      } else {
+        console.log("리퀘스트가 실패했습니다.");
+        return { success: false, error: "Request failed." };
+      }
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (buttonType === "disabled") return;
+
+    const data = getCreditData();
+
+    const creditResult = await saveCredit(data);
+
+    if (creditResult.success != true) {
+      window.alert("후원을 실패했습니다.");
+      return false;
+    }
+
+    const donateSuccess = await saveDonate();
+
+    if (!donateSuccess.success) {
+      console.log("작업 실패로 인해 변경을 적용하지 않습니다.");
+      onClose({ success: false, message: "api error" });
+      return false;
+    } else {
+      saveData({ credit: creditResult.updatedData });
+      window.alert(
+        `성공적으로 투표 되었습니다./n 현재 잔액: ${creditResult.updatedData.balance}`
+      );
+      onClose({ success: true, message: "donate" });
+    }
   };
 
   return (
@@ -68,12 +107,11 @@ const ModalDonation = ({ onClose }) => {
         <div className="advertisement" key="modalBody">
           <div className="card">
             <div className="idol-image">
-              {/* <img src="/public/idolImage/fandomK-img6.jpg" /> */}
               <img src={toDonateIdol.profilePicture} />
             </div>
             <div className="ad-about">
-              <div className="ad-place">강남역 광고</div>
-              <div className="ad-name">민지 2023 첫 광고</div>
+              <div className="ad-place">{donation.subtitle}</div>
+              <div className="ad-name">{donation.title}</div>
             </div>
           </div>
           <CreditInput

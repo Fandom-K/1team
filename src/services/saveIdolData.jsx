@@ -14,3 +14,10 @@ export async function addVote(idolId) {
   const response = await instance.post("/votes", { idolId: idolId });
   return response.data;
 }
+
+export async function donateToIdol(supportId, amount) {
+  const response = await instance.put(`/donations/${supportId}/contribute`, {
+    amount: amount,
+  });
+  return response.data;
+}
