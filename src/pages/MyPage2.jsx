@@ -56,13 +56,13 @@ const MyPage = () => {
           <h3>관심있는 아이돌을 추가해보세요</h3>
           {isMobile ? (
             <MyPageMobile
-              selectedIdols={selectedIdols}
+              selectedIdols={selectedIdols.map((i) => i.id)}
               onToggle={toggleSelect}
               onAddFavor={handleAddFavorIdolsFromChild}
             />
           ) : (
             <MyPageDesk
-              selectedIdols={selectedIdols}
+              selectedIdols={selectedIdols.map((i) => i.id)}
               onToggle={toggleSelect}
               onAddFavor={handleAddFavorIdolsFromChild}
             />
