@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
 import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
@@ -9,7 +9,7 @@ const IdolChartItem = ({ idol, rank }) => {
   return (
     <div className="IdolChartItem">
       <div className="idolchart-item__info">
-        <IdolProfile idol={idol} size={80} />
+        <IdolProfile idol={idol} size={70} />
         <p className="font-regular-16">{rank}</p>
         <h3 className="font-medium-16">
           {idol.group} {idol.name}
@@ -27,11 +27,8 @@ const IdolChartTab = ({ gender = "female" }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [visibleCount, setVisibleCount] = useState(() =>
-    window.innerWidth >= 745 ? 10 : 5
-  );
-
   const isWideScreen = useIsWideScreen(745);
+  const [visibleCount, setVisibleCount] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -43,25 +40,26 @@ const IdolChartTab = ({ gender = "female" }) => {
   }, [gender]);
 
   useEffect(() => {
-    // 화면 넓이 바뀌면 visibleCount 초기값 재조정
     setVisibleCount(isWideScreen ? 10 : 5);
   }, [isWideScreen]);
 
-  if (loading) return <p>로딩 중...</p>;
+  const sortedIdols = useMemo(() => {
+    return allIdols
+      .filter((idol) => idol.gender === gender)
+      .sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0));
+  }, [allIdols, gender]);
+
+  if (loading || visibleCount === null) return <p>로딩 중...</p>;
   if (error) return <p>에러 발생: {error.message}</p>;
 
-  const filtered = allIdols
-    .filter((idol) => idol.gender === gender)
-    .sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0));
-
-  const visibleIdols = filtered.slice(0, visibleCount);
+  const visibleIdols = sortedIdols.slice(0, visibleCount);
 
   const handleMoreClick = () => {
     const increment = isWideScreen ? 10 : 5;
     setVisibleCount((prev) => prev + increment);
   };
 
-  const showMoreButton = visibleCount < filtered.length;
+  const showMoreButton = visibleCount < sortedIdols.length;
 
   return (
     <>

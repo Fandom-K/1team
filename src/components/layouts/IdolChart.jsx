@@ -1,9 +1,9 @@
-// components/layout/IdolChart.js
 import { useState, useContext } from "react";
 import "../../styles/layout/IdolChart.css";
 import Button from "../common/Button";
 import IdolChartTab from "./IdolChartTab";
 import VoteContext from "../../contexts/VoteContext";
+import chartIcon from "../../assets/icons/chart.svg";
 
 const IdolChart = () => {
   const [activeTab, setActiveTab] = useState("이달의 여자 아이돌");
@@ -24,7 +24,7 @@ const IdolChart = () => {
         <h1 className="font-bold-20-line26">이달의 차트</h1>
         <Button
           text="차트  투표하기"
-          imgsrc="../../assets/icons/chart.svg"
+          imgsrc={chartIcon}
           alt="차트 투표하기 버튼"
           type="positive"
           corner="angular"
@@ -50,10 +50,20 @@ const IdolChart = () => {
         </div>
 
         <div>
-          {activeTab === "이달의 여자 아이돌" && (
+          <div
+            style={{
+              display: activeTab === "이달의 여자 아이돌" ? "block" : "none",
+            }}
+          >
             <IdolChartTab gender="female" />
-          )}
-          {activeTab === "이달의 남자 아이돌" && <IdolChartTab gender="male" />}
+          </div>
+          <div
+            style={{
+              display: activeTab === "이달의 남자 아이돌" ? "block" : "none",
+            }}
+          >
+            <IdolChartTab gender="male" />
+          </div>
         </div>
       </div>
     </div>
