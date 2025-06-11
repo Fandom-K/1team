@@ -1,0 +1,51 @@
+.IdolChart {
+  background-color: var(--black-100);
+  color: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.IdolChart .idolchart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0 16px;
+}
+
+.idolchart-tap {
+  width: 100%;
+}
+
+.idolchart-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0;
+}
+
+.idolchart-buttons button {
+  all: unset;
+  text-align: center;
+  width: 48%;
+  color: var(--gray-200);
+  background-color: var(--black-100);
+  cursor: pointer;
+  padding: 12px;
+}
+
+.idolchart-buttons button.active {
+  font-weight: 700;
+  border-bottom: 1px solid #ffffff;
+  color: var(--white-200);
+  background-color: var(--black-200);
+}
+
+@media (min-width: 376px) {
+}
+
+@media (min-width: 745px) {
+  .IdolChart {
+    max-width: 1200px;
+  }
+}

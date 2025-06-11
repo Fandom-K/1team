@@ -1,0 +1,48 @@
+.swiper-slide {
+  color: white;
+}
+
+.move-button .swiper-button-next button {
+  position: absolute; /* 위치 지정 */
+  display: flex;
+  justify-content: space-between;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+}
+
+.vote-slide .prev-button-wrapper > div {
+  position: relative;
+  left: -2rem;
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+  padding: 30px 10px;
+}
+
+.vote-slide .next-button-wrapper > div {
+  position: relative;
+  left: 2rem;
+  background-color: rgba(27, 27, 27, 0.8);
+  color: #ffffff;
+  padding: 30px 10px;
+}
+
+.vote-slide {
+  display: flex;
+  align-content: center;
+  margin: 0 auto;
+}
+
+@media (min-width: 745px) {
+  .vote-slide {
+    max-width: 744px;
+  }
+}
+
+@media (min-width: 376px) {
+  .vote-slide {
+    max-width: 1200px;
+  }
+}

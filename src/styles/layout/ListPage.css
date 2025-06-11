@@ -1,0 +1,25 @@
+.ListPage {
+  width: 100%;
+  font-family: "Pretendard";
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+/* ::가상 요소 왼쪽 상단 그라데이션 효과 */
+.ListPage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/assets/images/Img_top-design.png");
+  background-repeat: no-repeat;
+  /* 왼쪽 상단에 정확히 고정 */
+  background-position: top left;
+  /* 이미지 크기를 원본 그대로 유지해서 왜곡 없이 표시 */
+  background-size: auto;
+  z-index: 3;
+  pointer-events: none;
+}

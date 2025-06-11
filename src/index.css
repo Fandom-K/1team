@@ -1,0 +1,81 @@
+/* ------------------ */
+/* ✅ Reset           */
+/* ------------------ */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import url("/src/styles/common/fonts/font.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  background-color: var(--black-100);
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ------------------ */
+/* ✅ Color Variables */
+/* ------------------ */
+:root {
+  /* Black colors */
+  --black-100: #02000e;
+  --black-200: #181d26;
+
+  /* Gray colors */
+  --gray-100: #67666e;
+  --gray-200: #828282;
+  --gray-300: #a3a5a8;
+
+  /* White colors */
+  --white-100: #8c92ab;
+  --white-200: #f7f7f8;
+
+  /* Brand colors */
+  --brand-100: #f96d69;
+  --brand-200: #fe5493;
+
+  /* Error color */
+  --error-100: #ff3b3b;
+  --error-200: #ff2626;
+}
