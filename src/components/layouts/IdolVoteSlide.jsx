@@ -14,7 +14,6 @@ const IdolVoteSlide = () => {
   const [error, setError] = useState(null);
   const [idols, setIdols] = useState(null);
   const [donations, setDonations] = useState(null);
-  const [swiper, setSwiper] = useState(null);
 
   //데이터 요청
   // useEffect(() => {
