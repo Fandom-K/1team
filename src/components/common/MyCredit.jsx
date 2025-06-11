@@ -2,7 +2,7 @@ import "../../styles/layout/MyCredit.css";
 import { getMyCredit } from "../../utils/getStorage";
 import ModalCharge from "../modals/ModalCharge";
 import useModal from "../../hooks/useModal";
-
+import creditImg from "../../assets/icons/credit_113px.svg";
 const MyCredit = () => {
   const data = getMyCredit();
   const { isOpen, openModal, closeModal } = useModal();
@@ -16,10 +16,7 @@ const MyCredit = () => {
         <div>
           <div className="my-credit-amount">
             <div className="my-credit-icon-wrapper">
-              <img
-                className="my-credit-icon"
-                src="../../../src/assets/icons/credit_113px.svg"
-              />
+              <img className="my-credit-icon" src={creditImg} />
               <div className="my-credit-blur"></div>
             </div>
             <p>{data}</p>
