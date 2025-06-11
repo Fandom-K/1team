@@ -4,14 +4,13 @@ import ProfileChunk from "../ProfileChunk";
 import prevButton from "../../assets/images/prev_btn.png";
 import nextButton from "../../assets/images/next_btn.png";
 
-const MyPageDesk = () => {
+const MyPageDesk = ({ selectedIdols, onToggle }) => {
   const [list, setList] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
   const [currentCursor, setCurrentCursor] = useState(null);
   const [prevCursors, setPrevCursors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedIdols, setSelectedIdols] = useState([]);
   const pageSize = 10;
 
   useEffect(() => {
@@ -57,15 +56,6 @@ const MyPageDesk = () => {
   if (loading) return <p>로딩 중...</p>;
   if (error) return <p>에러 발생: {error.message}</p>;
 
-  // 선택 토글
-  const toggleSelect = (idolId) => {
-    setSelectedIdols((prev) =>
-      prev.includes(idolId)
-        ? prev.filter((id) => id !== idolId)
-        : [...prev, idolId]
-    );
-  };
-
   return (
     <div>
       <button onClick={handlePrevPage} className="list-change-btn">
@@ -78,7 +68,7 @@ const MyPageDesk = () => {
             className="ProfileChunk"
             idol={idol}
             isSelected={selectedIdols.includes(idol.id)}
-            onClick={() => toggleSelect(idol.id)}
+            onClick={() => onToggle(idol.id)}
           />
         ))}
       </div>

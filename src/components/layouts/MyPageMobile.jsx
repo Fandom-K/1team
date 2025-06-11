@@ -3,11 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import getIdol from "../../services/getIdol";
 import ProfileChunk from "../ProfileChunk";
 
-const MyPageMobile = () => {
+const MyPageMobile = ({ selectedIdols, onToggle }) => {
   const [groupedIdols, setGroupedIdols] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedIdols, setSelectedIdols] = useState([]);
 
   useEffect(() => {
     const fetchAllIdols = async () => {
@@ -36,15 +35,6 @@ const MyPageMobile = () => {
   if (loading) return <p>로딩 중...</p>;
   if (error) return <p>에러 발생: {error.message}</p>;
 
-  // 선택 토글
-  const toggleSelect = (idolId) => {
-    setSelectedIdols((prev) =>
-      prev.includes(idolId)
-        ? prev.filter((id) => id !== idolId)
-        : [...prev, idolId]
-    );
-  };
-
   return (
     <Swiper slidesPerView={1} spaceBetween={20}>
       {groupedIdols.map((group, index) => (
@@ -62,7 +52,7 @@ const MyPageMobile = () => {
                 className="ProfileChunk"
                 idol={idol}
                 isSelected={selectedIdols.includes(idol.id)}
-                onClick={() => toggleSelect(idol.id)}
+                onClick={() => onToggle(idol.id)}
               />
             ))}
           </div>
