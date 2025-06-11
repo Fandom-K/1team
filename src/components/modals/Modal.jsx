@@ -1,18 +1,17 @@
 import "../../styles/modals/Modal.css";
 import closeIcon from "../../assets/icons/btn_delete_24px.png";
 
-const Modal = ({ name = "", title, onClose, children, width, size }) => {
+const Modal = ({ name = "", title, onClose, children, width }) => {
   const modalBody = children.props.children?.find(
     (el) => el.key === "modalBody"
   );
+
   const modalFooter =
     children.props.children?.find((el) => el.key === "modalFooter") || null;
+
   return (
     <div className={`modal-overay`}>
-      <div
-        className={`Modal ${name} ${size}`}
-        style={{ width: `${width}` || "327px" }}
-      >
+      <div className={`Modal ${name}`} style={{ width: `${width}` || "327px" }}>
         <div className="modal-container">
           <section className="modal-header">
             <div

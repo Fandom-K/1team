@@ -6,17 +6,18 @@ import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
 import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalVote.css";
-import IdolProfile from "../common/IdolProfile";
 import getIdol from "../../services/getIdol";
 import Spinner from "../common/Spinner";
 import { getCreditData } from "../../utils/getStorage";
 import { addVote } from "../../services/saveIdolData";
+import ModalMobile from "./ModalMobile";
+import GradientVote from "../../pages/GradientVote";
 
-const IdolChartItem = ({ idol, rank }) => {
+const IdolChartItem = ({ idol, rank, selected }) => {
   return (
     <div className="InModalVote IdolChartItem">
       <div className="idolchart-item__info">
-        <IdolProfile idol={idol} size={70} />
+        <GradientVote idol={idol} isSelected={selected} />
         <p>{rank}</p>
         <div className="group-and-vote">
           <h3 className="name">
@@ -31,7 +32,7 @@ const IdolChartItem = ({ idol, rank }) => {
   );
 };
 
-const ModalVote = ({ gender, onClose }) => {
+const ModalVote = ({ isMobile, gender, onClose }) => {
   const genderName = gender == "male" ? "남자" : "여자";
   const [allIdols, setAllIdols] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -151,19 +152,25 @@ const ModalVote = ({ gender, onClose }) => {
     }
   };
 
+  const ModalComponent = isMobile ? ModalMobile : Modal;
+
   return (
-    <Modal
+    <ModalComponent
       title={`이달의 ${genderName} 아이돌`}
       name="ModalVote"
       onClose={onClose}
-      width="525px"
+      width={isMobile ? "" : "525px"}
     >
       <>
         <div className="vote-chart-list" key="modalBody">
           {filteredData.map((idol, index) =>
             !hasvoteToday ? (
               <RadioGroup key={idol.id} onClick={() => handleChange(idol.id)}>
-                <IdolChartItem idol={idol} rank={index + 1} />
+                <IdolChartItem
+                  idol={idol}
+                  rank={index + 1}
+                  selected={selectedIdolId === idol.id}
+                />
                 <RadioButton
                   value={idol.id}
                   checked={selectedIdolId === idol.id}
@@ -192,7 +199,7 @@ const ModalVote = ({ gender, onClose }) => {
           )}
         </div>
       </>
-    </Modal>
+    </ModalComponent>
   );
 };
 

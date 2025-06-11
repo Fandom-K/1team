@@ -43,7 +43,7 @@ export default function GradientProfile({ style, isSelected }) {
       ? "rgba(249, 110, 104, 1)"
       : "rgba(91, 253, 15, 0)";
     const colorMid = isSelected
-      ? "rgba(255, 248, 249, 1))"
+      ? "rgba(255, 248, 249, 1)"
       : "rgba(0, 148, 255, 0.7)";
     const colorEnd = isSelected
       ? "rgba(254, 86, 145, 1)"
