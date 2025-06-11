@@ -22,6 +22,7 @@ const ListPage = () => {
   const [highlightKeyword, setHighlightKeyword] = useState(null);
   const [refreshChart, setRefreshChart] = useState(false);
   const [isMobile, setIsMobile] = useState(null);
+  const [donateSuccess, setDonateSuccess] = useState(null);
 
   useEffect(() => {
     if (toDonateIdol !== null) {
@@ -30,18 +31,23 @@ const ListPage = () => {
   }, [toDonateIdol]);
 
   useEffect(() => {
-    //level-up: 크레딧 부족이 아닌, 로컬스토리지 저장 성공, 실패에도 팝업 오픈하기
     if (!voteSuccess || voteSuccess.success == undefined) return;
 
-    if (!voteSuccess.success && voteSuccess.message === "credit not enough") {
-      setPopupMessage("앗! 투표하기 위한 크레딧이 부족해요");
-      setHighlightKeyword("크레딧");
-      votePopupModal.openModal();
+    if (!voteSuccess.success) {
+      if (voteSuccess.message === "credit not enough") {
+        setPopupMessage("앗! 투표하기 위한 크레딧이 부족해요");
+        setHighlightKeyword("크레딧");
+      } else {
+        setPopupMessage(
+          "죄송합니다. 투표 처리 중 오류가 발생했습니다. 다시 시도해 주세요."
+        );
+        setHighlightKeyword(null);
+      }
     } else if (voteSuccess.success) {
-      setPopupMessage("성공적으로 투표 되었습니다.");
+      setPopupMessage("투표 완료 🎉");
       setHighlightKeyword(null);
-      votePopupModal.openModal();
     }
+    votePopupModal.openModal();
   }, [voteSuccess]);
 
   useEffect(() => {
@@ -49,6 +55,21 @@ const ListPage = () => {
       setRefreshChart((prev) => !prev);
     }
   }, [voteSuccess]);
+
+  useEffect(() => {
+    if (!donateSuccess || donateSuccess.success == undefined) return;
+
+    if (!donateSuccess.success) {
+      setPopupMessage(
+        "죄송합니다. 후원 처리 중 오류가 발생했습니다. 다시 시도해 주세요."
+      );
+      setHighlightKeyword(null);
+    } else if (donateSuccess.success) {
+      setPopupMessage("후원 완료 🎉");
+      setHighlightKeyword(null);
+    }
+    votePopupModal.openModal();
+  }, [donateSuccess]);
 
   return (
     <div className="ListPage">
@@ -59,7 +80,11 @@ const ListPage = () => {
         {donateModal.isOpen && (
           <ModalDonation
             isOpen={donateModal.isOpen}
-            onClose={donateModal.closeModal}
+            // onClose={donateModal.closeModal}
+            onClose={(result) => {
+              donateModal.closeModal();
+              setDonateSuccess(result);
+            }}
           />
         )}
       </DonateContext.Provider>

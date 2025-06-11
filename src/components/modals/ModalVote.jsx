@@ -42,8 +42,8 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
   const [hasvoteToday, setHasVoteToday] = useState(null);
 
   useEffect(() => {
-    const data = getCreditData();
-    const voted = data.history.some(
+    const creditData = getCreditData();
+    const voted = creditData.history.some(
       (el) =>
         el.date.split("T")[0] === new Date().toISOString().split("T")[0] &&
         el.type === "vote-" + gender
@@ -98,7 +98,11 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
       date: new Date().toISOString(),
     };
 
-    const updatedData = { ...data };
+    const updatedData = {
+      ...data,
+      history: [...data.history],
+    };
+
     updatedData.history.push(newHistory);
     updatedData.balance =
       Number(updatedData.balance) - Number(newHistory.amount);
@@ -131,24 +135,19 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
       return false;
     }
 
-    try {
-      const creditResult = await saveCredit(data);
-      const voteSuccess = await saveVote();
+    const creditResult = await saveCredit(data);
 
-      if (!creditResult.success || !voteSuccess.success) {
-        console.log("작업 실패로 인해 변경을 적용하지 않습니다.");
-        return false;
-      }
+    if (creditResult.success != true) return false;
 
-      saveData({ credit: creditResult.updatedData });
-      // window.alert(
-      //   `성공적으로 투표 되었습니다./n 현재 잔액: ${creditResult.updatedData.balance}`
-      // );
-      // setHasVoteToday(true);
-      onClose({ success: true, message: "vote-" + gender });
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
+    const voteSuccess = await saveVote();
+
+    if (!voteSuccess.success) {
+      console.log("작업 실패로 인해 변경을 적용하지 않습니다.");
+      onClose({ success: false, message: "api error" });
       return false;
+    } else {
+      saveData({ credit: creditResult.updatedData });
+      onClose({ success: true, message: "vote-" + gender });
     }
   };
 

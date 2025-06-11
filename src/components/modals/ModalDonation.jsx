@@ -2,7 +2,7 @@ import "../../styles/modals/ModalDonation.css";
 import "../common/Button";
 import Modal from "./Modal";
 import CreditInput from "../CreditInput";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { loadData, saveData } from "../../utils/storage";
 import Button from "../common/Button";
 import { getCreditData } from "../../utils/getStorage";
@@ -18,13 +18,16 @@ const ModalDonation = ({ onClose }) => {
   const [error, setError] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [buttonType, setButtonType] = useState("disabled");
+  const [myCredit, setMyCredit] = useState(null);
+
+  useEffect(() => {
+    const data = loadData();
+    setMyCredit(data.credit.balance);
+  }, []);
 
   const handleCreditChange = (e) => {
     const value = e.target.value;
     setCreditValue(value);
-
-    const data = loadData();
-    const myCredit = data.credit.balance;
 
     if (value && Number.parseInt(value) > myCredit) {
       setError("error");
@@ -50,7 +53,11 @@ const ModalDonation = ({ onClose }) => {
       date: new Date().toISOString(),
     };
 
-    const updatedData = { ...data };
+    const updatedData = {
+      ...data,
+      history: [...data.history],
+    };
+
     updatedData.history.push(newHistory);
     updatedData.balance =
       Number(updatedData.balance) - Number(newHistory.amount);
@@ -94,9 +101,6 @@ const ModalDonation = ({ onClose }) => {
       return false;
     } else {
       saveData({ credit: creditResult.updatedData });
-      window.alert(
-        `성공적으로 투표 되었습니다./n 현재 잔액: ${creditResult.updatedData.balance}`
-      );
       onClose({ success: true, message: "donate" });
     }
   };

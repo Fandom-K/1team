@@ -32,6 +32,7 @@
 
 .Modal.Popup .popup-message {
   color: #ffffff;
+  text-align: center;
 }
 
 .Modal.Popup .popup-message > span {
