@@ -7,9 +7,12 @@ import { loadData, saveData } from "../../utils/storage";
 import Button from "../common/Button";
 import { getCreditData } from "../../utils/getStorage";
 import DonateContext from "../../contexts/DonateContext";
+import { donateToIdol } from "../../services/saveIdolData";
 
 const ModalDonation = ({ onClose }) => {
   const { toDonateIdol } = useContext(DonateContext);
+
+  const donation = toDonateIdol?.donation || {};
 
   const [creditValue, setCreditValue] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +41,7 @@ const ModalDonation = ({ onClose }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (buttonType === "disabled") return;
 
     const data = getCreditData();
@@ -51,6 +54,14 @@ const ModalDonation = ({ onClose }) => {
 
     data.history.push(newHistory);
     data.balance = Number(data.balance) - Number(newHistory.amount);
+    saveData({ credit: data });
+
+    try {
+      await donateToIdol(toDonateIdol.id, Number(creditValue));
+    } catch (e) {
+      console.log(e);
+      window.alert("후원 실패");
+    }
 
     // const result = saveData({ credit: data });
     // if (result) {
@@ -72,8 +83,8 @@ const ModalDonation = ({ onClose }) => {
               <img src={toDonateIdol.profilePicture} />
             </div>
             <div className="ad-about">
-              <div className="ad-place">강남역 광고</div>
-              <div className="ad-name">민지 2023 첫 광고</div>
+              <div className="ad-place">{donation.subtitle}</div>
+              <div className="ad-name">{donation.title}</div>
             </div>
           </div>
           <CreditInput
