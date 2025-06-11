@@ -25,10 +25,6 @@
   border-bottom: 1px solid #ffffff1a;
 }
 
-.InModalVote.IdolChartItem {
-  border-bottom: none;
-}
-
 .ModalVote .credit-charge-section {
   display: flex;
   flex-direction: column;
