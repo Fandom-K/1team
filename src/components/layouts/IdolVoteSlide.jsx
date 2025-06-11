@@ -65,6 +65,13 @@ const IdolVoteSlide = () => {
     return <p>에러 발생: {error.message}</p>;
   }
 
+  // swiper.on('slideChange', function () {
+  //   console.log('slide changed'); function() {
+  //     if (this.realIndex == 0) {
+  //       $swiperPrev.classList.add('swiper-button-disabled');
+  //       startNum = false;
+  //     } else {
+  //       $swiperPrev.classList.remove('swiper-button-disabled');
   return (
     <div className="vote-slide">
       <div className="prev-button-wrapper">
@@ -72,32 +79,32 @@ const IdolVoteSlide = () => {
       </div>
       <Swiper
         modules={[Pagination, Navigation]}
-        spaceBetween={50}
+        spaceBetween={10}
         slidesPerView={10}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         }}
-        onBeforeInit={(swipper) => setSwiper(swipper)}
         slideToClickedSlide="true"
-        onSlideChange={() => console.log("slide change")}
         speed={500}
-        pagination={{
-          clickable: true,
-          type: "fraction",
-        }}
         breakpoints={{
           320: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 10,
+            navigation: {
+              enabled: false,
+            },
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 40,
+            spaceBetween: 10,
+            navigation: {
+              enabled: false,
+            },
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 50,
+            spaceBetween: 20,
           },
         }}
       >

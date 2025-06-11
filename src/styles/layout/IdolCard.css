@@ -6,14 +6,15 @@
 .card-image-wrapper {
   position: relative;
   width: 100%;
-  height: 80%;
-  background-image: linear-gradient(tobottom, rgba(0, 0, 0, 1), 90%);
+  height: 60%;
+  /* background-image: linear-gradient(tobottom, rgba(0, 0, 0, 1), 90%); */
 }
 
 .card-image {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  border-radius: 8px;
 }
 
 .card .button-wrapper {
@@ -27,16 +28,24 @@
 .card .button-wrapper .Button {
   width: 100%;
   height: 40px;
+  font: inherit;
 } /* 모바일 사이즈 일 때 37vw로 */
 
 .card-votes {
   font-weight: bold;
+}
+.card-vote p {
+  color: rgba(249, 109, 105, 1);
 }
 
 .card-feature h3 {
   color: #ffffff;
   opacity: 40%;
   margin-bottom: 8px;
+}
+
+.card-feature h2 {
+  margin-bottom: 20px;
 }
 
 .img-blur-overlay {
@@ -66,14 +75,35 @@
 .vote-amount {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .card-vote {
   display: flex;
 }
 
-@media (max-width: 768px) {
+.vote-amount .card-deadline .font-medium-12 {
+  font-weight: 400;
+}
+
+.swiper-button-disabled {
+  visibility: hidden;
+}
+
+@media (min-width: 376px) and (max-width: 767px) {
+  .swiper-button-next {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 767px) {
   .card .button-wrapper {
     width: 90%;
   }
+  .swiper-button-prev {
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 768px) {
 }
