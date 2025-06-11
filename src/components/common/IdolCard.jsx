@@ -69,6 +69,7 @@ const IdolCard = ({ idol, donation }) => {
             width="100%"
             baseBgColor="#ffffff"
             bgColor="rgba(249, 109, 105, 1)"
+            isLabelVisible={false}
           />
         </div>
       </div>
