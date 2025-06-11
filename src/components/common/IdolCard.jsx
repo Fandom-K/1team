@@ -2,7 +2,7 @@ import Button from "./Button";
 import DonateContext from "../../contexts/DonateContext";
 import { useContext } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-
+import creditIcon from "../../assets/icons/credit_113px.svg";
 import "../../styles/layout/IdolCard.css";
 import "../../styles/common/fonts/font.css";
 
@@ -10,7 +10,7 @@ const IdolCard = ({ idol, donation }) => {
   const { setToDonateIdol } = useContext(DonateContext);
 
   const handleButtonClick = () => {
-    setToDonateIdol(idol);
+    setToDonateIdol({ ...idol, donation });
   };
   const currentDonation = donation?.receivedDonations || 0;
   const targetDonation = donation?.targetDonation || 0;
@@ -53,10 +53,7 @@ const IdolCard = ({ idol, donation }) => {
         <div className="vote-amount">
           <div className="card-vote">
             <div className="img-blur">
-              <img
-                className="img-credit"
-                src="../../../src/assets/icons/credit_113px.svg"
-              />
+              <img className="img-credit" src={creditIcon} />
               <div className="blur"></div>
             </div>
             <p>{currentDonation || "0"}</p>
