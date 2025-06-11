@@ -21,6 +21,7 @@ const ListPage = () => {
   const [popupMessage, setPopupMessage] = useState(null);
   const [highlightKeyword, setHighlightKeyword] = useState(null);
   const [refreshChart, setRefreshChart] = useState(false);
+  const [isMobile, setIsMobile] = useState(null);
 
   useEffect(() => {
     if (toDonateIdol !== null) {
@@ -62,10 +63,13 @@ const ListPage = () => {
           />
         )}
       </DonateContext.Provider>
-      <VoteContext.Provider value={{ voteGender, setVoteGender, voteModal }}>
+      <VoteContext.Provider
+        value={{ voteGender, setVoteGender, voteModal, setIsMobile }}
+      >
         <IdolChart key={refreshChart} />
         {voteModal.isOpen && (
           <ModalVote
+            isMobile={isMobile}
             gender={voteGender}
             isOpen={voteModal.isOpen}
             onClose={(result) => {
