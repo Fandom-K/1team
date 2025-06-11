@@ -57,6 +57,7 @@
 .my-credit-charge-button {
   color: rgba(249, 109, 105, 1);
   background-color: transparent;
+  cursor: pointer;
 }
 
 @media (min-width: 376px) {
