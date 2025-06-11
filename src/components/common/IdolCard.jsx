@@ -46,9 +46,11 @@ const IdolCard = ({ idol, donation }) => {
       </div>
 
       <div className="card-feature">
-        <h3 className="font-regular-16-line18-letter-neg017">강남역 광고</h3>
-        <h2 className="font-medium-18">
+        <h3 className="font-regular-16-line18-letter-neg017">
           {donation?.subtitle || "후원 정보 없음"}
+        </h3>
+        <h2 className="font-medium-18">
+          {donation?.title || "후원 정보 없음"}
         </h2>
         <div className="vote-amount">
           <div className="card-vote">
