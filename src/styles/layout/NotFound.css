@@ -1,0 +1,92 @@
+.notfound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 1rem;
+  background: linear-gradient(to bottom right, #1e1e2f, #0d0d1f);
+}
+.notfound::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/assets/images/Img_top-design.png");
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: auto;
+  z-index: 2;
+  pointer-events: none;
+}
+.notfound-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(2, 0, 14, 0.196),
+    rgba(2, 0, 14, 0.412),
+    rgba(2, 0, 14, 0.913),
+    rgb(2, 0, 14)
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.notfound-container {
+  text-align: center;
+  z-index: 3;
+}
+.notfound .logo {
+  width: 90%;
+}
+
+.notfound-container h1 {
+  font-size: 9rem;
+  font-weight: 600;
+  color: var(--brand-100);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.notfound-container p {
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+  color: #e9e9e9;
+  line-height: 1.5;
+}
+
+.notfound-link {
+  display: inline-block;
+}
+
+.notfound-container .Button {
+  width: clamp(100px, 80vw, 320px);
+  height: 3rem;
+}
+.notfound-container .Button > span {
+  font-size: 16px;
+}
+
+/* ----------------tablet--------------------- */
+@media (min-width: 376px) {
+  .notfound-container h1 {
+    font-size: 10rem;
+  }
+
+  .notfound-container p {
+    font-size: 1.25rem;
+  }
+}
+
+/* ----------------PC--------------------- */
+@media (min-width: 768px) {
+  .notfound-container p {
+    font-size: 1.5rem;
+  }
+}
