@@ -1,6 +1,6 @@
 import "../common/Button";
 import Modal from "./Modal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RadioButton from "../common/RadioButton";
 import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
@@ -12,7 +12,7 @@ import { getCreditData } from "../../utils/getStorage";
 import { addVote } from "../../services/saveIdolData";
 import ModalMobile from "./ModalMobile";
 import GradientVote from "../../pages/GradientVote";
-import Error from "../../pages/Error";
+import VoteContext from "../../contexts/VoteContext";
 
 const IdolChartItem = ({ idol, rank, selected }) => {
   return (
@@ -41,6 +41,7 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedIdolId, setSelectedIdolId] = useState("");
   const [hasvoteToday, setHasVoteToday] = useState(null);
+  const { setVoteModalMounting } = useContext(VoteContext);
 
   useEffect(() => {
     const creditData = getCreditData();
@@ -80,9 +81,16 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
     setSelectedIdolId(filteredData[0].id);
   }, [filteredData]);
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setVoteModalMounting(false);
+      }, 0);
+    }
+  }, [error]);
+
   // if (loading) return <p>로딩 중...</p>;
   if (loading) return <Spinner />;
-  if (error) return <p>네트워크 에러</p>;
 
   const handleChange = (id) => {
     setSelectedIdolId(id);
