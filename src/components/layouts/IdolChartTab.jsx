@@ -57,12 +57,6 @@ const IdolChartTab = ({ gender = "female" }) => {
         <Spinner />
       </div>
     );
-  if (error)
-    return (
-      <div>
-        <Error />
-      </div>
-    );
 
   const visibleIdols = sortedIdols.slice(0, visibleCount);
 
@@ -74,19 +68,24 @@ const IdolChartTab = ({ gender = "female" }) => {
   const showMoreButton = visibleCount < sortedIdols.length;
 
   return (
-    <>
-      <div className="IdolChartTab grid-column">
-        {visibleIdols.map((idol, index) => (
-          <IdolChartItem key={idol.id} idol={idol} rank={index + 1} />
-        ))}
-      </div>
-
-      {showMoreButton && (
-        <div className="IdolChartTab__button-wrapper">
-          <MoreButton onClick={handleMoreClick} />
-        </div>
+    <div>
+      {!error ? (
+        <>
+          <div className="IdolChartTab grid-column">
+            {visibleIdols.map((idol, index) => (
+              <IdolChartItem key={idol.id} idol={idol} rank={index + 1} />
+            ))}
+          </div>
+          {showMoreButton && (
+            <div className="IdolChartTab__button-wrapper">
+              <MoreButton onClick={handleMoreClick} />
+            </div>
+          )}
+        </>
+      ) : (
+        <Error />
       )}
-    </>
+    </div>
   );
 };
 

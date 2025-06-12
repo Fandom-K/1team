@@ -63,13 +63,6 @@ const IdolVoteSlide = () => {
       </div>
     );
   }
-  if (error) {
-    return (
-      <div>
-        <Error />
-      </div>
-    );
-  }
 
   // swiper.on('slideChange', function () {
   //   console.log('slide changed'); function() {
@@ -79,42 +72,44 @@ const IdolVoteSlide = () => {
   //     } else {
   //       $swiperPrev.classList.remove('swiper-button-disabled');
   return (
-    <div className="vote-slide">
-      <div className="prev-button-wrapper">
-        <div className="swiper-button-prev"></div>
-      </div>
-      <Swiper
-        modules={[Pagination, Navigation]}
-        spaceBetween={10}
-        slidesPerView={10}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
-        slideToClickedSlide="true"
-        speed={500}
-        breakpoints={{
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-            navigation: {
-              enabled: false,
-            },
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-            navigation: {
-              enabled: false,
-            },
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-        }}
-      >
-        {/* {idols.map((idol) => {
+    <div>
+      {!error ? (
+        <div className="vote-slide">
+          <div className="prev-button-wrapper">
+            <div className="swiper-button-prev"></div>
+          </div>
+          <Swiper
+            modules={[Pagination, Navigation]}
+            spaceBetween={10}
+            slidesPerView={10}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            slideToClickedSlide="true"
+            speed={500}
+            breakpoints={{
+              320: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+                navigation: {
+                  enabled: false,
+                },
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+                navigation: {
+                  enabled: false,
+                },
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+            }}
+          >
+            {/* {idols.map((idol) => {
           const matchedDonation = donations.find(
             (donation) => donation.idolId === idol.id
           ); // id로 매칭
@@ -122,15 +117,19 @@ const IdolVoteSlide = () => {
             <IdolCard idol={idol} donation={matchedDonation} />
           </SwiperSlide>;
         })} */}
-        {donations.map((donation) => (
-          <SwiperSlide key={donation.id}>
-            <IdolCard donation={donation} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className="next-button-wrapper">
-        <div className="swiper-button-next"></div>
-      </div>
+            {idols.map((idol) => (
+              <SwiperSlide key={idol.id}>
+                <IdolCard idol={idol} donation={donations[idol.id]} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="next-button-wrapper">
+            <div className="swiper-button-next"></div>
+          </div>
+        </div>
+      ) : (
+        <Error />
+      )}
     </div>
   );
 };

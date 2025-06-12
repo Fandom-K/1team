@@ -82,12 +82,7 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
 
   // if (loading) return <p>로딩 중...</p>;
   if (loading) return <Spinner />;
-  if (error)
-    return (
-      <div>
-        <Error />
-      </div>
-    );
+  if (error) return <p>네트워크 에러</p>;
 
   const handleChange = (id) => {
     setSelectedIdolId(id);
