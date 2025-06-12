@@ -38,37 +38,39 @@ const MyPageMobile = ({ selectedIdolsIds, onToggle }) => {
         <Spiner />
       </div>
     );
-  if (error)
-    return (
-      <div>
-        <Error />
-      </div>
-    );
 
   return (
-    <Swiper slidesPerView={1} spaceBetween={20}>
-      {groupedIdols.map((group, index) => (
-        <SwiperSlide key={index}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 2fr)",
-              gap: "10px",
-            }}
-          >
-            {group.map((idol) => (
-              <ProfileChunk
-                key={idol.id}
-                className="ProfileChunk"
-                idol={idol}
-                isSelected={selectedIdolsIds.includes(idol.id)}
-                onClick={() => onToggle(idol)}
-              />
+    <div>
+      {!error ? (
+        <div>
+          <Swiper slidesPerView={1} spaceBetween={20}>
+            {groupedIdols.map((group, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(3, 2fr)",
+                    gap: "10px",
+                  }}
+                >
+                  {group.map((idol) => (
+                    <ProfileChunk
+                      key={idol.id}
+                      className="ProfileChunk"
+                      idol={idol}
+                      isSelected={selectedIdolsIds.includes(idol.id)}
+                      onClick={() => onToggle(idol)}
+                    />
+                  ))}
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+          </Swiper>
+        </div>
+      ) : (
+        <Error />
+      )}
+    </div>
   );
 };
 
