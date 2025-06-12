@@ -7,13 +7,18 @@ import chartIcon from "../../assets/icons/chart.svg";
 
 const IdolChart = () => {
   const [activeTab, setActiveTab] = useState("이달의 여자 아이돌");
-  const { setVoteGender, voteModal } = useContext(VoteContext);
+  const { setVoteGender, voteModal, setIsMobile } = useContext(VoteContext);
 
   const handleButtonClick = () => {
     if (activeTab.includes("여자")) {
       setVoteGender("female");
     } else {
       setVoteGender("male");
+    }
+    if (window.innerWidth < 745) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
     }
     voteModal.openModal();
   };

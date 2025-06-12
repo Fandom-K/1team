@@ -1,4 +1,4 @@
-.ModalVote .vote-chart-list {
+.Modal.ModalVote .vote-chart-list {
   height: 514px;
   overflow-y: auto;
 }
@@ -25,10 +25,6 @@
   border-bottom: 1px solid #ffffff1a;
 }
 
-.InModalVote.IdolChartItem {
-  border-bottom: none;
-}
-
 .ModalVote .credit-charge-section {
   display: flex;
   flex-direction: column;
@@ -45,4 +41,36 @@
 
 .ModalVote .vote-cost-message > span {
   color: #f96d69;
+}
+
+.Modal.ModalVote .modal-container .modal-close {
+  width: 15.5px;
+  height: 15.5px;
+}
+
+.Modal.ModalVote .modal-container {
+  gap: 19px;
+}
+
+.ModalMobile .vote-chart-list {
+  height: calc(100vh - 190px);
+  overflow-y: auto;
+}
+
+/* ::가상 요소 왼쪽 상단 그라데이션 효과 */
+.ModalMobile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/assets/images/Img_top-design.png");
+  background-repeat: no-repeat;
+  /* 왼쪽 상단에 정확히 고정 */
+  background-position: top left;
+  /* 이미지 크기를 원본 그대로 유지해서 왜곡 없이 표시 */
+  background-size: auto;
+  z-index: 3;
+  pointer-events: none;
 }

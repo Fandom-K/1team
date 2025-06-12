@@ -2,7 +2,7 @@ import "../../styles/modals/ModalDonation.css";
 import "../common/Button";
 import Modal from "./Modal";
 import CreditInput from "../CreditInput";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { loadData, saveData } from "../../utils/storage";
 import Button from "../common/Button";
 import { getCreditData } from "../../utils/getStorage";
@@ -18,13 +18,16 @@ const ModalDonation = ({ onClose }) => {
   const [error, setError] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [buttonType, setButtonType] = useState("disabled");
+  const [myCredit, setMyCredit] = useState(null);
+
+  useEffect(() => {
+    const data = loadData();
+    setMyCredit(data.credit.balance);
+  }, []);
 
   const handleCreditChange = (e) => {
     const value = e.target.value;
     setCreditValue(value);
-
-    const data = loadData();
-    const myCredit = data.credit.balance;
 
     if (value && Number.parseInt(value) > myCredit) {
       setError("error");
@@ -41,10 +44,8 @@ const ModalDonation = ({ onClose }) => {
     }
   };
 
-  const handleSubmit = async () => {
-    if (buttonType === "disabled") return;
-
-    const data = getCreditData();
+  const saveCredit = async (data) => {
+    const backupData = JSON.parse(JSON.stringify(data));
 
     const newHistory = {
       type: "donate",
@@ -52,25 +53,58 @@ const ModalDonation = ({ onClose }) => {
       date: new Date().toISOString(),
     };
 
-    data.history.push(newHistory);
-    data.balance = Number(data.balance) - Number(newHistory.amount);
-    saveData({ credit: data });
+    const updatedData = {
+      ...data,
+      history: [...data.history],
+    };
 
+    updatedData.history.push(newHistory);
+    updatedData.balance =
+      Number(updatedData.balance) - Number(newHistory.amount);
+
+    const storageSuccess = saveData({ credit: updatedData });
+
+    return { success: storageSuccess, updatedData, backupData };
+  };
+
+  const saveDonate = async () => {
     try {
-      await donateToIdol(toDonateIdol.id, Number(creditValue));
+      await donateToIdol(donation.id, Number(creditValue));
+      return { success: true };
     } catch (e) {
-      console.log(e);
-      window.alert("후원 실패");
+      if (e.response) {
+        console.log(e.response.status);
+        console.log(e.response.data);
+        return { success: false, error: e.response.data };
+      } else {
+        console.log("리퀘스트가 실패했습니다.");
+        return { success: false, error: "Request failed." };
+      }
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (buttonType === "disabled") return;
+
+    const data = getCreditData();
+
+    const creditResult = await saveCredit(data);
+
+    if (creditResult.success != true) {
+      window.alert("후원을 실패했습니다.");
+      return false;
     }
 
-    // const result = saveData({ credit: data });
-    // if (result) {
-    //   window.alert(`성공적으로 후원 되었습니다./n 현재 잔액: ${data.balance}`);
-    // } else {
-    //   window.alert("실패");
-    // }
+    const donateSuccess = await saveDonate();
 
-    onClose();
+    if (!donateSuccess.success) {
+      console.log("작업 실패로 인해 변경을 적용하지 않습니다.");
+      saveData({ credit: creditResult.backupData });
+      onClose({ success: false, message: "api error" });
+      return false;
+    } else {
+      onClose({ success: true, message: "donate" });
+    }
   };
 
   return (
@@ -79,7 +113,6 @@ const ModalDonation = ({ onClose }) => {
         <div className="advertisement" key="modalBody">
           <div className="card">
             <div className="idol-image">
-              {/* <img src="/public/idolImage/fandomK-img6.jpg" /> */}
               <img src={toDonateIdol.profilePicture} />
             </div>
             <div className="ad-about">
