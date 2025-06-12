@@ -83,7 +83,7 @@ const MypageTest = () => {
   // 모바일용으로 전체 아이돌 데이터 가공
   useEffect(() => {
     if (isMobile && allIdols.length > 0) {
-      const chunks = chunkArray(allIdols, 9); // 모바일은 9개씩 묶기
+      const chunks = chunkArray(allIdols, 6); // 모바일은 9개씩 묶기
       setGroupedIdols(chunks);
     }
   }, [allIdols, isMobile]);
