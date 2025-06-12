@@ -6,7 +6,7 @@ import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
 import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalVote.css";
-import getIdols from "../../services/getIdolss";
+import getIdols from "../../services/getIdols";
 import Spinner from "../common/Spinner";
 import { getCreditData } from "../../utils/getStorage";
 import { addVote } from "../../services/saveIdolData";
