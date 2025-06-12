@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import RefreshButton from "../components/common/Refresh";
-import "../styles/layout/Error.css";
+import "../styles/layout/Error.module.css";
 
 const Error = () => {
   return (
