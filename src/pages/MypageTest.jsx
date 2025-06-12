@@ -12,6 +12,7 @@ import idolDeleteBtn from "../assets/icons/btn_delete.svg";
 import prevButton from "../assets/images/prev_btn.png";
 import nextButton from "../assets/images/next_btn.png";
 import axios from "axios";
+import Error from "../pages/Error";
 import "../styles/common/Mypage.css";
 
 const INITIAL_ITEMS = 16;
@@ -151,7 +152,11 @@ const MypageTest = () => {
     );
   }
   if (error) {
-    return <p>에러 발생: {error.message}</p>;
+    return (
+      <div>
+        <Error />
+      </div>
+    );
   }
 
   return (
