@@ -1,7 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import { useState, useEffect } from "react";
-import getIdols from "../../services/getIdols";
 
 import getDonationIdol from "../../services/getDonationIdol";
 import IdolCard from "../../components/common/IdolCard";
@@ -16,35 +15,13 @@ const IdolVoteSlide = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
-  //데이터 요청
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       setLoading(true);
-  //       const data = await getIdols();
-  //       const votedata = await getDonationIdol();
-  //       setIdols(data);
-  //       setDonations(votedata);
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-
   const [donations, setDonations] = useState(null);
-
 
   // //데이터 요청
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-
-        const data = await getIdols();
         const votedata = await getDonationIdol();
         setDonations(votedata);
       } catch (error) {
@@ -140,9 +117,9 @@ const IdolVoteSlide = () => {
             <IdolCard idol={idol} donation={matchedDonation} />
           </SwiperSlide>;
         })} */}
-            {idols.map((idol) => (
-              <SwiperSlide key={idol.id}>
-                <IdolCard idol={idol} donation={donations[idol.id]} />
+            {donations.map((donation) => (
+              <SwiperSlide key={donation.id}>
+                <IdolCard donation={donation} />
               </SwiperSlide>
             ))}
           </Swiper>

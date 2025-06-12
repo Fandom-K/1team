@@ -113,7 +113,7 @@ const ModalDonation = ({ onClose }) => {
         <div className="advertisement" key="modalBody">
           <div className="card">
             <div className="idol-image">
-              <img src={toDonateIdol.profilePicture} />
+              <img src={donation.idol.profilePicture} />
             </div>
             <div className="ad-about">
               <div className="ad-place">{donation.subtitle}</div>
