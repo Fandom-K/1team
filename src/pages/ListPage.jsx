@@ -84,6 +84,7 @@ const ListPage = () => {
             onClose={(result) => {
               donateModal.closeModal();
               setDonateSuccess(result);
+              if (result.success) location.href = "/list";
             }}
           />
         )}
@@ -100,6 +101,7 @@ const ListPage = () => {
             onClose={(result) => {
               voteModal.closeModal();
               setVoteSuccess(result);
+              if (result.success) location.href = "/list";
             }}
           />
         )}
