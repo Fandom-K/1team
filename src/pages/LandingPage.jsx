@@ -47,10 +47,10 @@ const StepSection = ({
       <h2 className="font-medium-16">{title}</h2>
       <p className="font-bold-20-line26">
         {descriptionLines.map((line, idx) => (
-          <>
+          <React.Fragment key={idx}>
             {line}
             {idx !== descriptionLines.length - 1 && <br />}
-          </>
+          </React.Fragment>
         ))}
       </p>
     </div>
