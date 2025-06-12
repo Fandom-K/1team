@@ -87,6 +87,7 @@
 
 .swiper-button-disabled {
   visibility: hidden;
+  border: 2px solid red;
 }
 
 @media (min-width: 376px) and (max-width: 767px) {
