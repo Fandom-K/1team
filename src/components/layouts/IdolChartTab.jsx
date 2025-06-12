@@ -3,7 +3,7 @@ import "../../styles/layout/IdolChartTab.css";
 import IdolProfile from "../common/IdolProfile";
 import Error from "../../pages/Error";
 import Spinner from "../common/Spinner";
-import getIdols from "../../services/getIdolss";
+import getIdols from "../../services/getIdols";
 import MoreButton from "./MoreButton";
 import useIsWideScreen from "../../hooks/useIsWideScreen";
 
