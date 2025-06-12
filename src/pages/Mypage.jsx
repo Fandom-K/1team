@@ -182,6 +182,7 @@ const Mypage = () => {
                       display: "grid",
                       gridTemplateColumns: "repeat(3, 2fr)",
                       gap: "10px",
+                      marginTop: "16px",
                     }}
                   >
                     {group.map((idol) => (
