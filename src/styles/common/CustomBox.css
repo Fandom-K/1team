@@ -5,11 +5,18 @@
   border: 1px solid;
   border-color: #ffffff;
   padding: 16px;
-  background-color: #272f3d;
+  background-color: var(--black-100);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.CustomBox:focus-within {
+  border: 2px solid #f96d69;
+}
+
+.CustomBox:focus {
+  outline: none;
 }
 
 .CustomBox .custombox-input {
