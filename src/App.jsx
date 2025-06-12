@@ -7,10 +7,11 @@ import MyPage from "./pages/Mypage";
 import ExamplePage from "./pages/ExamplePage";
 import MypageTest from "./pages/MypageTest";
 import GradientVote from "./pages/GradientVote";
+import { CreditProvider } from "./contexts/CreditContext";
 
 function App() {
   return (
-    <>
+    <CreditProvider>
       <Routes>
         <Route index path="/" element={<LandingPage />} />
         <Route path="/list" element={<ListPage />} />
@@ -21,7 +22,7 @@ function App() {
         <Route path="/test" element={<MypageTest />} />
         <Route path="/gra" element={<GradientVote />} />
       </Routes>
-    </>
+    </CreditProvider>
   );
 }
 

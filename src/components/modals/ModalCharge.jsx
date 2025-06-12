@@ -9,9 +9,12 @@ import Button from "../common/Button";
 import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalCharge.css";
 import { getCreditData } from "../../utils/getStorage";
+import { useContext } from "react";
+import CreditContext from "../../contexts/CreditContext";
 
 const ModalCharge = ({ onClose }) => {
   const [selectedCredit, setSelectedCredit] = useState("100");
+  const { updateCredit } = useContext(CreditContext);
 
   const creditOptions = [
     { value: "100", label: "100" },
@@ -37,6 +40,7 @@ const ModalCharge = ({ onClose }) => {
 
     const result = saveData({ credit: data });
     if (result) {
+      updateCredit(data.balance);
       window.alert(`성공적으로 충전 되었습니다./n 현재 잔액: ${data.balance}`);
     } else {
       window.alert("실패");
