@@ -12,9 +12,6 @@
 .notfound-container {
   text-align: center;
 }
-.notfound .logo {
-  width: 50%;
-}
 
 .notfound-container h1 {
   font-size: 1.15rem;
@@ -32,11 +29,8 @@
   line-height: 1.5;
 }
 
-.notfound-link {
-  display: inline-block;
-}
-
-.error-notfound .ref-btn .Button {
+.ref-btn {
   width: 10em;
   height: 40px;
+  display: ruby;
 }
