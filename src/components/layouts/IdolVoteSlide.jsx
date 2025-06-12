@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import { useState, useEffect } from "react";
-import getIdol from "../../services/getIdol";
+
 import getDonationIdol from "../../services/getDonationIdol";
 import IdolCard from "../../components/common/IdolCard";
 import Error from "../../pages/Error";
@@ -14,42 +14,16 @@ import "../../styles/common/IdolVoteSlide.css";
 const IdolVoteSlide = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [idols, setIdols] = useState(null);
+
   const [donations, setDonations] = useState(null);
 
-  //데이터 요청
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       setLoading(true);
-  //       const data = await getIdol();
-  //       const votedata = await getDonationIdol();
-  //       setIdols(data);
-  //       setDonations(votedata);
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-
+  // //데이터 요청
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-        const data = await getIdol();
         const votedata = await getDonationIdol();
-
-        // 💡 donation을 idolId 기준으로 객체로 변환
-        const donationMap = votedata.reduce((acc, item) => {
-          acc[item.idolId] = item;
-          return acc;
-        }, {});
-
-        setIdols(data);
-        setDonations(donationMap); // 기존 배열이 아니라 Map 형태로 저장
+        setDonations(votedata);
       } catch (error) {
         setError(error);
       } finally {
@@ -58,6 +32,29 @@ const IdolVoteSlide = () => {
     }
     fetchData();
   }, []);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       setLoading(true);
+
+  //       const votedata = await getDonationIdol();
+
+  //       // 💡 donation을 idolId 기준으로 객체로 변환
+  //       const donationMap = votedata.reduce((acc, item) => {
+  //         acc[item.idolId] = item;
+  //         return acc;
+  //       }, {});
+
+  //       setDonations(donationMap); // 기존 배열이 아니라 Map 형태로 저장
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   if (loading) {
     return (
