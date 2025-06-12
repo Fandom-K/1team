@@ -31,6 +31,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  margin-bottom: 24px;
 }
 
 .MyPage .chunk-name {
@@ -52,7 +53,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 24px;
 }
 
 .MyPage .my-idols-list p {
