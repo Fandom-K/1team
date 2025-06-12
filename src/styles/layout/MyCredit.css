@@ -59,10 +59,33 @@
   background-color: transparent;
   cursor: pointer;
 }
+.donation-title-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 327px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
 
-@media (min-width: 376px) {
+.font-bold-16-line26 {
+  width: 100%;
+  color: white;
+  /* margin-bottom: 0.5rem; */
+}
+
+@media (min-width: 376px) and (max-width: 744px) {
   .my-credit {
     max-width: 696px;
+  }
+
+  .font-bold-16-line26 {
+    font-size: 20px;
+  }
+  .donation-title-wrapper {
+    max-width: 743px;
   }
 }
 
@@ -70,5 +93,12 @@
   .my-credit {
     max-width: 1200px;
     padding: 30px 80px;
+  }
+  .font-bold-16-line26 {
+    font-size: 24px;
+  }
+  .donation-title-wrapper {
+    max-width: 1200px;
+    margin-bottom: 2rem;
   }
 }

@@ -18,7 +18,8 @@
   left: -2rem;
   background-color: rgba(27, 27, 27, 0.8);
   color: #ffffff;
-  padding: 30px 10px;
+  padding: 45px 20px;
+  border-radius: 8px;
 }
 
 .vote-slide .next-button-wrapper > div {
@@ -26,7 +27,8 @@
   left: 2rem;
   background-color: rgba(27, 27, 27, 0.8);
   color: #ffffff;
-  padding: 30px 10px;
+  padding: 45px 20px;
+  border-radius: 8px;
 }
 
 .vote-slide {
@@ -35,14 +37,14 @@
   margin: 0 auto;
 }
 
-@media (min-width: 745px) {
+@media (min-width: 376px) and (max-width: 744px) {
   .vote-slide {
     max-width: 744px;
   }
 }
 
-@media (min-width: 376px) {
+@media (min-width: 745px) {
   .vote-slide {
-    max-width: 1200px;
+    max-width: 1270px;
   }
 }
