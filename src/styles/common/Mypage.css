@@ -147,6 +147,7 @@
     color: rgba(255, 255, 255, 1);
     background-color: rgba(27, 27, 27, 0.8);
     border-radius: 4px;
+    flex-shrink: 0;
   }
   .MyPage .interest-idols-list-md-to-large {
     display: flex;
