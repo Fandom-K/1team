@@ -6,7 +6,7 @@ import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
 import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalVote.css";
-import getIdol from "../../services/getIdol";
+import getIdols from "../../services/getIdolss";
 import Spinner from "../common/Spinner";
 import { getCreditData } from "../../utils/getStorage";
 import { addVote } from "../../services/saveIdolData";
@@ -56,7 +56,7 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
     async function fetchData() {
       try {
         setLoading(true);
-        const data = await getIdol();
+        const data = await getIdols();
         setAllIdols(data.filter((idol) => idol.gender === gender));
       } catch (err) {
         setError(err);

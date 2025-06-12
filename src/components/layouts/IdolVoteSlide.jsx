@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import { useState, useEffect } from "react";
-import getIdol from "../../services/getIdol";
+import getIdols from "../../services/getIdols";
 import getDonationIdol from "../../services/getDonationIdol";
 import IdolCard from "../../components/common/IdolCard";
 import Error from "../../pages/Error";
@@ -22,7 +22,7 @@ const IdolVoteSlide = () => {
   //   async function fetchData() {
   //     try {
   //       setLoading(true);
-  //       const data = await getIdol();
+  //       const data = await getIdols();
   //       const votedata = await getDonationIdol();
   //       setIdols(data);
   //       setDonations(votedata);
@@ -39,7 +39,7 @@ const IdolVoteSlide = () => {
     async function fetchData() {
       try {
         setLoading(true);
-        const data = await getIdol();
+        const data = await getIdols();
         const votedata = await getDonationIdol();
 
         // 💡 donation을 idolId 기준으로 객체로 변환

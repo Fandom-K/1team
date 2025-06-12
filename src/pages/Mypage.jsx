@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Swiper, SwiperSlide } from "swiper/react";
-import getIdol from "../services/getIdol";
+import getIdols from "../services/getIdols";
 import usePageSize from "../hooks/usePageSize";
 import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
@@ -122,7 +122,7 @@ const Mypage = () => {
     async function fetchData() {
       try {
         setLoading(true);
-        const data = await getIdol();
+        const data = await getIdols();
         setIdols(data);
       } catch (error) {
         setError(error);

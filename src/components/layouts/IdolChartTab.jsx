@@ -3,7 +3,7 @@ import "../../styles/layout/IdolChartTab.css";
 import IdolProfile from "../common/IdolProfile";
 import Error from "../../pages/Error";
 import Spinner from "../common/Spinner";
-import getIdol from "../../services/getIdol";
+import getIdols from "../../services/getIdolss";
 import MoreButton from "./MoreButton";
 import useIsWideScreen from "../../hooks/useIsWideScreen";
 
@@ -35,7 +35,7 @@ const IdolChartTab = ({ gender = "female" }) => {
   useEffect(() => {
     setLoading(true);
 
-    getIdol({ gender })
+    getIdols({ gender })
       .then((data) => setAllIdols(data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));

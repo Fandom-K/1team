@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import getIdol from "../../services/getIdol";
+import getIdols from "../../services/getIdols";
 import ProfileChunk from "../ProfileChunk";
 
 const MyPageMobile = ({ selectedIdolsIds, onToggle }) => {
@@ -12,7 +12,7 @@ const MyPageMobile = ({ selectedIdolsIds, onToggle }) => {
     const fetchAllIdols = async () => {
       try {
         setLoading(true);
-        const data = await getIdol();
+        const data = await getIdols();
         setGroupedIdols(chunkArray(data, 9));
       } catch (err) {
         setError(err);
