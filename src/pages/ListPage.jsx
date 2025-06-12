@@ -10,6 +10,7 @@ import ModalDonation from "../components/modals/ModalDonation";
 import VoteContext from "../contexts/VoteContext";
 import ModalVote from "../components/modals/ModalVote";
 import Popup from "../components/modals/Popup";
+import PopupWarning from "../components/modals/PopupWarning";
 
 const ListPage = () => {
   const [toDonateIdol, setToDonateIdol] = useState(null);
@@ -23,6 +24,8 @@ const ListPage = () => {
   const [refreshChart, setRefreshChart] = useState(false);
   const [isMobile, setIsMobile] = useState(null);
   const [donateSuccess, setDonateSuccess] = useState(null);
+  const [voteModalMounting, setVoteModalMounting] = useState(null);
+  const mountingErrorPopupModal = useModal();
 
   useEffect(() => {
     if (toDonateIdol !== null) {
@@ -71,6 +74,13 @@ const ListPage = () => {
     votePopupModal.openModal();
   }, [donateSuccess]);
 
+  useEffect(() => {
+    if (voteModalMounting === false) {
+      voteModal.closeModal();
+      mountingErrorPopupModal.openModal();
+    }
+  }, [voteModalMounting]);
+
   return (
     <div className="ListPage">
       <Header />
@@ -84,12 +94,19 @@ const ListPage = () => {
             onClose={(result) => {
               donateModal.closeModal();
               setDonateSuccess(result);
+              if (result.success) location.href = "/list";
             }}
           />
         )}
       </DonateContext.Provider>
       <VoteContext.Provider
-        value={{ voteGender, setVoteGender, voteModal, setIsMobile }}
+        value={{
+          voteGender,
+          setVoteGender,
+          voteModal,
+          setIsMobile,
+          setVoteModalMounting,
+        }}
       >
         <IdolChart key={refreshChart} />
         {voteModal.isOpen && (
@@ -100,6 +117,7 @@ const ListPage = () => {
             onClose={(result) => {
               voteModal.closeModal();
               setVoteSuccess(result);
+              if (result.success) location.href = "/list";
             }}
           />
         )}
@@ -109,6 +127,13 @@ const ListPage = () => {
             highlightKeyword={highlightKeyword}
             isOpen={votePopupModal.isOpen}
             onClose={votePopupModal.closeModal}
+          />
+        )}
+        {mountingErrorPopupModal.isOpen && (
+          <PopupWarning
+            message={"네트워크 에러가 발생했습니다. \n다시 로드 해주세요."}
+            isOpen={mountingErrorPopupModal.isOpen}
+            onClose={mountingErrorPopupModal.closeModal}
           />
         )}
       </VoteContext.Provider>

@@ -6,11 +6,11 @@ import creditIcon from "../../assets/icons/credit_113px.svg";
 import "../../styles/layout/IdolCard.css";
 import "../../styles/common/fonts/font.css";
 
-const IdolCard = ({ idol, donation }) => {
+const IdolCard = ({ donation }) => {
   const { setToDonateIdol } = useContext(DonateContext);
 
   const handleButtonClick = () => {
-    setToDonateIdol({ ...idol, donation });
+    setToDonateIdol({ donation });
   };
   const currentDonation = donation?.receivedDonations || 0;
   const targetDonation = donation?.targetDonation || 0;
@@ -29,7 +29,7 @@ const IdolCard = ({ idol, donation }) => {
       <div className="card-image-wrapper">
         <img
           className="card-image"
-          src={idol.profilePicture}
+          src={donation.idol.profilePicture}
           alt="카드이미지"
         />
         <div className="img-blur-overlay"></div>

@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
 import IdolProfile from "../common/IdolProfile";
-import getIdol from "../../services/getIdol";
+import Error from "../../pages/Error";
+import Spinner from "../common/Spinner";
+import getIdols from "../../services/getIdols";
 import MoreButton from "./MoreButton";
 import useIsWideScreen from "../../hooks/useIsWideScreen";
 
@@ -33,7 +35,7 @@ const IdolChartTab = ({ gender = "female" }) => {
   useEffect(() => {
     setLoading(true);
 
-    getIdol({ gender })
+    getIdols({ gender })
       .then((data) => setAllIdols(data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
@@ -49,8 +51,12 @@ const IdolChartTab = ({ gender = "female" }) => {
       .sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0));
   }, [allIdols, gender]);
 
-  if (loading || visibleCount === null) return <p>로딩 중...</p>;
-  if (error) return <p>에러 발생: {error.message}</p>;
+  if (loading || visibleCount === null)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
 
   const visibleIdols = sortedIdols.slice(0, visibleCount);
 
@@ -62,19 +68,24 @@ const IdolChartTab = ({ gender = "female" }) => {
   const showMoreButton = visibleCount < sortedIdols.length;
 
   return (
-    <>
-      <div className="IdolChartTab grid-column">
-        {visibleIdols.map((idol, index) => (
-          <IdolChartItem key={idol.id} idol={idol} rank={index + 1} />
-        ))}
-      </div>
-
-      {showMoreButton && (
-        <div className="IdolChartTab__button-wrapper">
-          <MoreButton onClick={handleMoreClick} />
-        </div>
+    <div>
+      {!error ? (
+        <>
+          <div className="IdolChartTab grid-column">
+            {visibleIdols.map((idol, index) => (
+              <IdolChartItem key={idol.id} idol={idol} rank={index + 1} />
+            ))}
+          </div>
+          {showMoreButton && (
+            <div className="IdolChartTab__button-wrapper">
+              <MoreButton onClick={handleMoreClick} />
+            </div>
+          )}
+        </>
+      ) : (
+        <Error />
       )}
-    </>
+    </div>
   );
 };
 

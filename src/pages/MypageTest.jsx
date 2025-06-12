@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Swiper, SwiperSlide } from "swiper/react";
-import getIdol from "../services/getIdol";
+import getIdols from "../services/getIdols";
 import usePageSize from "../hooks/usePageSize";
 import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
@@ -42,7 +42,7 @@ const MypageTest = () => {
   const fetchAllIdols = async () => {
     try {
       setLoading(true);
-      const data = await getIdol();
+      const data = await getIdols();
       setAllIdols(data);
     } catch (err) {
       setError(err);
@@ -151,60 +151,80 @@ const MypageTest = () => {
       </p>
     );
   }
-  if (error) {
-    return (
-      <div>
-        <Error />
-      </div>
-    );
-  }
 
   return (
-    <div className="MyPage">
-      <Header />
+    <div>
+      {!error ? (
+        <div className="MyPage">
+          <Header />
 
-      <div>
-        {/* 내가 관심있는 아이돌 목록 */}
-        <div className="my-idols">
-          <h3 className="font-bold-16-line26">내가 관심있는 아이돌</h3>
-          <div className="my-idols-list">
-            {myFavorIdols.length === 0 && <p>관심 아이돌이 없습니다.</p>}
-            {myFavorIdols.map((idol) => (
-              <div className="chunk-wrapper" key={idol.id}>
-                <IdolProfile idol={idol} />
-                <button
-                  className="idol-delete-Btn"
-                  onClick={() => handleRemoveFavorite(idol.id)}
-                >
-                  <img src={idolDeleteBtn} alt="삭제 버튼" />
-                </button>
-                <div className="idol-info">
-                  <h4>{idol.name}</h4>
-                  <p>{idol.group}</p>
-                </div>
+          <div>
+            {/* 내가 관심있는 아이돌 목록 */}
+            <div className="my-idols">
+              <h3 className="font-bold-16-line26">내가 관심있는 아이돌</h3>
+              <div className="my-idols-list">
+                {myFavorIdols.length === 0 && <p>관심 아이돌이 없습니다.</p>}
+                {myFavorIdols.map((idol) => (
+                  <div className="chunk-wrapper" key={idol.id}>
+                    <IdolProfile idol={idol} />
+                    <button
+                      className="idol-delete-Btn"
+                      onClick={() => handleRemoveFavorite(idol.id)}
+                    >
+                      <img src={idolDeleteBtn} alt="삭제 버튼" />
+                    </button>
+                    <div className="idol-info">
+                      <h4>{idol.name}</h4>
+                      <p>{idol.group}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {/* 관심 있는 아이돌 표시 영역 */}
-        <div className="interest-idols">
-          <h3 className="font-bold-16-line26">
-            관심 있는 아이돌을 추가해보세요.
-          </h3>
-          {isMobile ? (
-            // 모바일: 스와이퍼
-            <Swiper slidesPerView={1} spaceBetween={20}>
-              {groupedIdols.map((group, index) => (
-                <SwiperSlide key={index}>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(3, 2fr)",
-                      gap: "10px",
-                    }}
-                  >
-                    {group.map((idol) => (
+            {/* 관심 있는 아이돌 표시 영역 */}
+            <div className="interest-idols">
+              <h3 className="font-bold-16-line26">
+                관심 있는 아이돌을 추가해보세요.
+              </h3>
+              {isMobile ? (
+                // 모바일: 스와이퍼
+                <Swiper slidesPerView={1} spaceBetween={20}>
+                  {groupedIdols.map((group, index) => (
+                    <SwiperSlide key={index}>
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "repeat(3, 2fr)",
+                          gap: "10px",
+                        }}
+                      >
+                        {group.map((idol) => (
+                          <ProfileChunk
+                            key={idol.id}
+                            className="ProfileChunk"
+                            idol={idol}
+                            isSelected={selectedIdols.includes(idol.id)}
+                            onClick={() => toggleSelect(idol.id)}
+                          />
+                        ))}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ) : (
+                // 데스크탑: 페이지네이션
+                <div className="interest-idols-list-md-to-large">
+                  <div>
+                    <button
+                      className="list-change-btn"
+                      onClick={handlePrevPage}
+                    >
+                      <img src={prevButton} alt="이전 페이지" />
+                    </button>
+                  </div>
+                  <div className="interest-idols-list">
+                    {list.map((idol) => (
                       <ProfileChunk
                         key={idol.id}
                         className="ProfileChunk"
@@ -214,45 +234,27 @@ const MypageTest = () => {
                       />
                     ))}
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            // 데스크탑: 페이지네이션
-            <div className="interest-idols-list-md-to-large">
-              <div>
-                <button className="list-change-btn" onClick={handlePrevPage}>
-                  <img src={prevButton} alt="이전 페이지" />
-                </button>
-              </div>
-              <div className="interest-idols-list">
-                {list.map((idol) => (
-                  <ProfileChunk
-                    key={idol.id}
-                    className="ProfileChunk"
-                    idol={idol}
-                    isSelected={selectedIdols.includes(idol.id)}
-                    onClick={() => toggleSelect(idol.id)}
-                  />
-                ))}
-              </div>
-              <button className="list-change-btn" onClick={handleNextPage}>
-                <img src={nextButton} alt="다음 페이지" />
-              </button>
+                  <button className="list-change-btn" onClick={handleNextPage}>
+                    <img src={nextButton} alt="다음 페이지" />
+                  </button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
 
-        {/* 내 관심 아이돌에 추가 버튼 */}
-        <div className="button-wrapper">
-          <Button
-            onClick={handleAddFavorIdols}
-            className="mypage-btn"
-            text="+ 추가하기"
-            type="positive"
-          />
+            {/* 내 관심 아이돌에 추가 버튼 */}
+            <div className="button-wrapper">
+              <Button
+                onClick={handleAddFavorIdols}
+                className="mypage-btn"
+                text="+ 추가하기"
+                type="positive"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <Error />
+      )}
     </div>
   );
 };

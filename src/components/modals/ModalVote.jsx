@@ -1,17 +1,18 @@
 import "../common/Button";
 import Modal from "./Modal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RadioButton from "../common/RadioButton";
 import RadioGroup from "../common/RadioGroup";
 import Button from "../common/Button";
 import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalVote.css";
-import getIdol from "../../services/getIdol";
+import getIdols from "../../services/getIdols";
 import Spinner from "../common/Spinner";
 import { getCreditData } from "../../utils/getStorage";
 import { addVote } from "../../services/saveIdolData";
 import ModalMobile from "./ModalMobile";
 import GradientVote from "../../pages/GradientVote";
+import VoteContext from "../../contexts/VoteContext";
 
 const IdolChartItem = ({ idol, rank, selected }) => {
   return (
@@ -40,6 +41,7 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedIdolId, setSelectedIdolId] = useState("");
   const [hasvoteToday, setHasVoteToday] = useState(null);
+  const { setVoteModalMounting } = useContext(VoteContext);
 
   useEffect(() => {
     const creditData = getCreditData();
@@ -55,7 +57,7 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
     async function fetchData() {
       try {
         setLoading(true);
-        const data = await getIdol();
+        const data = await getIdols();
         setAllIdols(data.filter((idol) => idol.gender === gender));
       } catch (err) {
         setError(err);
@@ -79,9 +81,16 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
     setSelectedIdolId(filteredData[0].id);
   }, [filteredData]);
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setVoteModalMounting(false);
+      }, 0);
+    }
+  }, [error]);
+
   // if (loading) return <p>로딩 중...</p>;
   if (loading) return <Spinner />;
-  if (error) return <p>에러 발생: {error.message}</p>;
 
   const handleChange = (id) => {
     setSelectedIdolId(id);

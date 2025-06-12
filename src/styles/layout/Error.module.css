@@ -1,0 +1,36 @@
+.notfound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem;
+  background: var(--black-100);
+  padding: 20px;
+}
+
+.notfound-container {
+  text-align: center;
+}
+
+.notfound-container h1 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--brand-100);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  white-space: nowrap;
+}
+
+.notfound-container p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #e9e9e9;
+  line-height: 1.5;
+}
+
+.ref-btn {
+  width: 10em;
+  height: 40px;
+  display: ruby;
+}
