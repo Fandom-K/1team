@@ -16,7 +16,6 @@ const IdolVoteSlide = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   //데이터 요청
   // useEffect(() => {
   //   async function fetchData() {
@@ -36,7 +35,6 @@ const IdolVoteSlide = () => {
   // }, []);
 
   const [donations, setDonations] = useState(null);
-
 
   // //데이터 요청
   useEffect(() => {
@@ -81,7 +79,13 @@ const IdolVoteSlide = () => {
 
   if (loading) {
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
         <Spinner />
       </div>
     );
