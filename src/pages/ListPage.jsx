@@ -11,6 +11,7 @@ import VoteContext from "../contexts/VoteContext";
 import ModalVote from "../components/modals/ModalVote";
 import Popup from "../components/modals/Popup";
 import PopupWarning from "../components/modals/PopupWarning";
+import ChargeContext from "../contexts/ChargeContext";
 
 const ListPage = () => {
   const [toDonateIdol, setToDonateIdol] = useState(null);
@@ -18,7 +19,7 @@ const ListPage = () => {
   const [voteGender, setVoteGender] = useState(null);
   const voteModal = useModal();
   const [voteSuccess, setVoteSuccess] = useState(null);
-  const votePopupModal = useModal();
+  const alertPopupModal = useModal();
   const [popupMessage, setPopupMessage] = useState(null);
   const [highlightKeyword, setHighlightKeyword] = useState(null);
   const [refreshChart, setRefreshChart] = useState(false);
@@ -26,12 +27,29 @@ const ListPage = () => {
   const [donateSuccess, setDonateSuccess] = useState(null);
   const [voteModalMounting, setVoteModalMounting] = useState(null);
   const mountingErrorPopupModal = useModal();
+  const chargeModal = useModal();
+  const [chargeSuccess, setChargeSuccess] = useState(null);
 
   useEffect(() => {
     if (toDonateIdol !== null) {
       donateModal.openModal();
     }
   }, [toDonateIdol]);
+
+  useEffect(() => {
+    if (!chargeSuccess || chargeSuccess == undefined) return;
+
+    if (chargeSuccess) {
+      setPopupMessage("충전 완료 🎉");
+      setHighlightKeyword(null);
+    } else {
+      setPopupMessage(
+        "죄송합니다. 충전전 처리 중 오류가 발생했습니다. 다시 시도해 주세요."
+      );
+      setHighlightKeyword(null);
+    }
+    alertPopupModal.openModal();
+  }, [chargeSuccess]);
 
   useEffect(() => {
     if (!voteSuccess || voteSuccess.success == undefined) return;
@@ -50,7 +68,7 @@ const ListPage = () => {
       setPopupMessage("투표 완료 🎉");
       setHighlightKeyword(null);
     }
-    votePopupModal.openModal();
+    alertPopupModal.openModal();
   }, [voteSuccess]);
 
   useEffect(() => {
@@ -71,7 +89,7 @@ const ListPage = () => {
       setPopupMessage("후원 완료 🎉");
       setHighlightKeyword(null);
     }
-    votePopupModal.openModal();
+    alertPopupModal.openModal();
   }, [donateSuccess]);
 
   useEffect(() => {
@@ -84,17 +102,17 @@ const ListPage = () => {
   return (
     <div className="ListPage">
       <Header />
-      <MyCredit />
+      <ChargeContext.Provider value={{ chargeModal, setChargeSuccess }}>
+        <MyCredit />
+      </ChargeContext.Provider>
       <DonateContext.Provider value={{ toDonateIdol, setToDonateIdol }}>
         <IdolVoteSlide></IdolVoteSlide>
         {donateModal.isOpen && (
           <ModalDonation
             isOpen={donateModal.isOpen}
-            // onClose={donateModal.closeModal}
             onClose={(result) => {
               donateModal.closeModal();
               setDonateSuccess(result);
-              if (result.success) location.href = "/list";
             }}
           />
         )}
@@ -117,16 +135,18 @@ const ListPage = () => {
             onClose={(result) => {
               voteModal.closeModal();
               setVoteSuccess(result);
-              if (result.success) location.href = "/list";
             }}
           />
         )}
-        {votePopupModal.isOpen && (
+        {alertPopupModal.isOpen && (
           <Popup
             message={popupMessage}
             highlightKeyword={highlightKeyword}
-            isOpen={votePopupModal.isOpen}
-            onClose={votePopupModal.closeModal}
+            isOpen={alertPopupModal.isOpen}
+            onClose={() => {
+              alertPopupModal.closeModal();
+              location.href = "/list";
+            }}
           />
         )}
         {mountingErrorPopupModal.isOpen && (
