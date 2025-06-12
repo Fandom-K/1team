@@ -6,7 +6,7 @@ const RefreshButton = () => {
   };
 
   return (
-    <div>
+    <div className="ref-btn">
       <Button
         type="positive"
         corner="angular"

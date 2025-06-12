@@ -7,6 +7,7 @@ const CustomBox = ({ className = "", children, width, ...props }) => {
     <div
       className={`CustomBox ${className}${error ? " error" : ""}`}
       style={width ? { width } : {}}
+      tabIndex={0}
     >
       {children}
     </div>
