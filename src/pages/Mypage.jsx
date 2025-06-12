@@ -7,6 +7,8 @@ import Header from "../components/layouts/Header";
 import Button from "../components/common/Button";
 import ProfileChunk from "../components/ProfileChunk";
 import IdolProfile from "../components/common/IdolProfile";
+import Spinner from "../components/common/Spinner";
+import Error from "./Error";
 import idolDeleteBtn from "../assets/icons/btn_delete.svg";
 import prevButton from "../assets/images/prev_btn.png";
 import nextButton from "../assets/images/next_btn.png";
@@ -132,10 +134,18 @@ const Mypage = () => {
   }, []);
 
   if (loading) {
-    return <p>로딩 중...</p>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
   if (error) {
-    return <p>에러 발생: {error.message}</p>;
+    return (
+      <div>
+        <Error />
+      </div>
+    );
   }
 
   return (

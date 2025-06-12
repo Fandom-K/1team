@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import "../../styles/layout/IdolChartTab.css";
 import IdolProfile from "../common/IdolProfile";
+import Error from "../../pages/Error";
+import Spinner from "../common/Spinner";
 import getIdol from "../../services/getIdol";
 import MoreButton from "./MoreButton";
 import useIsWideScreen from "../../hooks/useIsWideScreen";
@@ -49,8 +51,18 @@ const IdolChartTab = ({ gender = "female" }) => {
       .sort((a, b) => (b.totalVotes || 0) - (a.totalVotes || 0));
   }, [allIdols, gender]);
 
-  if (loading || visibleCount === null) return <p>로딩 중...</p>;
-  if (error) return <p>에러 발생: {error.message}</p>;
+  if (loading || visibleCount === null)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  if (error)
+    return (
+      <div>
+        <Error />
+      </div>
+    );
 
   const visibleIdols = sortedIdols.slice(0, visibleCount);
 

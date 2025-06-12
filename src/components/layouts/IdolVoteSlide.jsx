@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import getIdol from "../../services/getIdol";
 import getDonationIdol from "../../services/getDonationIdol";
 import IdolCard from "../../components/common/IdolCard";
+import Error from "../../pages/Error";
+import Spinner from "../common/Spinner";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -58,10 +60,18 @@ const IdolVoteSlide = () => {
   }, []);
 
   if (loading) {
-    return <p>로딩 중...</p>;
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   }
   if (error) {
-    return <p>에러 발생: {error.message}</p>;
+    return (
+      <div>
+        <Error />
+      </div>
+    );
   }
 
   // swiper.on('slideChange', function () {
