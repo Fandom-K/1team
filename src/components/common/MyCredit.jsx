@@ -1,11 +1,13 @@
 import "../../styles/layout/MyCredit.css";
 import { getMyCredit } from "../../utils/getStorage";
 import ModalCharge from "../modals/ModalCharge";
-import useModal from "../../hooks/useModal";
 import creditImg from "../../assets/icons/credit_113px.svg";
+import { useContext } from "react";
+import ChargeContext from "../../contexts/ChargeContext";
+
 const MyCredit = () => {
   const data = getMyCredit();
-  const { isOpen, openModal, closeModal } = useModal();
+  const { chargeModal, setChargeSuccess } = useContext(ChargeContext);
 
   return (
     <>
@@ -25,10 +27,20 @@ const MyCredit = () => {
           </div>
         </div>
         <div>
-          <button className="my-credit-charge-button" onClick={openModal}>
+          <button
+            className="my-credit-charge-button"
+            onClick={chargeModal.openModal}
+          >
             충전하기
           </button>
-          {isOpen && <ModalCharge onClose={closeModal} />}
+          {chargeModal.isOpen && (
+            <ModalCharge
+              onClose={(result) => {
+                chargeModal.closeModal();
+                setChargeSuccess(result);
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="donation-title-wrapper">
