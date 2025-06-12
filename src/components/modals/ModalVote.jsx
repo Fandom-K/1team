@@ -12,6 +12,7 @@ import { getCreditData } from "../../utils/getStorage";
 import { addVote } from "../../services/saveIdolData";
 import ModalMobile from "./ModalMobile";
 import GradientVote from "../../pages/GradientVote";
+import Error from "../../pages/Error";
 
 const IdolChartItem = ({ idol, rank, selected }) => {
   return (
@@ -81,7 +82,12 @@ const ModalVote = ({ isMobile, gender, onClose }) => {
 
   // if (loading) return <p>로딩 중...</p>;
   if (loading) return <Spinner />;
-  if (error) return <p>에러 발생: {error.message}</p>;
+  if (error)
+    return (
+      <div>
+        <Error />
+      </div>
+    );
 
   const handleChange = (id) => {
     setSelectedIdolId(id);
