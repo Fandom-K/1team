@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
-import logo from "../../src/assets/images/logo.svg";
 import RefreshButton from "../components/common/Refresh";
 import "../styles/layout/Error.css";
 
 const Error = () => {
   return (
-    <div className="notfound">
-      <div className="notfound-overlay"></div>
+    <div className="error-notfound">
       <section className="notfound-container">
-        <img className="logo" src={logo} alt="Fadom-K Logo" />
         <h1>데이터를 로드하지 못했습니다</h1>
         <p>다시 시도해 주세요</p>
         <Link to="/" className="notfound-link">
