@@ -9,6 +9,7 @@ import Button from "../common/Button";
 import { saveData } from "../../utils/storage";
 import "../../styles/modals/ModalCharge.css";
 import { getCreditData } from "../../utils/getStorage";
+import creditIconWhite from "/src/assets/icons/credit_white.png";
 
 const ModalCharge = ({ onClose }) => {
   const [selectedCredit, setSelectedCredit] = useState("100");
@@ -76,7 +77,7 @@ const ModalCharge = ({ onClose }) => {
             type="positive"
             text="충전하기"
             alt="충전하기"
-            imgsrc="/src/assets/icons/credit_white.png"
+            imgsrc={creditIconWhite}
             onClick={handleSubmit}
           />
         </div>
