@@ -1,18 +1,14 @@
 import idolDeleteBtn from "../../assets/icons/btn_delete.svg";
 import IdolProfile from "../../components/common/IdolProfile";
 
-const FavoriteIdols = ({
-  myFavorIdols,
-  selectedIdolsIds,
-  onRemoveFavorite,
-}) => {
+const FavoriteIdols = ({ myFavorIdols, selectedIdolIds, onRemoveFavorite }) => {
   return (
     <div>
       {myFavorIdols.length === 0 ? (
         <p>관심 아이돌이 없습니다.</p>
       ) : (
         myFavorIdols.map((idol) => {
-          const isSelected = selectedIdolsIds.includes(idol.id);
+          const isSelected = selectedIdolIds.includes(idol.id);
           return (
             <div key={idol.id}>
               <IdolProfile idol={idol} isSelected={isSelected} />

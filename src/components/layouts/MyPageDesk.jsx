@@ -4,7 +4,7 @@ import ProfileChunk from "../ProfileChunk";
 import prevButton from "../../assets/images/prev_btn.png";
 import nextButton from "../../assets/images/next_btn.png";
 
-const MyPageDesk = ({ selectedIdolsIds, onToggle }) => {
+const MyPageDesk = ({ selectedIdolIds, onToggle }) => {
   const [list, setList] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
   const [currentCursor, setCurrentCursor] = useState(null);
@@ -67,7 +67,7 @@ const MyPageDesk = ({ selectedIdolsIds, onToggle }) => {
             key={idol.id}
             className="ProfileChunk"
             idol={idol}
-            isSelected={selectedIdolsIds.includes(idol.id)}
+            isSelected={selectedIdolIds.includes(idol.id)}
             onClick={() => onToggle(idol)}
           />
         ))}
